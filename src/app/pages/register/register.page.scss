@@ -1,0 +1,133 @@
+.cadastro-content {
+  --background: linear-gradient(to bottom, #faff74, #ffb85b);
+  --color: #000
+}
+
+ion-content::part(scroll) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+
+  padding: 16px;
+}
+
+.cadastro-container {
+  background: #ffffff;
+
+  width: 100%;
+  max-width: 420px;
+
+  padding: 24px;
+
+  border-radius: 24px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 🔽 PARTE PRINCIPAL */
+.header-text {
+  text-align: center;
+  margin-bottom: 20px;
+
+  .logo {
+    font-size: 50px;
+    background: #facc15;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h2 {
+    font-size: clamp(18px, 3vw, 24px);
+    margin-bottom: 6px;
+    color: #1f2937;
+
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  p {
+    font-size: clamp(11px, 2vw, 13px);
+    color: #6b7280;
+
+    line-height: 1.4;
+    margin: 0;
+  }
+}
+
+.input-item {
+  margin-bottom: 16px;
+
+  --border-radius: 12px;
+  --padding-start: 10px;
+
+  ion-input {
+    font-size: 16px;
+  }
+}
+
+.submit-btn {
+  margin-top: 20px;
+
+  height: 48px;
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.links {
+  text-align: center;
+
+  margin-top: 20px;
+
+  font-size: 14px;
+
+  p {
+    color: black;
+  }
+
+  a {
+    color: #3880ff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+}
+
+/* 📱 CELULARES */
+@media (max-width: 480px) {
+
+  .cadastro-container {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .header-text {
+
+    h2 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 11px;
+    }
+  }
+
+  .submit-btn {
+    height: 46px;
+  }
+}
+
+/* 💻 TELAS GRANDES */
+@media (min-width: 768px) {
+
+  .cadastro-container {
+    max-width: 480px;
+    padding: 32px;
+  }
+}

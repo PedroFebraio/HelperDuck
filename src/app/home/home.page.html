@@ -1,20 +1,104 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>TheHelperDuck</ion-title>
+      <ion-button shape="round" slot="end" color="secondary" routerLink="/login">Entrar</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="home">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="logo">🦆</div>
+    <h1 class="principal">The <span>Helper Duck</span>®️</h1>
+
+    <h2>Cuidar da sua saúde mental nunca foi tão acessível.</h2>
+
+    <div class="card">
+      <p>
+        Conectamos você a psicólogos em início de carreira para tratamento acessível.
+        Quanto mais você cuida da sua saúde mental, mais benefícios você ganha!
+      </p>
+    </div>
+
+
+    <div class="actions">
+      <ion-button shape="round" color="warning" routerLink="/register">
+        Começar como Usuário
+        <ion-icon name="arrow-forward-sharp"></ion-icon>
+      </ion-button>
+
+      <ion-button shape="round" color="tertiary" routerLink="/registerPsico">
+        Começar como Psicologo
+        <ion-icon name="arrow-forward-sharp"></ion-icon>
+      </ion-button>
+    </div>
   </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="card">
+      <div class="icon">💙</div>
+      <h3>Acessibilidade</h3>
+      <p>Consultas com preços justos,
+        planos de assinatura e descontos por fidelidade.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">👥</div>
+      <h3>Profissionais</h3>
+      <p>Ajudamos psicólogos em início de carreira
+         a construírem sua experiência profissional.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏆</div>
+      <h3>Fidelidade</h3>
+      <p>Ganhe pontos a cada consulta e
+        troque por recompensas como consultas gratuitas.</p>
+    </div>
+  </div>
+
+  <!-- COMO FUNCIONA -->
+  <div class="steps">
+    <h2>Como funciona?</h2>
+
+    <div class="step">
+      <span>1</span>
+      <ion-text>
+        <h5>Cadastre-se gratuitamente</h5>
+        <p>Crie sua conta e escolha um
+        plano que cabe no seu bolso.</p>
+      </ion-text>
+    </div>
+
+    <div class="step">
+      <span>2</span>
+      <ion-text>
+        <h5>Agende sua consulta</h5>
+        <p>Escolha um psicólogo, veja horários disponíveis
+        e agende online.</p>
+      </ion-text>
+    </div>
+
+    <div class="step">
+      <span>3</span>
+      <ion-text>
+        <h5>Acumule pontos</h5>
+        <p>A cada consulta realizada,
+        você ganha pontos que podem ser trocados por benefícios.</p>
+      </ion-text>
+    </div>
+
+    <div class="step">
+      <span>4</span>
+      <ion-text>
+        <h5>Resgate recompensas</h5>
+        <p>Use seus pontos para ganhar descontos
+        ou até consultas gratuitas!</p>
+      </ion-text>
+
+    </div>
+  </div>
+
 </ion-content>

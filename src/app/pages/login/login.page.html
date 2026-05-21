@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="end">
+      <ion-button fill="solid" color="warning" routerLink="/home">Voltar</ion-button>
+    </ion-buttons>
+
+    <ion-title color="warning">The Helper Duck 🦆</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cadastro-content">
+
+  <div class="cadastro-container">
+
+    <div class="header-text">
+      <div class="logo">🦆</div>
+      <h2>Entrar</h2>
+      <p>Vamos aumentar seu bem-estar mental patinho</p>
+    </div>
+
+      <!-- EMAIL -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">E-mail</ion-label>
+
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="seu@email.com">
+        </ion-input>
+      </ion-item>
+
+      <!-- SENHA -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Senha</ion-label>
+
+        <ion-input
+          type="password"
+          [(ngModel)]="senha"
+          placeholder="Digite sua senha">
+        </ion-input>
+      </ion-item>
+
+      <!-- BOTÃO -->
+      <ion-button
+        expand="block"
+        color="primary"
+        class="submit-btn"
+        [disabled]="!email || !senha"
+        (click)="login()">
+
+        Entrar
+
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        color="danger"
+        class="submit-btn"
+        (click)="loginGoogle()">
+        Entrar com Google
+
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        color="dark"
+        class="submit-btn"
+        (click)="loginGitHub()">
+
+        Entrar com Github
+
+      </ion-button>
+
+
+    <div class="links">
+
+      <p>Não tem login?
+        <a routerLink="/register">Cadastrar</a>
+      </p>
+
+    </div>
+
+  </div>
+
+</ion-content>

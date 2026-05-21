@@ -1,0 +1,270 @@
+.cadastro-content {
+  --background: linear-gradient(to bottom, #faff74, #ffb85b);
+  --color: #000;
+}
+
+/* CENTRALIZAÇÃO */
+ion-content::part(scroll) {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  min-height: 100vh;
+
+  padding: 24px 16px;
+}
+
+/* CARD PRINCIPAL */
+.cadastro-container {
+
+  width: 100%;
+  max-width: 520px;
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  padding: 28px 24px;
+
+  margin-bottom: 32px;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08),
+    0 4px 10px rgba(0, 0, 0, 0.04);
+
+  overflow: hidden;
+}
+
+/* HEADER */
+
+.header-text {
+
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.logo {
+
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: #facc15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+
+    font-size: clamp(24px, 4vw, 30px);
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 8px;
+  }
+
+  p {
+
+    color: #6b7280;
+
+    font-size: clamp(13px, 2vw, 15px);
+
+    line-height: 1.5;
+
+    padding: 0 10px;
+  }
+}
+/* FORM */
+
+form {
+
+  width: 100%;
+}
+
+/* INPUTS */
+
+.input-item {
+
+  margin-bottom: 18px;
+  --border-radius: 14px;
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+  --highlight-color-focused: #3b82f6;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+ion-input,
+ion-textarea {
+
+  font-size: 15px;
+}
+
+/* TEXTAREA */
+
+ion-textarea {
+
+  min-height: 100px;
+}
+
+/* UPLOAD */
+
+.upload-container {
+
+  margin-top: 8px;
+
+  margin-bottom: 22px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.upload-label {
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #374151;
+}
+
+.upload-container input {
+
+  width: 100%;
+
+  padding: 14px;
+
+  border: 2px dashed #d1d5db;
+
+  border-radius: 14px;
+
+  background: #f9fafb;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.upload-container input:hover {
+
+  border-color: #3b82f6;
+
+  background: #eff6ff;
+}
+
+/* BOTÃO */
+
+.submit-btn {
+
+  margin-top: 8px;
+
+  height: 50px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  --border-radius: 14px;
+}
+
+/* LINKS */
+
+.links {
+
+  margin-top: 24px;
+
+  text-align: center;
+
+  font-size: 14px;
+}
+
+.links p {
+
+  color: #374151;
+}
+
+.links a {
+
+  color: #2563eb;
+
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.links a:hover {
+
+  text-decoration: underline;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  ion-content::part(scroll) {
+
+    padding: 16px 12px;
+  }
+
+  .cadastro-container {
+
+    padding: 22px 18px;
+
+    border-radius: 22px;
+  }
+
+  .logo {
+
+    width: 84px;
+
+    height: 84px;
+
+    font-size: 40px;
+  }
+
+  .header-text h2 {
+
+    font-size: 22px;
+  }
+
+  .header-text p {
+
+    font-size: 13px;
+  }
+
+  .submit-btn {
+
+    height: 48px;
+
+    font-size: 15px;
+  }
+}
+
+/* TABLET */
+
+@media (min-width: 768px) {
+
+  .cadastro-container {
+
+    max-width: 560px;
+
+    padding: 36px 32px;
+  }
+}
+
+/* TELAS GRANDES */
+
+@media (min-width: 1200px) {
+
+  .cadastro-container {
+
+    max-width: 620px;
+  }
+}

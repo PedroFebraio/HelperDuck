@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="end">
+      <ion-button fill="solid" color="warning" routerLink="/home">Voltar</ion-button>
+    </ion-buttons>
+
+    <ion-title color="warning">The Helper Duck 🦆</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cadastro-content">
+
+  <div class="cadastro-container">
+
+    <div class="header-text">
+      <div class="logo">🦆</div>
+      <h2>Criar Conta</h2>
+      <p>Comece sua jornada de bem-estar mental</p>
+    </div>
+
+    <form (ngSubmit)="cadastrar()">
+
+      <!-- nome -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Nome</ion-label>
+
+        <ion-input
+          type="text"
+          [(ngModel)]="nome"
+          name="nome"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <!-- EMAIL -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">E-mail</ion-label>
+
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <!-- SENHA -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Senha</ion-label>
+
+        <ion-input
+          type="password"
+          [(ngModel)]="senha"
+          name="senha"
+          required
+          minlength="6">
+        </ion-input>
+      </ion-item>
+
+      <!-- Date -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Data de Nascimento</ion-label>
+
+        <ion-input
+          type="date"
+          [(ngModel)]="data"
+          [max]="dataMaxima"
+          [min]="dataMinima"
+          name="data"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <!-- BOTÃO -->
+      <ion-button
+        expand="block"
+        color="primary"
+        class="submit-btn"
+        type="submit"
+        [disabled]="!nome ||!email || !senha || senha.length < 6 
+        || !data || data > dataMaxima || data < dataMinima">
+
+        Criar Conta
+
+      </ion-button>
+
+    </form>
+
+    <div class="links">
+
+      <p>Possui cadastro?
+        <a routerLink="/login">Entrar</a>
+      </p>
+
+    </div>
+
+  </div>
+
+</ion-content>

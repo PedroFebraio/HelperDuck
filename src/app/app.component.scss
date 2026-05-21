@@ -1,0 +1,31 @@
+
+ion-menu {
+  --width: 260px;
+  --background: linear-gradient(to bottom, #eff6ff, #ffffff);
+}
+
+
+ion-list {
+  
+  width: 100%;
+  padding: 10px;
+}
+
+ion-item {
+  --min-height: 70px;
+  --background: linear-gradient(to bottom, #5272ff, #5468ff);
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+
+  margin: 8px 12px;
+
+  --border-radius: 14px;
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+ion-title {
+  font-weight: 600;
+  font-size: 20px;
+}

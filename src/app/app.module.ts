@@ -7,10 +7,22 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+// Importação do SDK modular do Firebase
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore'
+import { provideAuth, getAuth} from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+import { provideStorage, getStorage }from '@angular/fire/storage';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideFirebaseApp(()=> initializeApp(environment.firebaseConfig)),
+    // Provisão do Firestore
+    provideFirestore(()=> getFirestore()),
+    provideAuth(()=> getAuth()),
+    provideStorage(() => getStorage())
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

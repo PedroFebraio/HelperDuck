@@ -1,3 +1,49 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <!-- MENU -->
+  <ion-menu contentId="main-content" side="start">
+
+    <ion-header>
+      <ion-toolbar color="warning">
+        <ion-title>The Helper Duck 🦆</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+
+      <ion-list lines="none">
+
+        <ion-item routerLink="/dashboard" button>
+          <ion-label>🏠 Dashboard</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/agendamento" button>
+          <ion-label>📅 Agendar consulta</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/consulta" button>
+          <ion-label>📖 Minhas consultas</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/forum" button>
+          <ion-label>💬 Fórum</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/pagamento" button>
+          <ion-label>💳 Planos</ion-label>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+
+  </ion-menu>
+
+  <!-- CONTEÚDO -->
+  <div class="ion-page" id="main-content">
+
+    <ion-router-outlet></ion-router-outlet>
+
+  </div>
+
 </ion-app>
