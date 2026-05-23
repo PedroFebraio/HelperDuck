@@ -44,6 +44,7 @@ export class DataServices {
       await setDoc(usuarioRef,{
         id: uid,
         nome: usuario.nome,
+        email: usuario.email,
         dataNascimento: usuario.dataNascimento,
         pontosFidelidade: 0,
         chartedAt: Date.now()

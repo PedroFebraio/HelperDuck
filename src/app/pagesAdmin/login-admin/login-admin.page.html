@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="warning">
+
+    <ion-title>
+      Admin 🛠️
+    </ion-title>
+
+    <ion-button slot="end" fill="solid"
+     routerLink="/home">Voltar</ion-button>
+    
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="login-content">
+
+  <div class="login-container">
+
+    <div class="header-text">
+
+      <div class="logo">
+        🛠️
+      </div>
+
+      <h2>
+        Painel Administrativo
+      </h2>
+
+      <p>
+        Área restrita para administradores
+      </p>
+
+    </div>
+
+    <form (ngSubmit)="loginAdmin()">
+
+      <!-- EMAIL -->
+      <ion-item class="input-item">
+
+        <ion-label position="stacked">
+          E-mail
+        </ion-label>
+
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required>
+
+        </ion-input>
+
+      </ion-item>
+
+      <!-- SENHA -->
+      <ion-item class="input-item">
+
+        <ion-label position="stacked">
+          Senha
+        </ion-label>
+
+        <ion-input
+          type="password"
+          [(ngModel)]="senha"
+          name="senha"
+          required>
+
+        </ion-input>
+
+      </ion-item>
+
+      <!-- BOTÃO -->
+      <ion-button
+        expand="block"
+        type="submit"
+        color="danger"
+        class="submit-btn"
+        [disabled]="!email || !senha">
+
+        Entrar como Admin
+
+      </ion-button>
+
+    </form>
+
+  </div>
+
+</ion-content>

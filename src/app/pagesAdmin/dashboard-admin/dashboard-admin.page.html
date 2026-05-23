@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="warning">
+
+    <ion-title>
+      Admin 🛠️
+    </ion-title>
+
+    <ion-button 
+      slot="end"
+      color="danger"
+      (click)="logout()">
+      Logout
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="admin-content">
+
+    <div class="card profile-card">
+      <div class="profile-header">
+
+        <div class="duck-icon">
+          🦆
+        </div>
+
+        <div class="profile-info">
+          <h2>Bem-vindo, {{ admin.nome }}. adm é top!</h2>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="section-title">
+      <h3>
+        Novos psicólogos cadastrados
+      </h3>
+
+      <p>
+        Revise e aprove os profissionais pendentes.
+      </p>
+    </div>
+
+
+    <ion-card *ngFor="let psicologo of psicologos">
+      <ion-card-header>
+        <ion-card-title>
+          {{ psicologo.nome }}
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+
+        <p>
+          {{ psicologo.email }}
+        </p>
+
+        <p>
+          CRP: {{ psicologo.crp }}
+        </p>
+
+        <p>
+          {{ psicologo.descricao }}
+        </p>
+
+        <!-- BOTÕES -->
+
+        <ion-button
+          color="success"
+          (click)="aprovar(psicologo)">
+          Aprovar
+
+        </ion-button>
+
+        <ion-button
+          color="danger"
+          (click)="remover(psicologo)">
+          Remover
+
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

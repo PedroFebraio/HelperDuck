@@ -40,12 +40,28 @@ const routes: Routes = [
     loadChildren: () => import('./pages/pagamento/pagamento.module').then( m => m.PagamentoPageModule)
   },
   {
-    path: 'loginPsico',
+    path: 'login-psicologo',
     loadChildren: () => import('./pagesPsico/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'registerPsico',
+    path: 'register-psicologo',
     loadChildren: () => import('./pagesPsico/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'login-admin',
+    loadChildren: () => import('./pagesAdmin/login-admin/login-admin.module').then( m => m.LoginAdminPageModule)
+  },
+  {
+    path: 'dashboard-admin',
+    loadChildren: () => import('./pagesAdmin/dashboard-admin/dashboard-admin.module').then( m => m.DashboardAdminPageModule)
+  },
+  {
+    path: 'dashboard-psicologo',
+    loadChildren: () => import('./pagesPsico/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
+  {
+    path: 'perfil-psicologo',
+    loadChildren: () => import('./pagesPsico/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
 ];
 

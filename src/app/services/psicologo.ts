@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import {
-  Firestore, doc, setDoc
+  Firestore, doc, getDoc, setDoc
 } from '@angular/fire/firestore';
 
 import { AuthServices } from './auth';
-
 
 export interface Psicologo{
   id?: string,
@@ -21,16 +20,18 @@ export interface Psicologo{
   createdAt?: number
 }
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class PsicologoServices {
 
+  
   constructor(
     private authServices: AuthServices,
     private firestore: Firestore,
   ){}
+
+
 
   async addPsicologo( psicologo: Psicologo){
 
@@ -64,4 +65,57 @@ export class PsicologoServices {
     }
   }
 
+
+
+  async loginPsicologo(email: string, senha: string){
+
+    try {
+
+      const uid = await this.authServices.Login(email, senha);
+
+      const psicologoRef = doc(
+        this.firestore,
+        `Psicologos/${uid}`
+      );
+
+      const psicologoSnap = await getDoc(psicologoRef);
+
+      // EXISTE?
+
+      if(!psicologoSnap.exists()){
+
+        throw new Error(
+          'Psicólogo não encontrado'
+        );
+      }
+
+      const dadosPsicologo =
+        psicologoSnap.data();
+
+      // APROVADO?
+
+      if(!dadosPsicologo['aprovado']){
+
+        throw new Error(
+          'Cadastro ainda não aprovado'
+        );
+      }
+      // SALVA LOCAL
+
+      localStorage.setItem(
+        'psicologo',
+        JSON.stringify(dadosPsicologo)
+      );
+
+      return dadosPsicologo;
+
+    } catch(error){
+
+      console.log(error);
+
+      throw error;
+    }
+  }
+
+  
 }

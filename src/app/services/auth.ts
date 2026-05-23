@@ -78,6 +78,7 @@ export class AuthServices {
         await setDoc(usuarioRef, {
           id: user.uid,
           nome: user.displayName,
+          email: user.email,
           foto: user.photoURL,
           pontosFidelidade: 0,
           createdAt: Date.now()
@@ -122,6 +123,7 @@ export class AuthServices {
         await setDoc(usuarioRef, {
           id: user.uid,
           nome: user.displayName,
+          email: user.email,
           foto: user.photoURL,
           pontosFidelidade: 0,
           createdAt: Date.now()

@@ -31,6 +31,7 @@ export class LoginPage implements OnInit {
   limparFormulario(){
 
     this.email = '';
+    this.senha = ''
   }
 
 
