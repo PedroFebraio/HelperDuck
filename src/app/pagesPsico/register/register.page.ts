@@ -1,8 +1,8 @@
-import { Psicologo } from './../../services/psicologo';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { PsicologoServices } from 'src/app/services/psicologo';
+import { Psicologo, PsicologoServices } from 'src/app/services/psicologo';
 
 @Component({
   selector: 'app-register',
@@ -19,8 +19,6 @@ export class RegisterPage implements OnInit {
     estadoCrp= '';
     descricao= '';
     especialidades: string[] = [];
-
-  arquivoSelecionado!: File;
 
   especialidadesDisponiveis: string[] = [
 
@@ -60,16 +58,7 @@ export class RegisterPage implements OnInit {
     this.estadoCrp= '';
     this.descricao= '';
     this.especialidades= [];
-
   }
-
-
-  onFileSelected(event: any){
-
-    this.arquivoSelecionado =
-      event.target.files[0];
-  }
-
 
   async cadastrar(){
 
@@ -88,7 +77,7 @@ export class RegisterPage implements OnInit {
 
     try {
 
-      const psico = await this.psicologoServices.addPsicologo(psicologo, this.arquivoSelecionado);
+      const psico = await this.psicologoServices.addPsicologo(psicologo);
 
       loading.dismiss()
 
@@ -106,7 +95,6 @@ export class RegisterPage implements OnInit {
       this.presentToast('Erro ao cadastrar Psicólogo', 'danger');
     }
   }
-
 
 
   async presentToast (mensagem: string, cor: string) {

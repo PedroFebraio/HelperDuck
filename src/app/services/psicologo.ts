@@ -4,10 +4,6 @@ import {
   Firestore, doc, setDoc
 } from '@angular/fire/firestore';
 
-import {
-  Storage, ref, uploadBytes, getDownloadURL
-} from '@angular/fire/storage';
-
 import { AuthServices } from './auth';
 
 
@@ -21,7 +17,6 @@ export interface Psicologo{
   especialidades: string[],
   descricao: string,
   fotoPerfil?: string,
-  documentoUrl?: string,
   aprovado?: boolean,
   createdAt?: number
 }
@@ -35,29 +30,15 @@ export class PsicologoServices {
   constructor(
     private authServices: AuthServices,
     private firestore: Firestore,
-    private storage: Storage
   ){}
 
-  async addPsicologo( psicologo: Psicologo,arquivo: File){
+  async addPsicologo( psicologo: Psicologo){
 
     try{
 
       const uid = await this.authServices.Register(psicologo.email, psicologo.senha);
 
-      // 2 - upload documento
-      const caminho =
-        `documentos-psicologos/${uid}`;
-
-      const storageRef =
-        ref(this.storage, caminho);
-
-      await uploadBytes(storageRef, arquivo);
-
-      // 3 - pega URL documento
-      const documentoUrl =
-        await getDownloadURL(storageRef);
-
-        const psicologoRef = doc(this.firestore, `Psicologos/${uid}`);
+      const psicologoRef = doc(this.firestore, `Psicologos/${uid}`);
 
       // 4 - salva firestore
       await setDoc(psicologoRef,
@@ -69,7 +50,6 @@ export class PsicologoServices {
           estadoCrp: psicologo.estadoCrp,
           especialidades: psicologo.especialidades,
           descricao: psicologo.descricao,
-          documentoUrl,
           aprovado: false,
           createdAt: Date.now()
         }
@@ -83,4 +63,5 @@ export class PsicologoServices {
       return false
     }
   }
+
 }

@@ -144,19 +144,6 @@
         </ion-textarea>
       </ion-item>
 
-
-      <!-- DOCUMENTO -->
-      <div class="upload-container">
-        <label class="upload-label">Documento profissional / CRP</label>
-
-        <input
-          type="file"
-          accept="image/*,.pdf"
-          (change)="onFileSelected($event)"
-        />
-
-      </div>
-
       <!-- BOTÃO -->
       <ion-button
         expand="block"
@@ -166,11 +153,10 @@
 
         [disabled]="
           !nome || !email || !senha ||
-          senha.length < 6 ||
-          !crp || crp.length == 7 ||
-          !estadoCrp ||
+          senha.length < 6 || !crp || crp.length > 8 ||
+          crp.length < 5|| !estadoCrp ||
           especialidades.length === 0 ||
-          !descricao || !arquivoSelecionado">
+          !descricao">
         Solicitar Cadastro
 
       </ion-button>

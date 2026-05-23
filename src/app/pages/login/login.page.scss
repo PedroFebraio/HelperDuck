@@ -7,7 +7,7 @@
 ion-content::part(scroll) {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   min-height: 100vh;
 
@@ -24,7 +24,11 @@ ion-content::part(scroll) {
 
   border-radius: 24px;
 
+  margin-bottom: 32px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+
 }
 
 /* 🔽 PARTE PRINCIPAL */
