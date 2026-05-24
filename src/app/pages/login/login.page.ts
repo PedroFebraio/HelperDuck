@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Observable } from 'rxjs';
 import { AuthServices } from 'src/app/services/auth';
 import { DataServices } from 'src/app/services/data';
 
@@ -130,41 +129,6 @@ export class LoginPage implements OnInit {
       );
     }
   }
-
-  
-  async loginGitHub(){
-
-    const load = await this.loading.create({message: 'Cadastrando...'})
-    await load.present()
-
-      try{
-
-      const usuario = await this.authServices.loginWithGitHub();
-
-        await load.dismiss()
-        
-      if(usuario){
-
-        this.presentToast(
-          'Logado com sucesso',
-          'success'
-        );
-
-        this.router.navigateByUrl(
-          '/dashboard'
-        );
-      }
-
-    }catch(error){
-      await load.dismiss();
-
-      this.presentToast(
-        'Erro ao logar com Github',
-        'danger'
-      );
-    }
-  }
-
 
 
   async presentToast (mensagem: string, cor: string) {

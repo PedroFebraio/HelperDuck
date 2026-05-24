@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "122894424409",
+    "project_id": "duckhelper-ed899",
+    "storage_bucket": "duckhelper-ed899.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122894424409:android:ce8fd40cfbef32b8471448",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122894424409-vi114tn22rkutupcrrcat0arrgcg9r8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbanj1eyUKWFwu5PMGi133aTruUz81878"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122894424409-vi114tn22rkutupcrrcat0arrgcg9r8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

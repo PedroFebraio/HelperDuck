@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
- signOut, GoogleAuthProvider, signInWithPopup,
- GithubAuthProvider} from '@angular/fire/auth';
+ signOut, GoogleAuthProvider, signInWithPopup, signInWithCredential} from '@angular/fire/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
+import { Capacitor } from '@capacitor/core';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
  
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServices {
   
+  
+  novoUser: any;
+
+
   constructor(
     private auth: Auth,
     private firestore: Firestore
@@ -53,61 +58,26 @@ export class AuthServices {
 
 
   async loginWithGoogle(){
-
     try {
-
+   
+    if (Capacitor.getPlatform() === 'web') {
       const provider = new GoogleAuthProvider();
-      const novoUser = await signInWithPopup(
-        this.auth,
-        provider
-      );
+      this.novoUser = await signInWithPopup(this.auth, provider);
+    } else {
+      
+      
+      const result = await FirebaseAuthentication.signInWithGoogle();
+     
 
-      const user = novoUser.user;
-
-      const usuarioRef = doc(
-        this.firestore,
-        `Usuarios/${user.uid}`
-      );
-
-      // Verifica se já existe
-      const usuarioLogin = await getDoc(usuarioRef);
-
-      // Se NÃO existir, cria
-      if(!usuarioLogin.exists()){
-
-        await setDoc(usuarioRef, {
-          id: user.uid,
-          nome: user.displayName,
-          email: user.email,
-          foto: user.photoURL,
-          pontosFidelidade: 0,
-          createdAt: Date.now()
-        });
+      if (!result.credential?.idToken) {
+        throw new Error('Não foi possível obter o idToken do Google.');
       }
 
-      // Busca os dados finais
-      const dadosUsuario = (await getDoc(usuarioRef)).data();
-      
-      localStorage.setItem('usuario', JSON.stringify(dadosUsuario))
-      return dadosUsuario;
-
-    } catch(error){
-      return console.log(error);
+      const credential = GoogleAuthProvider.credential(result.credential.idToken);
+      this.novoUser = await signInWithCredential(this.auth, credential);
     }
-  }
 
-
-  async loginWithGitHub(){
-
-    try {
-
-      const provider = new GithubAuthProvider();
-      const novoUser = await signInWithPopup(
-        this.auth,
-        provider
-      );
-
-      const user = novoUser.user;
+      const user = this.novoUser.user;
 
       const usuarioRef = doc(
         this.firestore,
@@ -134,10 +104,12 @@ export class AuthServices {
       const dadosUsuario = (await getDoc(usuarioRef)).data();
       
       localStorage.setItem('usuario', JSON.stringify(dadosUsuario))
+
+      this.novoUser = []
       return dadosUsuario;
 
-    } catch(error){
-      return console.log(error);
+    } catch(error: any){
+      return null;
     }
   }
 

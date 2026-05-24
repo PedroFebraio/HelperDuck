@@ -85,7 +85,7 @@ export class RegisterPage implements OnInit {
         this.limparFormulario()
 
         this.presentToast('Psicólogo cadastrado!', 'success');
-        this.router.navigateByUrl('/loginPsico')
+        this.router.navigateByUrl('/login-psicologo')
       }
     } catch (error) {
       loading.dismiss()
