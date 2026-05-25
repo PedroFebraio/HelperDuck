@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Psicologo, PsicologoServices } from 'src/app/services/psicologo';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,13 +13,7 @@ import { Psicologo, PsicologoServices } from 'src/app/services/psicologo';
 })
 export class RegisterPage implements OnInit {
 
-    nome= '';
-    email= '';
-    senha= '';
-    crp= '';
-    estadoCrp= '';
-    descricao= '';
-    especialidades: string[] = [];
+  cadastroForm!: FormGroup;
 
   especialidadesDisponiveis: string[] = [
 
@@ -43,36 +38,61 @@ export class RegisterPage implements OnInit {
     private psicologoServices: PsicologoServices,
     private toastController: ToastController,
     private router: Router,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private fb: FormBuilder
   ){}
 
   ngOnInit() {
+
+    this.cadastroForm = this.fb.group({
+
+      nome: ['', [Validators.required, Validators.minLength(3),
+          Validators.maxLength(50)]],
+
+      email: ['', [Validators.required, Validators.email]],
+
+      senha: ['', [Validators.required, Validators.pattern(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/)]],
+
+      telefone: ['', [Validators.required, Validators.pattern(
+            /^\(\d{2}\)\s\d{5}-\d{4}$/)]],
+
+      crp: ['', [Validators.required, Validators.minLength(4)]],
+
+      estadoCrp: ['', [Validators.required, Validators.maxLength(2)]],
+
+      bio: ['', [Validators.required, 
+        Validators.minLength(20), Validators.maxLength(500)]],
+
+      valorConsulta: ['', [Validators.required, Validators.min(50), Validators.max(400)]],
+
+      especialidades: [[], [Validators.required]]
+
+    });
+
   }
 
-
-  limparFormulario(){
-    this.nome= '';
-    this.email= '';
-    this.senha= '';
-    this.crp= '';
-    this.estadoCrp= '';
-    this.descricao= '';
-    this.especialidades= [];
-  }
 
   async cadastrar(){
+
+    if(this.cadastroForm.invalid){
+      this.cadastroForm.markAllAsTouched();
+      return;
+    }
 
     const loading = await this.loadingCtrl.create({message: 'Cadastrando...'})
     await loading.present();
 
     const psicologo: Psicologo ={
-      nome: this.nome,
-      email: this.email,
-      senha: this.senha,
-      crp: this.crp,
-      estadoCrp: this.estadoCrp,
-      descricao: this.descricao,
-      especialidades: this.especialidades
+      nome: this.cadastroForm.value.nome,
+      email: this.cadastroForm.value.email,
+      senha: this.cadastroForm.value.senha,
+      crp: this.cadastroForm.value.crp,
+      estadoCrp: this.cadastroForm.value.estadoCrp,
+      bio: this.cadastroForm.value.bio,
+      especialidades: this.cadastroForm.value.especialidades,
+      valorConsulta: this.cadastroForm.value.valorConsulta,
+      telefone: this.cadastroForm.value.telefone,
     }
 
     try {
@@ -82,7 +102,7 @@ export class RegisterPage implements OnInit {
       loading.dismiss()
 
       if(psico){
-        this.limparFormulario()
+        this.cadastroForm.reset();
 
         this.presentToast('Psicólogo cadastrado!', 'success');
         this.router.navigateByUrl('/login-psicologo')

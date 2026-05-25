@@ -1,10 +1,17 @@
 <ion-header>
   <ion-toolbar color="warning">
-    
-    <ion-button slot="end" fill="solid"
-     routerLink="/home">Voltar</ion-button>
-    
-    <ion-title>TheHelperDuck</ion-title>
+
+    <ion-button
+      slot="end"
+      fill="solid"
+      routerLink="/home">
+
+      Voltar
+    </ion-button>
+
+    <ion-title>
+      The Helper Duck 🦆
+    </ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -13,64 +20,162 @@
 
   <div class="cadastro-container">
 
+    <!-- HEADER -->
     <div class="header-text">
       <div class="logo">🦆</div>
+
       <h2>Criar Conta</h2>
+
       <p>Comece sua jornada de bem-estar mental</p>
     </div>
 
-    <form (ngSubmit)="cadastrar()">
 
-      <!-- nome -->
+    <!-- FORM -->
+    <form
+      [formGroup]="cadastroForm"
+      (ngSubmit)="cadastrar()">
+
+
+      <!-- NOME -->
       <ion-item class="input-item">
-        <ion-label position="stacked">Nome</ion-label>
+        <ion-label position="stacked">Nome Completo</ion-label>
 
         <ion-input
+          placeholder="Digite seu nome completo"
           type="text"
-          [(ngModel)]="nome"
-          name="nome"
-          required>
+          formControlName="nome">
         </ion-input>
       </ion-item>
+
+      <div class="erro" *ngIf="
+        cadastroForm.get('nome')?.touched &&
+        cadastroForm.get('nome')?.invalid
+      ">
+
+        <p *ngIf="cadastroForm.get('nome')?.hasError('required')">
+          Nome é obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('nome')?.hasError('minlength')">
+          Nome precisa ter pelo menos 3 caracteres.
+        </p>
+        <p *ngIf="cadastroForm.get('nome')?.hasError('maxlength')">
+          Nome deve ter no máximo 50 caracteres.
+        </p>
+      </div>
+
 
       <!-- EMAIL -->
       <ion-item class="input-item">
         <ion-label position="stacked">E-mail</ion-label>
 
         <ion-input
+        placeholder="Ex: exemplo@email.com"
           type="email"
-          [(ngModel)]="email"
-          name="email"
-          required>
+          formControlName="email">
         </ion-input>
       </ion-item>
+
+      <div class="erro" *ngIf="
+        cadastroForm.get('email')?.touched &&
+        cadastroForm.get('email')?.invalid
+      ">
+
+        <p *ngIf="cadastroForm.get('email')?.hasError('required')">
+          E-mail é obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('email')?.hasError('email')">
+          Digite um e-mail válido.
+        </p>
+      </div>
+
+
+      <!-- TELEFONE -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Telefone</ion-label>
+
+        <ion-input
+          type="tel"
+          placeholder="Ex: (11) 12345-6789"
+          mask="(00) 00000-0000"
+          formControlName="telefone">
+        </ion-input>
+      </ion-item>
+
+      <div class="erro" *ngIf="
+        cadastroForm.get('telefone')?.touched &&
+        cadastroForm.get('telefone')?.invalid
+      ">
+
+        <p *ngIf="cadastroForm.get('telefone')?.hasError('required')">
+          Telefone é obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('telefone')?.hasError('pattern')">
+          Digite um telefone válido.
+        </p>
+      </div>
+
 
       <!-- SENHA -->
       <ion-item class="input-item">
         <ion-label position="stacked">Senha</ion-label>
 
         <ion-input
+          placeholder="Digite uma senha (que não esqueça)"
           type="password"
-          [(ngModel)]="senha"
-          name="senha"
-          required
-          minlength="6">
+          formControlName="senha">
         </ion-input>
       </ion-item>
 
-      <!-- Date -->
+      <div class="erro" *ngIf="
+        cadastroForm.get('senha')?.touched &&
+        cadastroForm.get('senha')?.invalid
+      ">
+
+        <p *ngIf="cadastroForm.get('senha')?.hasError('required')">
+          Senha é obrigatória.
+        </p>
+
+        <div *ngIf="cadastroForm.get('senha')?.hasError('pattern')">
+          <p>A senha deve conter:</p>
+
+          <ul>
+            <li>Letra maiúscula</li>
+            <li>Letra minúscula</li>
+            <li>Número</li>
+            <li>Caractere especial</li>
+            <li>Mínimo de 8 caracteres</li>
+          </ul>
+        
+        </div>
+      </div>
+
+
+      <!-- DATA NASCIMENTO -->
       <ion-item class="input-item">
         <ion-label position="stacked">Data de Nascimento</ion-label>
 
         <ion-input
           type="date"
-          [(ngModel)]="data"
-          [max]="dataMaxima"
-          [min]="dataMinima"
-          name="data"
-          required>
+          formControlName="dataNascimento">
         </ion-input>
       </ion-item>
+
+      <div class="erro" *ngIf="
+        cadastroForm.get('dataNascimento')?.touched &&
+        cadastroForm.get('dataNascimento')?.invalid
+      ">
+
+        <p *ngIf="cadastroForm.get('dataNascimento')?.hasError('required')">
+          Data de nascimento é obrigatória.
+        </p>
+
+        <p *ngIf="cadastroForm.get('dataNascimento')?.hasError('menorIdade')">
+          Você precisa ter pelo menos 18 anos.
+        </p>
+      </div>
 
       <!-- BOTÃO -->
       <ion-button
@@ -78,23 +183,22 @@
         color="primary"
         class="submit-btn"
         type="submit"
-        [disabled]="!nome ||!email || !senha || senha.length < 6 
-        || !data || data > dataMaxima || data < dataMinima">
-
+        [disabled]="cadastroForm.invalid">
+        
         Criar Conta
-
       </ion-button>
-
     </form>
 
+
+    <!-- LINKS -->
     <div class="links">
-
-      <p>Possui cadastro?
-        <a routerLink="/login">Entrar</a>
+      <p>
+        Já possui cadastro?
+        <a routerLink="/login">
+          Entrar
+        </a>
       </p>
-
     </div>
-
   </div>
-
+  
 </ion-content>

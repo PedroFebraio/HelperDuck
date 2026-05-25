@@ -141,55 +141,88 @@ ion-select {
   width: 100%;
 }
 
-/* UPLOAD */
+/* =========================
+   ERROS DO FORMULÁRIO
+========================= */
 
-.upload-container {
+.erro {
 
-  margin-top: 8px;
+  margin-top: -8px;
 
-  margin-bottom: 22px;
+  margin-bottom: 14px;
+
+  padding-left: 6px;
+
+  animation: fadeError 0.25s ease;
+}
+
+.erro p {
+
+  margin: 4px 0;
+
+  color: #dc2626;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  line-height: 1.4;
 
   display: flex;
 
-  flex-direction: column;
+  align-items: center;
 
-  gap: 10px;
+  gap: 6px;
 }
 
-.upload-label {
+/* Ícone automático */
 
-  font-size: 14px;
+.erro p::before {
 
-  font-weight: 600;
+  content: "⚠";
 
-  color: #374151;
+  font-size: 12px;
 }
 
-.upload-container input {
+/* INPUT COM ERRO */
 
-  width: 100%;
+.input-item.ion-invalid.ion-touched {
 
-  padding: 14px;
+  --highlight-color-focused: #ef4444;
 
-  border: 2px dashed #d1d5db;
+  border: 1px solid #fecaca;
 
-  border-radius: 14px;
+  border-radius: 12px;
 
-  background: #f9fafb;
-
-  cursor: pointer;
-
-  transition: 0.3s ease;
-
-  box-sizing: border-box;
+  transition: 0.2s ease;
 }
 
-.upload-container input:hover {
+/* INPUT CORRETO */
 
-  border-color: #3b82f6;
+.input-item.ion-valid.ion-touched {
 
-  background: #eff6ff;
+  --highlight-color-focused: #22c55e;
 }
+
+/* ANIMAÇÃO */
+
+@keyframes fadeError {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(-4px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
 
 /* BOTÃO */
 
@@ -247,6 +280,23 @@ ion-select {
   ion-content::part(scroll) {
 
     padding: 14px 10px;
+  }
+  
+  .erro {
+
+    margin-bottom: 12px;
+  }
+
+  .erro p {
+
+    font-size: 12px;
+
+    gap: 5px;
+  }
+
+  .erro p::before {
+
+    font-size: 11px;
   }
 
   .cadastro-container {

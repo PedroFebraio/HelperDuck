@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/agendamento">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Perfil do Psicólogo
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="perfil-content">
+
+  <!-- LOADING -->
+  <div
+    *ngIf="carregando"
+    class="loading-box">
+
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <!-- PERFIL -->
+
+  <div
+    *ngIf="!carregando && psicologo"
+    class="perfil-container">
+
+    <!-- TOPO -->
+    <div class="hero-card">
+      <div class="avatar">🧠</div>
+
+      <h1>{{ psicologo.nome }}</h1>
+
+      <p class="crp">CRP {{ psicologo.crp }}</p>
+
+      <div class="valor">
+        R$ {{ psicologo.valorConsulta }}
+        <span>/ consulta</span>
+      </div>
+    </div>
+
+    <!-- BIO -->
+    <div class="card">
+      <h2>Sobre</h2>
+
+      <p>{{ psicologo.bio }}</p>
+    </div>
+
+
+    <!-- ESPECIALIDADES -->
+    <div class="card">
+      <h2>Especialidades</h2>
+
+      <div class="especialidades">
+
+        <span
+          *ngFor="
+            let especialidade
+            of psicologo.especialidades">
+          {{ especialidade }}
+        </span>
+      </div>
+    </div>
+
+
+    <!-- CONTATO -->
+    <div class="card">
+      <h2>Contato</h2>
+
+      <p>{{ psicologo.email }}</p>
+    </div>
+
+    <!-- BOTÃO -->
+    <ion-button
+      expand="block"
+      size="large"
+      color="warning"
+      class="agendar-btn">
+
+      Agendar Consulta
+    </ion-button>
+  </div>
+
+</ion-content>

@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterPageRoutingModule } from './register-routing.module';
+import { CompletarCadastroPageRoutingModule } from './completar-cadastro-routing.module';
 
-import { RegisterPage } from './register.page';
+import { CompletarCadastroPage } from './completar-cadastro.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterPageRoutingModule,
+    CompletarCadastroPageRoutingModule,
     ReactiveFormsModule
 ],
-  declarations: [RegisterPage]
+  declarations: [CompletarCadastroPage]
 })
-export class RegisterPageModule {}
+export class CompletarCadastroPageModule {}

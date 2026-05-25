@@ -1,0 +1,510 @@
+/* FUNDO */
+
+.agendamento-content {
+
+  --background:
+    linear-gradient(to bottom, #fff8e7, #f5f7fb);
+
+  --color: #000;
+
+  --padding-bottom:
+    calc(env(safe-area-inset-bottom) + 90px);
+}
+
+/* HERO */
+
+.hero-search {
+
+  padding: 28px 20px 10px;
+
+  text-align: center;
+}
+
+.hero-search h1 {
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  color: #1f2937;
+
+  margin-bottom: 10px;
+
+  line-height: 1.2;
+}
+
+.hero-search p {
+
+  color: #6b7280;
+
+  font-size: 15px;
+
+  margin-bottom: 22px;
+
+  line-height: 1.5;
+}
+
+/* SEARCHBAR */
+
+ion-searchbar {
+
+  --background: white;
+
+  --border-radius: 18px;
+
+  --box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+  --placeholder-color: #9ca3af;
+
+  --icon-color: #f59e0b;
+
+  padding: 0;
+}
+
+/* FILTROS */
+
+.filtros-container {
+
+  --color: #000;
+
+  padding: 0 18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-bottom: 22px;
+}
+
+/* ITEM */
+
+.filtro-item {
+
+  --background: white;
+
+  --border-radius: 16px;
+
+  --padding-start: 14px;
+
+  --inner-padding-end: 14px;
+
+  --color: #000;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* RANGE */
+
+.preco-box {
+
+  background: white;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.05);
+}
+
+.preco-box p {
+
+  margin-top: 0;
+
+  margin-bottom: 10px;
+
+  color: #374151;
+
+  font-weight: 600;
+}
+
+ion-range {
+
+  --bar-background: #fde68a;
+
+  --bar-background-active: #f59e0b;
+
+  --knob-background: #f59e0b;
+
+  --pin-background: #f59e0b;
+
+  --pin-color: white;
+}
+
+/* RESULTADO */
+
+.resultado-info {
+
+  padding: 0 20px;
+
+  margin-bottom: 12px;
+}
+
+.resultado-info p {
+
+  color: #6b7280;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+/* LOADING */
+
+.loading-box {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 40px;
+}
+
+/* LISTA */
+
+.psicologos-container {
+
+  padding: 0 18px 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* CARD */
+
+.psicologo-card {
+  --color: #000;
+
+  margin: 0;
+
+  border-radius: 24px;
+
+  background: white;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.08);
+
+  padding: 20px;
+
+  transition: 0.3s ease;
+}
+
+.psicologo-card:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.10);
+}
+
+/* TOPO */
+
+.card-top {
+
+  display: flex;
+
+  gap: 16px;
+
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+/* AVATAR */
+
+.avatar {
+
+  width: 74px;
+
+  height: 74px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(to bottom right,
+    #f59e0b,
+    #facc15);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 34px;
+
+  flex-shrink: 0;
+}
+
+/* INFO */
+
+.info {
+
+  flex: 1;
+}
+
+.info h2 {
+
+  margin: 0;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  color: #1f2937;
+
+  line-height: 1.2;
+}
+
+.estado {
+
+  margin-top: 6px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+/* BIO */
+
+.bio {
+
+  color: #4b5563;
+
+  line-height: 1.6;
+
+  font-size: 14px;
+
+  margin-bottom: 18px;
+}
+
+/* ESPECIALIDADES */
+
+.especialidades {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-bottom: 22px;
+}
+
+.especialidades span {
+
+  background: #fff7d6;
+
+  color: #92400e;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+/* FOOTER */
+
+.card-footer {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+/* PREÇO */
+
+.preco {
+
+  font-size: 22px;
+
+  font-weight: 800;
+
+  color: #f59e0b;
+}
+
+/* BOTÃO */
+
+.card-footer ion-button {
+
+  --border-radius: 14px;
+
+  height: 44px;
+
+  font-weight: 700;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .hero-search {
+
+    padding: 24px 16px 8px;
+  }
+
+  .hero-search h1 {
+
+    font-size: 24px;
+  }
+
+  .hero-search p {
+
+    font-size: 14px;
+  }
+
+  .filtros-container {
+
+    padding: 0 14px;
+  }
+
+  .psicologos-container {
+
+    padding: 0 14px 30px;
+  }
+
+  .psicologo-card {
+
+    padding: 18px;
+  }
+
+  .card-top {
+
+    align-items: flex-start;
+  }
+
+  .avatar {
+
+    width: 62px;
+
+    height: 62px;
+
+    font-size: 28px;
+  }
+
+  .info h2 {
+
+    font-size: 20px;
+  }
+
+  .bio {
+
+    font-size: 13px;
+  }
+
+  .card-footer {
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .card-footer ion-button {
+
+    width: 100%;
+  }
+
+  .preco {
+
+    text-align: center;
+  }
+}
+
+/* TELAS MUITO PEQUENAS */
+
+@media (max-width: 360px) {
+
+  .hero-search h1 {
+
+    font-size: 21px;
+  }
+
+  .avatar {
+
+    width: 56px;
+
+    height: 56px;
+
+    font-size: 24px;
+  }
+
+  .info h2 {
+
+    font-size: 18px;
+  }
+
+  .especialidades span {
+
+    font-size: 11px;
+
+    padding: 7px 12px;
+  }
+}
+
+/* TABLET */
+
+@media (min-width: 768px) {
+
+  .psicologos-container {
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 20px;
+  }
+
+  .hero-search {
+
+    max-width: 900px;
+
+    margin: 0 auto;
+  }
+
+  .filtros-container {
+
+    max-width: 900px;
+
+    margin: 0 auto 24px;
+  }
+}
+
+/* DESKTOP */
+
+@media (min-width: 1200px) {
+
+  .psicologos-container {
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+  }
+}

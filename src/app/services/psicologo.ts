@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import {
-  Firestore, doc, getDoc, setDoc
+  Firestore, collection, collectionData, doc, docData, getDoc, query, setDoc,
+  where
 } from '@angular/fire/firestore';
 
 import { AuthServices } from './auth';
@@ -14,7 +15,9 @@ export interface Psicologo{
   crp: string,
   estadoCrp: string,
   especialidades: string[],
-  descricao: string,
+  bio: string,
+  telefone: string,
+  valorConsulta: number
   fotoPerfil?: string,
   aprovado?: boolean,
   createdAt?: number
@@ -50,8 +53,10 @@ export class PsicologoServices {
           crp: psicologo.crp,
           estadoCrp: psicologo.estadoCrp,
           especialidades: psicologo.especialidades,
-          descricao: psicologo.descricao,
+          bio: psicologo.bio,
+          valorConsulta: psicologo.valorConsulta,
           aprovado: false,
+          telefone: psicologo.telefone,
           createdAt: Date.now()
         }
       );
@@ -73,35 +78,28 @@ export class PsicologoServices {
 
       const uid = await this.authServices.Login(email, senha);
 
-      const psicologoRef = doc(
-        this.firestore,
-        `Psicologos/${uid}`
-      );
+      const psicologoRef = doc( this.firestore, `Psicologos/${uid}`);
 
       const psicologoSnap = await getDoc(psicologoRef);
 
       // EXISTE?
 
       if(!psicologoSnap.exists()){
-
         throw new Error(
           'Psicólogo não encontrado'
         );
       }
 
-      const dadosPsicologo =
-        psicologoSnap.data();
+      const dadosPsicologo = psicologoSnap.data();
 
       // APROVADO?
 
       if(!dadosPsicologo['aprovado']){
-
         throw new Error(
           'Cadastro ainda não aprovado'
         );
       }
       // SALVA LOCAL
-
       localStorage.setItem(
         'psicologo',
         JSON.stringify(dadosPsicologo)
@@ -112,10 +110,25 @@ export class PsicologoServices {
     } catch(error){
 
       console.log(error);
-
       throw error;
     }
   }
 
+
+  listarPsicologos(){
+
+    const psicologosRef = collection(this.firestore, 'Psicologos');
+
+    const q = query(psicologosRef, where('aprovado', '==', true));
+
+    return collectionData(q, { idField: 'id' });
+  }
+
+  buscarPsicologo(id: string){
+
+    const docRef = doc( this.firestore,`Psicologos/${id}`);
+
+    return docData(docRef, { idField: 'id' });
+  }
   
 }

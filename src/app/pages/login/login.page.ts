@@ -42,31 +42,31 @@ export class LoginPage implements OnInit {
 
   await load.present();
 
-  try{
+    try{
 
-    const usuario =
-      await this.dataServices.getUsuario( this.email, this.senha);
+      const usuario =
+        await this.dataServices.getUsuario( this.email, this.senha);
 
-    await load.dismiss();
+      await load.dismiss();
 
-    if(usuario){
+      if(usuario){
 
-      this.presentToast(
-        'Logado com sucesso!',
-        'success'
-      );
+        this.presentToast(
+          'Logado com sucesso!',
+          'success'
+        );
 
-      this.limparFormulario();
+        this.limparFormulario();
 
-      this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/dashboard');
 
-    }else{
+      }else{
 
-      this.presentToast(
-        'Usuário não encontrado',
-        'danger'
-      );
-    }
+        this.presentToast(
+          'Usuário não encontrado',
+          'danger'
+        );
+      }
 
     }catch(error: any){
       await load.dismiss();
@@ -108,27 +108,35 @@ export class LoginPage implements OnInit {
 
       await load.dismiss()
       
-      if(usuario){
-
-        this.presentToast(
-          'Logado com sucesso',
-          'success'
-        );
-
-        this.router.navigateByUrl(
-          '/dashboard'
-        );
+      if(!usuario){
+        this.presentToast('Usuário não encontrado.', 'warning');
+        return;
       }
 
-    }catch(error){
+      if(usuario['perfilCompleto'] === false){
+        this.presentToast('Complete seu cadastro.','warning');
+        this.router.navigateByUrl('/completar-cadastro');
+
+        return
+      }
+
+      this.presentToast('Login realizado com sucesso!', 'success');
+      this.router.navigateByUrl('/dashboard');
+
+    }catch(error: any){
       await load.dismiss();
 
-      this.presentToast(
-        'Erro ao logar com Google',
-        'danger'
-      );
+      let mensagem ='Erro ao logar com Google.';
+
+      // CANCELAMENTO
+      if(error?.message?.includes('cancel')){
+        mensagem ='Login cancelado.';
+      }
+      
+      this.presentToast( mensagem, 'danger');
     }
   }
+  
 
 
   async presentToast (mensagem: string, cor: string) {

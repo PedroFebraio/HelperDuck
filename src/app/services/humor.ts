@@ -44,6 +44,8 @@ export class HumorServices {
       data: hoje,
       createdAt: Date.now()
     });
+
+    return humor
   }
 
 

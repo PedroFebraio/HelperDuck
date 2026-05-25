@@ -13,9 +13,11 @@ export interface Usuario{
   id?: string,
   nome: string,
   email: string,
+  telefone: string,
   senha: string,
   dataNascimento: Date | null,
-  pontosFidelidade: number,
+  pontosFidelidade?: number,
+  consultaGratisUsada?: boolean,
   chartedAt?: number
 }
 
@@ -45,8 +47,10 @@ export class DataServices {
         id: uid,
         nome: usuario.nome,
         email: usuario.email,
+        telefone: usuario.telefone,
         dataNascimento: usuario.dataNascimento,
         pontosFidelidade: 0,
+        consultaGratisUsada: false,
         chartedAt: Date.now()
       })
 

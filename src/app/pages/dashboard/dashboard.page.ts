@@ -91,9 +91,31 @@ export class DashboardPage implements OnInit {
   
   async selecionarHumor(humor: 'bem' | 'neutro' | 'mal'){
 
-    await this.humorServices.addHumor(this.usuario.id, humor);
+    const humorClick = await this.humorServices.addHumor(this.usuario.id, humor);
 
-    this.humorRegistrado = true;
+
+    if(humorClick){
+
+      this.humorRegistrado = true;
+
+      if(humorClick === 'bem'){
+
+        this.mensagemHumor =
+          'Que ótimo saber que você está bem 😊';
+      }
+
+      else if(humorClick === 'neutro'){
+
+        this.mensagemHumor =
+          'Dias neutros também fazem parte da jornada 💛';
+      }
+
+      else if(humorClick === 'mal'){
+
+        this.mensagemHumor =
+          'Você não precisa enfrentar tudo sozinho 🫂';
+      }
+    }
   }
   
 

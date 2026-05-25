@@ -1,0 +1,339 @@
+/* FUNDO */
+
+.perfil-content {
+
+  --background:
+    linear-gradient(to bottom,
+    #fff8e8,
+    #f5f7fb);
+
+  --color: #1f2937;
+
+  --padding-bottom:
+    calc(env(safe-area-inset-bottom) + 90px);
+}
+
+/* LOADING */
+
+.loading-box {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  min-height: 80vh;
+}
+
+/* CONTAINER */
+
+.perfil-container {
+
+  padding: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+/* HERO */
+
+.hero-card {
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 32px 24px;
+
+  text-align: center;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* AVATAR */
+
+.avatar {
+
+  width: 110px;
+
+  height: 110px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(to bottom right,
+    #f59e0b,
+    #facc15);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 50px;
+
+  box-shadow:
+    0 6px 18px rgba(245,158,11,0.25);
+}
+
+/* NOME */
+
+.hero-card h1 {
+
+  margin: 0;
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  color: #1f2937;
+
+  line-height: 1.2;
+}
+
+/* CRP */
+
+.crp {
+
+  margin-top: 10px;
+
+  color: #6b7280;
+
+  font-size: 15px;
+
+  font-weight: 500;
+}
+
+/* VALOR */
+
+.valor {
+
+  margin-top: 22px;
+
+  font-size: 34px;
+
+  font-weight: 800;
+
+  color: #f59e0b;
+}
+
+.valor span {
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  color: #6b7280;
+}
+
+/* CARDS */
+
+.card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 22px;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* TITULOS */
+
+.card h2 {
+
+  margin-top: 0;
+
+  margin-bottom: 16px;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  color: #1f2937;
+}
+
+/* TEXTOS */
+
+.card p {
+
+  color: #4b5563;
+
+  line-height: 1.7;
+
+  font-size: 15px;
+
+  margin: 0;
+}
+
+/* ESPECIALIDADES */
+
+.especialidades {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.especialidades span {
+
+  background: #fff7d6;
+
+  color: #92400e;
+
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+/* BOTÃO */
+
+.agendar-btn {
+
+  margin-top: 10px;
+
+  height: 52px;
+
+  --border-radius: 18px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 6px 16px rgba(245,158,11,0.25);
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .perfil-container {
+
+    padding: 16px;
+  }
+
+  .hero-card {
+
+    padding: 28px 20px;
+  }
+
+  .avatar {
+
+    width: 90px;
+
+    height: 90px;
+
+    font-size: 42px;
+
+    border-radius: 24px;
+  }
+
+  .hero-card h1 {
+
+    font-size: 24px;
+  }
+
+  .valor {
+
+    font-size: 28px;
+  }
+
+  .card {
+
+    padding: 18px;
+  }
+
+  .card h2 {
+
+    font-size: 20px;
+  }
+
+  .card p {
+
+    font-size: 14px;
+  }
+
+  .especialidades span {
+
+    font-size: 12px;
+
+    padding: 8px 14px;
+  }
+
+  .agendar-btn {
+
+    height: 50px;
+
+    font-size: 15px;
+  }
+}
+
+/* TELAS PEQUENAS */
+
+@media (max-width: 360px) {
+
+  .hero-card h1 {
+
+    font-size: 22px;
+  }
+
+  .valor {
+
+    font-size: 24px;
+  }
+
+  .avatar {
+
+    width: 80px;
+
+    height: 80px;
+
+    font-size: 36px;
+  }
+}
+
+/* TABLET */
+
+@media (min-width: 768px) {
+
+  .perfil-container {
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 28px;
+  }
+
+  .hero-card {
+
+    padding: 40px 32px;
+  }
+}
+
+/* DESKTOP */
+
+@media (min-width: 1200px) {
+
+  .perfil-container {
+
+    max-width: 950px;
+  }
+}

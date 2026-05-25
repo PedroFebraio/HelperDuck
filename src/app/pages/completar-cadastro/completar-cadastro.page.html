@@ -1,0 +1,89 @@
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-title>
+      Completar Cadastro
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="cadastro-content">
+
+  <div class="cadastro-container">
+    <!-- HEADER -->
+
+    <div class="header-text">
+      <div class="logo">🦆</div>
+
+      <h2>Só falta mais um passo!</h2>
+
+      <p>Complete seu cadastro para continuar.</p>
+    </div>
+
+    <!-- FORM -->
+    <form 
+      [formGroup]="cadastroForm"
+      (ngSubmit)="salvar()">
+
+
+      <!-- TELEFONE -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Telefone</ion-label>
+
+        <ion-input
+          type="tel"
+          placeholder="Ex: (11) 12345-6789"
+          mask="(00) 00000-0000"
+          formControlName="telefone">
+        </ion-input>
+
+      </ion-item>
+      <div class="erro" *ngIf="cadastroForm.get('telefone')?.touched &&
+      cadastroForm.get('telefone')?.invalid">
+
+        <p>
+          Digite um telefone válido.
+        </p>
+      </div>
+
+
+      <!-- DATA -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Data de Nascimento</ion-label>
+
+        <ion-input
+          type="date"
+          formControlName="dataNascimento">
+        </ion-input>
+      </ion-item>
+
+      <div class="erro" *ngIf="cadastroForm.get('dataNascimento')?.touched &&
+      cadastroForm.get('dataNascimento')?.invalid">
+
+        <p *ngIf="cadastroForm.get('dataNascimento')?.hasError('required')">
+          Campo obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('dataNascimento')?.hasError('menorIdade')">
+          Você precisa ter 18 anos.
+        </p>
+      
+      </div>
+
+
+      <!-- BOTÃO -->
+      <ion-button
+        expand="block"
+        class="submit-btn"
+        type="submit"
+        [disabled]="cadastroForm.invalid">
+
+        Finalizar Cadastro
+      </ion-button>
+    </form>
+  </div>
+
+</ion-content>

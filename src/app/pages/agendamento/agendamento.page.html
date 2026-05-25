@@ -1,13 +1,201 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>agendamento</ion-title>
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Encontrar Psicólogos
+    </ion-title>
+
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">agendamento</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="agendamento-content">
+
+  <!-- HERO -->
+
+  <div class="hero-search">
+
+    <h1>
+      Encontre seu psicólogo ideal 🧠
+    </h1>
+
+    <p>
+      Busque profissionais por especialidade, preço e região.
+    </p>
+
+    <!-- BUSCA -->
+
+    <ion-searchbar
+      placeholder="Pesquisar psicólogo..."
+      [(ngModel)]="busca"
+      (ionInput)="filtrarPsicologos()">
+    </ion-searchbar>
+
+  </div>
+
+  <!-- FILTROS -->
+
+  <div class="filtros-container">
+
+    <!-- ESPECIALIDADE -->
+
+    <ion-item class="filtro-item">
+
+      <ion-label>
+        Especialidade
+      </ion-label>
+
+      <ion-select
+        [(ngModel)]="especialidadeSelecionada"
+        (ionChange)="filtrarPsicologos()">
+
+        <ion-select-option value="">
+          Todas
+        </ion-select-option>
+
+        <ion-select-option
+          *ngFor="let especialidade of especialidadesDisponiveis"
+          [value]="especialidade">
+
+          {{ especialidade }}
+
+        </ion-select-option>
+
+      </ion-select>
+
+    </ion-item>
+
+    <!-- PREÇO -->
+
+    <div class="preco-box">
+
+      <p>
+        Valor máximo:
+        <strong>
+          R$ {{ precoMaximo }}
+        </strong>
+      </p>
+
+      <ion-range
+        min="50"
+        max="500"
+        step="10"
+        [(ngModel)]="precoMaximo"
+        (ionChange)="filtrarPsicologos()">
+      </ion-range>
+
+    </div>
+
+    <!-- LIMPAR -->
+
+    <ion-button
+      expand="block"
+      fill="outline"
+      color="medium"
+      (click)="limparFiltros()">
+
+      Limpar filtros
+
+    </ion-button>
+
+  </div>
+
+  <!-- RESULTADOS -->
+
+  <div class="resultado-info">
+
+    <p>
+      {{ psicologos.length }}
+      psicólogos encontrados
+    </p>
+
+  </div>
+
+  <!-- LOADING -->
+
+  <div
+    *ngIf="carregando"
+    class="loading-box">
+
+    <ion-spinner></ion-spinner>
+
+  </div>
+
+  <!-- CARDS -->
+
+  <div
+    class="psicologos-container"
+    *ngIf="!carregando">
+
+    <ion-card
+      *ngFor="let psicologo of psicologos"
+      class="psicologo-card">
+
+      <div class="card-top">
+
+        <div class="avatar">
+          🧠
+        </div>
+
+        <div class="info">
+
+          <h2>
+            {{ psicologo.nome }}
+          </h2>
+
+          <p class="estado">
+            CRP {{ psicologo.crp }}
+          </p>
+
+        </div>
+
+      </div>
+
+      <p class="bio">
+
+        {{ psicologo.bio }}
+
+      </p>
+
+      <!-- ESPECIALIDADES -->
+
+      <div class="especialidades">
+
+        <span
+          *ngFor="let especialidade of psicologo.especialidades">
+
+          {{ especialidade }}
+
+        </span>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="card-footer">
+
+        <div class="preco">
+
+          R$ {{ psicologo.valorConsulta }}
+
+        </div>
+
+        <ion-button
+          (click)="abrirPerfil(psicologo.id)">
+
+          Ver Perfil
+
+        </ion-button>
+
+      </div>
+
+    </ion-card>
+
+  </div>
+
 </ion-content>

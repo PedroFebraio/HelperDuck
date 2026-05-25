@@ -59,23 +59,25 @@ export class AuthServices {
 
   async loginWithGoogle(){
     try {
+
+      await signOut(this.auth);
    
-    if (Capacitor.getPlatform() === 'web') {
-      const provider = new GoogleAuthProvider();
-      this.novoUser = await signInWithPopup(this.auth, provider);
-    } else {
+      if (Capacitor.getPlatform() === 'web') {
+        const provider = new GoogleAuthProvider();
+        this.novoUser = await signInWithPopup(this.auth, provider);
+      } else {
+        
+        
+        const result = await FirebaseAuthentication.signInWithGoogle();
       
-      
-      const result = await FirebaseAuthentication.signInWithGoogle();
-     
 
-      if (!result.credential?.idToken) {
-        throw new Error('Não foi possível obter o idToken do Google.');
+        if (!result.credential?.idToken) {
+          throw new Error('Não foi possível obter o idToken do Google.');
+        }
+
+        const credential = GoogleAuthProvider.credential(result.credential.idToken);
+        this.novoUser = await signInWithCredential(this.auth, credential);
       }
-
-      const credential = GoogleAuthProvider.credential(result.credential.idToken);
-      this.novoUser = await signInWithCredential(this.auth, credential);
-    }
 
       const user = this.novoUser.user;
 
@@ -94,8 +96,13 @@ export class AuthServices {
           id: user.uid,
           nome: user.displayName,
           email: user.email,
+          telefone: '',
           foto: user.photoURL,
+          dataNascimento: null,
           pontosFidelidade: 0,
+          consultaGratisUsada: false,
+          perfilCompleto: false,
+          provider: 'google',
           createdAt: Date.now()
         });
       }
@@ -105,7 +112,6 @@ export class AuthServices {
       
       localStorage.setItem('usuario', JSON.stringify(dadosUsuario))
 
-      this.novoUser = []
       return dadosUsuario;
 
     } catch(error: any){
