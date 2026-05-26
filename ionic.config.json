@@ -1,0 +1,7 @@
+{
+  "name": "HelperDuck",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
