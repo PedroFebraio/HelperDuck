@@ -1,0 +1,319 @@
+.perfil-content {
+
+  --background: #f5f7fb;
+}
+
+
+/* LOADING */
+
+.loading-box {
+
+  height: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+
+/* CONTAINER */
+
+.perfil-container {
+
+  padding: 20px;
+
+  max-width: 900px;
+
+  margin: 0 auto;
+}
+
+
+/* HERO */
+
+.hero-card {
+
+  background: linear-gradient(
+    135deg,
+    #f5b700,
+    #ffcc33
+  );
+
+  border-radius: 28px;
+
+  padding: 28px 24px;
+
+  text-align: center;
+
+  color: #1e293b;
+
+  margin-bottom: 22px;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,0.12);
+}
+
+
+.avatar {
+
+  width: 110px;
+
+  height: 110px;
+
+  margin: 0 auto 16px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.35);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 54px;
+
+  backdrop-filter: blur(8px);
+
+  border: 3px solid rgba(255,255,255,0.5);
+}
+
+
+.hero-info h1 {
+
+  font-size: 1.8rem;
+
+  font-weight: 700;
+
+  margin-bottom: 8px;
+}
+
+
+.crp {
+
+  font-size: 0.95rem;
+
+  opacity: .8;
+
+  margin-bottom: 16px;
+}
+
+
+.valor {
+
+  font-size: 2rem;
+
+  font-weight: bold;
+}
+
+
+.valor span {
+
+  font-size: .95rem;
+
+  font-weight: 500;
+
+  opacity: .7;
+}
+
+
+/* CARDS */
+
+.card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 22px;
+
+  margin-bottom: 18px;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.06);
+
+  border: 1px solid #edf2f7;
+}
+
+
+.card-header {
+
+  margin-bottom: 16px;
+}
+
+
+.card-header h2 {
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+  color: #1e293b;
+}
+
+
+/* BIO */
+
+.descricao {
+
+  color: #475569;
+
+  line-height: 1.7;
+
+  font-size: .98rem;
+}
+
+
+/* ESPECIALIDADES */
+
+.especialidades {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+
+.especialidades span {
+
+  background: #fff8db;
+
+  color: #8b5e00;
+
+  padding: 10px 14px;
+
+  border-radius: 999px;
+
+  font-size: .9rem;
+
+  font-weight: 600;
+
+  border: 1px solid #ffe082;
+
+  transition: .2s ease;
+}
+
+
+.especialidades span:hover {
+
+  transform: translateY(-2px);
+
+  background: #ffe082;
+}
+
+
+/* CONTATO */
+
+.contato-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #475569;
+}
+
+
+.contato-box ion-icon {
+
+  font-size: 1.2rem;
+
+  color: #f5b700;
+}
+
+
+/* AGENDAMENTO */
+
+.subtitulo {
+
+  color: #64748b;
+
+  font-size: .92rem;
+
+  margin-bottom: 14px;
+}
+
+
+.datetime-item {
+
+  --background: #f8fafc;
+
+  border-radius: 18px;
+
+  border: 1px solid #e2e8f0;
+
+  overflow: hidden;
+}
+
+
+ion-datetime {
+
+  width: 100%;
+}
+
+
+/* BOTÃO */
+
+.agendar-btn {
+
+  margin-top: 12px;
+
+  height: 54px;
+
+  font-weight: 700;
+
+  font-size: 1rem;
+
+  --border-radius: 18px;
+
+  --box-shadow:
+    0 8px 18px rgba(245,183,0,0.35);
+
+  text-transform: none;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 768px){
+
+  .perfil-container {
+
+    padding: 14px;
+  }
+
+  .hero-card {
+
+    padding: 24px 18px;
+  }
+
+  .hero-info h1 {
+
+    font-size: 1.5rem;
+  }
+
+  .valor {
+
+    font-size: 1.7rem;
+  }
+
+  .card {
+
+    padding: 18px;
+  }
+
+  .avatar {
+
+    width: 90px;
+
+    height: 90px;
+
+    font-size: 44px;
+  }
+}

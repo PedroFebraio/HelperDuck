@@ -1,3 +1,249 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <!-- MENU -->
+
+  <ion-menu
+    side="start"
+    contentId="main-content"
+    *ngIf="tipoConta">
+
+    <ion-header>
+
+      <ion-toolbar
+        [color]="
+          tipoConta === 'psicologo'
+          ? 'warning'
+          : 'primary'
+        ">
+
+        <ion-title>
+
+          {{
+            tipoConta === 'psicologo'
+            ? 'Painel do Psicólogo'
+            : 'TheHelperDuck'
+          }}
+
+        </ion-title>
+
+      </ion-toolbar>
+
+    </ion-header>
+
+    <ion-content>
+
+      <!-- PERFIL -->
+
+      <div class="perfil-box">
+
+        <div class="avatar">
+
+          {{
+            tipoConta === 'psicologo'
+            ? '🧠'
+            : '🦆'
+          }}
+
+        </div>
+
+        <h2>
+
+          {{
+            tipoConta === 'psicologo'
+            ? psicologo?.nome
+            : usuario?.nome
+          }}
+
+        </h2>
+
+        <p>
+
+          {{
+            tipoConta === 'psicologo'
+            ? 'Psicólogo'
+            : 'Usuário'
+          }}
+
+        </p>
+
+      </div>
+
+      <!-- MENU USUÁRIO -->
+
+      <ion-list *ngIf="tipoConta === 'usuario'">
+
+        <!-- DASHBOARD -->
+
+        <ion-item
+          routerLink="/dashboard"
+          routerDirection="root">
+
+          <ion-icon
+            name="home-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Dashboard
+          </ion-label>
+
+        </ion-item>
+
+        <!-- BUSCAR PSICÓLOGOS -->
+
+        <ion-item
+          routerLink="/agendamento">
+
+          <ion-icon
+            name="search-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Buscar Psicólogos
+          </ion-label>
+
+        </ion-item>
+
+        <!-- CONSULTAS -->
+
+        <ion-item
+          routerLink="/consultas">
+
+          <ion-icon
+            name="calendar-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Minhas Consultas
+          </ion-label>
+
+        </ion-item>
+
+        <!-- PERFIL -->
+
+        <ion-item
+          routerLink="/perfil">
+
+          <ion-icon
+            name="person-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Meu Perfil
+          </ion-label>
+
+        </ion-item>
+
+      </ion-list>
+
+      <!-- MENU PSICÓLOGO -->
+
+      <ion-list *ngIf="tipoConta === 'psicologo'">
+
+        <!-- DASHBOARD -->
+
+        <ion-item
+          routerLink="/dashboard-psicologo"
+          routerDirection="root">
+
+          <ion-icon
+            name="grid-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Dashboard
+          </ion-label>
+
+        </ion-item>
+
+        <!-- CONSULTAS -->
+
+        <ion-item
+          routerLink="/consultas-psicologo">
+
+          <ion-icon
+            name="calendar-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Consultas
+          </ion-label>
+
+        </ion-item>
+
+        <!-- AGENDA -->
+
+        <ion-item
+          routerLink="/agenda-psicologo">
+
+          <ion-icon
+            name="time-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Agenda
+          </ion-label>
+
+        </ion-item>
+
+        <!-- PERFIL -->
+
+        <ion-item
+          routerLink="/perfil-psicologo-editar">
+
+          <ion-icon
+            name="person-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Meu Perfil
+          </ion-label>
+
+        </ion-item>
+
+      </ion-list>
+
+      <!-- SAIR -->
+
+      <ion-list *ngIf="tipoConta">
+
+        <ion-item
+          button
+          (click)="logout()">
+
+          <ion-icon
+            name="log-out-outline"
+            slot="start">
+          </ion-icon>
+
+          <ion-label>
+            Sair
+          </ion-label>
+
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+
+  </ion-menu>
+
+  <!-- CONTEÚDO -->
+
+  <div
+    class="ion-page"
+    id="main-content">
+
+    <ion-router-outlet>
+    </ion-router-outlet>
+
+  </div>
+
 </ion-app>

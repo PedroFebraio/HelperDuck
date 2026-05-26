@@ -1,0 +1,402 @@
+.cadastro-content {
+  --background: linear-gradient(to bottom, #fab49a, #ffb85b);
+  --color: #000;
+
+  /* espaço para navbar Android */
+  --padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+}
+
+/* CENTRALIZAÇÃO */
+ion-content::part(scroll) {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  min-height: 100%;
+
+  padding: 24px 16px;
+
+  box-sizing: border-box;
+}
+
+/* CONTAINER */
+.cadastro-container {
+
+  background: #ffffff;
+
+  width: 100%;
+  max-width: 420px;
+
+  padding: 24px;
+
+  border-radius: 24px;
+
+  margin-bottom: 40px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  box-sizing: border-box;
+}
+
+/* 🔽 PARTE PRINCIPAL */
+.header-text {
+
+  text-align: center;
+
+  margin-bottom: 20px;
+}
+
+.header-text .logo {
+
+  font-size: 50px;
+
+  background: #facc15;
+
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.header-text h2 {
+
+  font-size: clamp(18px, 3vw, 24px);
+
+  margin-bottom: 6px;
+
+  color: #1f2937;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+.header-text p {
+
+  font-size: clamp(11px, 2vw, 13px);
+
+  color: #6b7280;
+
+  line-height: 1.4;
+
+  margin: 0;
+}
+
+/* INPUTS */
+.input-item {
+
+  margin-bottom: 16px;
+
+  --border-radius: 12px;
+
+  --padding-start: 10px;
+
+  --inner-padding-end: 10px;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+.input-item ion-input,
+.input-item ion-textarea,
+.input-item ion-select {
+
+  font-size: 16px;
+}
+
+/* TEXTAREA */
+ion-textarea {
+
+  min-height: 100px;
+}
+
+/* SELECT */
+ion-select {
+
+  width: 100%;
+}
+
+/* =========================
+   ERROS DO FORMULÁRIO
+========================= */
+
+.erro {
+
+  margin-top: -8px;
+
+  margin-bottom: 14px;
+
+  padding-left: 6px;
+
+  animation: fadeError 0.25s ease;
+}
+
+.erro p {
+
+  margin: 4px 0;
+
+  color: #dc2626;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  line-height: 1.4;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+/* Ícone automático */
+
+.erro p::before {
+
+  content: "⚠";
+
+  font-size: 12px;
+}
+
+/* INPUT COM ERRO */
+
+.input-item.ion-invalid.ion-touched {
+
+  --highlight-color-focused: #ef4444;
+
+  border: 1px solid #fecaca;
+
+  border-radius: 12px;
+
+  transition: 0.2s ease;
+}
+
+/* INPUT CORRETO */
+
+.input-item.ion-valid.ion-touched {
+
+  --highlight-color-focused: #22c55e;
+}
+
+/* ANIMAÇÃO */
+
+@keyframes fadeError {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(-4px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* BOTÃO */
+.submit-btn {
+
+  margin-top: 20px;
+
+  margin-bottom: 20px;
+
+  height: 48px;
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+  --border-radius: 12px;
+}
+
+/* LINKS */
+.links {
+
+  text-align: center;
+
+  margin-top: 20px;
+
+  margin-bottom: 10px;
+
+  font-size: 14px;
+}
+
+.links p {
+
+  color: black;
+}
+
+.links a {
+
+  color: #3880ff;
+
+  text-decoration: none;
+
+  font-weight: 500;
+}
+
+/* 📱 CELULARES */
+@media (max-width: 480px) {
+
+  ion-content::part(scroll) {
+
+    padding: 16px 12px;
+
+  }
+
+  .erro {
+
+    margin-bottom: 12px;
+  }
+
+  .erro p {
+
+    font-size: 12px;
+
+    gap: 5px;
+  }
+
+  .erro p::before {
+
+    font-size: 11px;
+  }
+
+  .cadastro-container {
+
+    padding: 20px 16px;
+
+    border-radius: 20px;
+
+    margin-bottom: 60px;
+  }
+
+  .header-text {
+
+    margin-bottom: 18px;
+  }
+
+  .header-text .logo {
+
+    width: 84px;
+
+    height: 84px;
+
+    font-size: 40px;
+
+    margin-bottom: 16px;
+  }
+
+  .header-text h2 {
+
+    font-size: 18px;
+  }
+
+  .header-text p {
+
+    font-size: 11px;
+  }
+
+  .input-item {
+
+    margin-bottom: 14px;
+
+    --padding-start: 8px;
+  }
+
+  .input-item ion-input,
+  .input-item ion-textarea,
+  .input-item ion-select {
+
+    font-size: 14px;
+  }
+
+  .submit-btn {
+
+    height: 46px;
+
+    font-size: 15px;
+
+    margin-bottom: 28px;
+  }
+
+  .links {
+
+    font-size: 13px;
+  }
+}
+
+/* 📱 TELAS MUITO PEQUENAS */
+@media (max-width: 360px) {
+
+  .cadastro-container {
+
+    padding: 18px 14px;
+  }
+
+  .header-text .logo {
+
+    width: 72px;
+
+    height: 72px;
+
+    font-size: 34px;
+  }
+
+  .header-text h2 {
+
+    font-size: 17px;
+  }
+
+  .header-text p {
+
+    font-size: 10px;
+  }
+
+  .submit-btn {
+
+    height: 44px;
+
+    font-size: 14px;
+  }
+}
+
+/* 💻 TABLETS */
+@media (min-width: 768px) {
+
+  .cadastro-container {
+
+    max-width: 480px;
+
+    padding: 32px;
+  }
+}
+
+/* 🖥️ TELAS GRANDES */
+@media (min-width: 1200px) {
+
+  .cadastro-container {
+
+    max-width: 540px;
+  }
+}

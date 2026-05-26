@@ -1,0 +1,168 @@
+
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Dashboard
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="dashboard-content">
+
+  <div class="dashboard-container">
+
+    <!-- HEADER -->
+
+    <div class="welcome-card">
+
+      <div>
+
+        <h1>
+          Olá,
+          {{ psicologo.nome }}
+        </h1>
+
+        <p>
+          Bem-vindo ao painel do psicólogo
+        </p>
+
+      </div>
+
+      <div class="avatar">
+        🧠
+      </div>
+
+    </div>
+
+    <!-- CARDS -->
+
+    <div class="stats-grid">
+
+      <!-- CONSULTAS -->
+
+      <div class="stat-card">
+
+        <h2>
+          {{ consultasHoje }}
+        </h2>
+
+        <p>
+          Consultas Hoje
+        </p>
+
+      </div>
+
+      <!-- PACIENTES -->
+
+      <div class="stat-card">
+
+        <h2>
+          {{ totalPacientes }}
+        </h2>
+
+        <p>
+          Pacientes
+        </p>
+
+      </div>
+
+      <!-- GANHOS -->
+
+      <div class="stat-card">
+
+        <h2>
+          R$ {{ ganhosMes }}
+        </h2>
+
+        <p>
+          Ganhos no mês
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- CONSULTAS -->
+
+    <div class="section-card">
+
+      <div class="section-header">
+
+        <h2>
+          Próximas Consultas
+        </h2>
+
+      </div>
+
+      <div
+        *ngFor="
+          let consulta
+          of proximasConsultas"
+        class="consulta-item">
+
+        <div>
+
+          <strong>
+            {{ consulta.paciente }}
+          </strong>
+
+          <p>
+            {{ consulta.horario }}
+          </p>
+
+        </div>
+
+        <ion-button
+          fill="outline"
+          size="small">
+
+          Ver
+        </ion-button>
+
+      </div>
+
+    </div>
+
+    <!-- AÇÕES -->
+
+    <div class="actions">
+
+      <ion-button
+
+        expand="block"
+
+        color="warning"
+
+        routerLink="/perfil-psicologo-editar">
+
+        Editar Perfil
+
+      </ion-button>
+
+      <ion-button
+
+        expand="block"
+
+        fill="outline"
+
+        color="warning"
+
+        routerLink="/agenda-psicologo">
+
+        Configurar Agenda
+
+      </ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>

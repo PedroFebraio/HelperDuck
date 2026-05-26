@@ -1,0 +1,323 @@
+/* FUNDO */
+
+.consultas-content {
+
+  --background:
+    linear-gradient(
+      180deg,
+      #fff8ea 0%,
+      #ffffff 100%
+    );
+}
+
+
+/* LOADING */
+
+.loading-box {
+
+  height: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+
+/* EMPTY STATE */
+
+.empty-state {
+
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 30px;
+}
+
+.empty-state ion-icon {
+
+  font-size: 90px;
+
+  color: #f5b700;
+
+  margin-bottom: 18px;
+}
+
+.empty-state h2 {
+
+  font-size: 1.4rem;
+
+  font-weight: 700;
+
+  color: #1e293b;
+
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+
+  color: #64748b;
+
+  line-height: 1.5;
+}
+
+
+/* CONTAINER */
+
+.consultas-container {
+
+  padding: 18px;
+}
+
+
+/* CARD */
+
+.consulta-card {
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  padding: 20px;
+
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.06);
+
+  border:
+    1px solid rgba(255,255,255,.8);
+
+  transition: .2s;
+}
+
+.consulta-card:hover {
+
+  transform: translateY(-2px);
+}
+
+
+/* HEADER */
+
+.card-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+
+/* PACIENTE */
+
+.paciente-info {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.avatar {
+
+  width: 58px;
+
+  height: 58px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f5b700,
+      #ffcc33
+    );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 28px;
+}
+
+.paciente-info h2 {
+
+  margin: 0;
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  color: #1e293b;
+}
+
+.paciente-info p {
+
+  margin-top: 4px;
+
+  color: #64748b;
+
+  font-size: .9rem;
+}
+
+
+/* STATUS */
+
+.status {
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: .8rem;
+
+  font-weight: 700;
+
+  text-transform: capitalize;
+}
+
+.pendente {
+
+  background: #fff7d6;
+
+  color: #b7791f;
+}
+
+.confirmada {
+
+  background: #dcfce7;
+
+  color: #15803d;
+}
+
+.cancelada {
+
+  background: #fee2e2;
+
+  color: #b91c1c;
+}
+
+.finalizada {
+
+  background: #dbeafe;
+
+  color: #1d4ed8;
+}
+
+
+/* GRID */
+
+.info-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+
+/* ITEM */
+
+.info-item {
+
+  background: #f8fafc;
+
+  border-radius: 18px;
+
+  padding: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.info-item ion-icon {
+
+  font-size: 24px;
+
+  color: #f5b700;
+}
+
+.info-item span {
+
+  display: block;
+
+  font-size: .8rem;
+
+  color: #64748b;
+
+  margin-bottom: 4px;
+}
+
+.info-item strong {
+
+  color: #1e293b;
+
+  font-size: .95rem;
+}
+
+
+/* MENSAGEM */
+
+.mensagem-status {
+
+  margin-bottom: 20px;
+}
+
+.mensagem-status p {
+
+  margin: 0;
+
+  color: #475569;
+
+  line-height: 1.5;
+
+  font-size: .95rem;
+}
+
+
+/* AÇÕES */
+
+.acoes {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+/* BOTÕES */
+
+.acoes ion-button {
+
+  --border-radius: 16px;
+
+  font-weight: 700;
+
+  height: 48px;
+}

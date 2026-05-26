@@ -1,0 +1,159 @@
+<ion-header>
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/agendamento">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      Perfil do Psicólogo
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="perfil-content">
+
+  <!-- LOADING -->
+  <div
+    *ngIf="carregando"
+    class="loading-box">
+
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <!-- PERFIL -->
+  <div
+    *ngIf="!carregando && psicologo"
+    class="perfil-container">
+
+    <!-- HERO -->
+    <div class="hero-card">
+
+      <div class="avatar">
+        🧠
+      </div>
+
+      <div class="hero-info">
+
+        <h1>
+          {{ psicologo.nome }}
+        </h1>
+
+        <p class="crp">
+          CRP {{ psicologo.crp }}
+        </p>
+
+        <div class="valor">
+          R$ {{ psicologo.valorConsulta }}
+
+          <span>
+            / consulta
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BIO -->
+    <div class="card">
+
+      <div class="card-header">
+        <h2>Sobre</h2>
+      </div>
+
+      <p class="descricao">
+        {{ psicologo.bio }}
+      </p>
+
+    </div>
+
+    <!-- ESPECIALIDADES -->
+    <div class="card">
+
+      <div class="card-header">
+        <h2>Especialidades</h2>
+      </div>
+
+      <div class="especialidades">
+
+        <span
+          *ngFor="
+            let especialidade
+            of psicologo.especialidades">
+
+          {{ especialidade }}
+
+        </span>
+
+      </div>
+    </div>
+
+    <!-- CONTATO -->
+    <div class="card">
+
+      <div class="card-header">
+        <h2>Contato</h2>
+      </div>
+
+      <div class="contato-box">
+
+        <ion-icon
+          name="mail-outline">
+        </ion-icon>
+
+        <p>
+          {{ psicologo.email }}
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- AGENDAMENTO -->
+    <div class="card">
+
+      <div class="card-header">
+        <h2>Agendar Consulta</h2>
+      </div>
+
+      <p class="subtitulo">
+        Escolha uma data e horário disponível
+      </p>
+
+      <ion-item
+        lines="none"
+        class="datetime-item">
+<!-- [min]="dataMinima" -->
+        <ion-datetime
+          presentation="date-time"
+          [(ngModel)]="dataConsulta">
+
+        </ion-datetime>
+
+      </ion-item>
+
+    </div>
+
+    <!-- BOTÃO -->
+    <ion-button
+
+      expand="block"
+
+      size="large"
+
+      color="warning"
+
+      class="agendar-btn"
+
+      (click)="agendarConsulta()">
+
+      Confirmar Agendamento
+
+    </ion-button>
+
+  </div>
+
+</ion-content>

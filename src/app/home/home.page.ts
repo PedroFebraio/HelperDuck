@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,30 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
 
+  constructor(
+    private router: Router
+  ) {}
+
+  
+  ngOnInit(){
+
+    const usuario =
+    localStorage.getItem('usuario');
+
+    const psicologo =
+      localStorage.getItem('psicologo');
+
+    if(usuario){
+      console.log('Usuário logado');
+      this.router.navigateByUrl('/dashboard')
+    } else {
+      console.log('Não logado');
+    }
+
+    if(psicologo){
+      console.log('Psicólogo Logado');
+      this.router.navigateByUrl('/dashboard-psicologo')
+    }
+  }
 }

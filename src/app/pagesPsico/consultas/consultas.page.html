@@ -1,0 +1,283 @@
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Consultas
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content
+  id="main-content"
+  class="consultas-content">
+
+  <!-- LOADING -->
+
+  <div
+    *ngIf="carregando"
+    class="loading-box">
+
+    <ion-spinner
+      name="crescent">
+    </ion-spinner>
+
+  </div>
+
+  <!-- SEM CONSULTAS -->
+
+  <div
+    *ngIf="
+      !carregando &&
+      consultas.length === 0
+    "
+    class="empty-state">
+
+    <ion-icon
+      name="calendar-clear-outline">
+    </ion-icon>
+
+    <h2>
+      Nenhuma consulta encontrada
+    </h2>
+
+    <p>
+      Quando pacientes agendarem consultas,
+      elas aparecerão aqui.
+    </p>
+
+  </div>
+
+  <!-- LISTA -->
+
+  <div
+    *ngIf="
+      !carregando &&
+      consultas.length > 0
+    "
+    class="consultas-container">
+
+    <!-- CARD -->
+
+    <div
+      *ngFor="
+        let consulta
+        of consultas"
+      class="consulta-card">
+
+      <!-- TOPO -->
+
+      <div class="card-header">
+
+        <div class="paciente-info">
+
+          <div class="avatar">
+            👤
+          </div>
+
+          <div>
+
+            <h2>
+              {{ consulta.usuarioNome }}
+            </h2>
+
+            <p>
+              Paciente
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- STATUS -->
+
+        <div
+          class="status"
+          [ngClass]="consulta.status">
+
+          {{ consulta.status }}
+
+        </div>
+
+      </div>
+
+      <!-- INFORMAÇÕES -->
+
+      <div class="info-grid">
+
+        <!-- DATA -->
+
+        <div class="info-item">
+
+          <ion-icon
+            name="calendar-outline">
+          </ion-icon>
+
+          <div>
+
+            <span>
+              Data
+            </span>
+
+            <strong>
+              {{ consulta.dataConsulta }}
+            </strong>
+
+          </div>
+
+        </div>
+
+        <!-- VALOR -->
+
+        <div class="info-item">
+
+          <ion-icon
+            name="cash-outline">
+          </ion-icon>
+
+          <div>
+
+            <span>
+              Valor
+            </span>
+
+            <strong>
+              R$ {{ consulta.valorConsulta }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- STATUS TEXTO -->
+
+      <div class="mensagem-status">
+
+        <p *ngIf="consulta.status === 'pendente'">
+          Aguardando confirmação da consulta.
+        </p>
+
+        <p *ngIf="consulta.status === 'confirmada'">
+          Consulta confirmada com sucesso.
+        </p>
+
+        <p *ngIf="consulta.status === 'cancelada'">
+          Consulta cancelada.
+        </p>
+
+        <p *ngIf="consulta.status === 'finalizada'">
+          Consulta realizada.
+        </p>
+
+      </div>
+
+      <!-- BOTÕES -->
+
+      <div class="acoes">
+
+        <!-- CONFIRMAR -->
+
+        <ion-button
+
+          *ngIf="
+            consulta.status ===
+            'pendente'
+          "
+
+          expand="block"
+
+          color="success"
+
+          (click)="
+            alterarStatus(
+              consulta.id,
+              'confirmada'
+            )
+          ">
+
+          <ion-icon
+            slot="start"
+            name="checkmark-outline">
+          </ion-icon>
+
+          Confirmar
+
+        </ion-button>
+
+        <!-- FINALIZAR -->
+
+        <ion-button
+
+          *ngIf="
+            consulta.status ===
+            'confirmada'
+          "
+
+          expand="block"
+
+          color="warning"
+
+          (click)="
+            alterarStatus(
+              consulta.id,
+              'finalizada'
+            )
+          ">
+
+          <ion-icon
+            slot="start"
+            name="checkmark-done-outline">
+          </ion-icon>
+
+          Finalizar
+
+        </ion-button>
+
+        <!-- CANCELAR -->
+
+        <ion-button
+
+          *ngIf="
+            consulta.status !==
+            'cancelada' &&
+            consulta.status !==
+            'finalizada'
+          "
+
+          expand="block"
+
+          fill="outline"
+
+          color="danger"
+
+          (click)="
+            alterarStatus(
+              consulta.id,
+              'cancelada'
+            )
+          ">
+
+          <ion-icon
+            slot="start"
+            name="close-outline">
+          </ion-icon>
+
+          Cancelar
+
+        </ion-button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

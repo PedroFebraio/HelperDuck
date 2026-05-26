@@ -1,0 +1,276 @@
+<ion-header>
+  <ion-toolbar color="warning">
+
+    <ion-button
+      slot="end"
+      fill="solid"
+      routerLink="/home">
+      Voltar
+
+    </ion-button>
+
+    <ion-title>
+      TheHelperDuck
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cadastro-content">
+
+  <div class="cadastro-container">
+
+    <!-- HEADER -->
+    <div class="header-text">
+      <div class="logo">🧠</div>
+
+      <h2>Cadastro Psicólogo</h2>
+
+      <p>Faça parte da nossa rede de apoio emocional</p>
+    </div>
+
+    <form [formGroup]="cadastroForm"
+      (ngSubmit)="cadastrar()">
+
+      <!-- NOME -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Nome Completo</ion-label>
+
+        <ion-input
+          type="text"
+          formControlName="nome">
+        </ion-input>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('nome')?.touched">
+
+        <p *ngIf="cadastroForm.get('nome')?.hasError('required')">
+          Nome é obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('nome')?.hasError('minlength')">
+          Nome deve ter no mínimo 3 caracteres.
+        </p>
+      </div>
+
+
+      <!-- EMAIL -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">E-mail</ion-label>
+
+        <ion-input
+          type="email"
+          formControlName="email">
+        </ion-input>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('email')?.touched">
+
+        <p *ngIf="cadastroForm.get('email')?.hasError('required')">
+          Email é obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('email')?.hasError('email')">
+          Digite um email válido.
+        </p>
+      </div>
+
+
+      <!-- SENHA -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Senha</ion-label>
+
+        <ion-input
+          type="password"
+          formControlName="senha">
+        </ion-input>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('senha')?.touched &&
+          cadastroForm.get('senha')?.errors?.['pattern']">
+
+        <p>A senha deve conter:</p>
+        <p>• Letra maiúscula</p>
+        <p>• Letra minúscula</p>
+        <p>• Número</p>
+        <p>• Caractere especial</p>
+        <p>• Mínimo de 8 caracteres</p>
+      </div>
+
+
+      <!-- CRP -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">CRP</ion-label>
+
+        <ion-input
+          type="text"
+          placeholder="Ex: 06/123456"
+          formControlName="crp">
+        </ion-input>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('crp')?.touched">
+
+        <p *ngIf="cadastroForm.get('crp')?.hasError('required')">
+          CRP é obrigatório.
+        </p>
+      </div>
+
+
+      <!-- ESTADO -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Estado do CRP</ion-label>
+
+        <ion-input
+          type="text"
+          placeholder="Ex: SP"
+          formControlName="estadoCrp">
+        </ion-input>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('estadoCrp')?.touched">
+
+        <p *ngIf="cadastroForm.get('estadoCrp')?.hasError('required')">
+          Estado do CRP é obrigatório.
+        </p>
+      </div>
+
+
+      <!-- VALOR CONSULTA -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Valor da Consulta</ion-label>
+
+        <ion-input
+          type="number"
+          placeholder="Ex: 80"
+          formControlName="valorConsulta">
+        </ion-input>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('valorConsulta')?.touched">
+
+        <p *ngIf="cadastroForm.get('valorConsulta')?.hasError('required')">
+          Valor da consulta é obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('valorConsulta')?.hasError('min')">
+          O valor mínimo é R$ 20.
+        </p>
+      </div>
+
+
+      <!-- TELEFONE -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Telefone (Celular)</ion-label>
+
+        <ion-input
+          type="text"
+          placeholder="(11) 91234-5678"
+          formControlName="telefone">
+        </ion-input>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('telefone')?.touched">
+
+        <p *ngIf="cadastroForm.get('telefone')?.hasError('required')">
+          Telefone é obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('telefone')?.hasError('pattern')">
+          Digite um telefone válido.
+        </p>
+      </div>
+
+
+      <!-- ESPECIALIDADES -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Especialidades</ion-label>
+
+        <ion-select
+          multiple="true"
+          interface="popover"
+          placeholder="Selecione as especialidades"
+          formControlName="especialidades">
+
+          <ion-select-option
+            *ngFor="let especialidade of especialidadesDisponiveis"
+            [value]="especialidade">
+
+            {{ especialidade }}
+          </ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('especialidades')?.touched">
+
+        <p *ngIf="cadastroForm.get('especialidades')?.hasError('required')">
+          Selecione pelo menos uma especialidade.
+        </p>
+      </div>
+
+
+      <!-- BIO -->
+      <ion-item class="input-item">
+        <ion-label position="stacked">Biografia Profissional</ion-label>
+
+        <ion-textarea
+          rows="4"
+          autoGrow="true"
+          formControlName="bio">
+        </ion-textarea>
+      </ion-item>
+
+      <div
+        class="erro"
+        *ngIf="cadastroForm.get('bio')?.touched">
+
+        <p *ngIf="cadastroForm.get('bio')?.hasError('required')">
+          A biografia é obrigatória.
+        </p>
+
+        <p *ngIf="cadastroForm.get('bio')?.hasError('minlength')">
+          A biografia deve ter pelo menos 20 caracteres.
+        </p>
+      </div>
+
+
+      <!-- BOTÃO -->
+      <ion-button
+        expand="block"
+        color="warning"
+        class="submit-btn"
+        type="submit"
+        [disabled]="cadastroForm.invalid">
+        Solicitar Cadastro
+
+      </ion-button>
+    </form>
+
+    <!-- LINKS -->
+    <div class="links">
+      <p>
+        Já possui cadastro?
+        <a routerLink="/login-psicologo">
+          Entrar
+        </a>
+      </p>
+    </div>
+  </div>
+</ion-content>

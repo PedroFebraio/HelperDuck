@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>TheHelperDuck</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="dashboard-content" >
+  <div class="dashboard-container">
+
+    <!-- PERFIL -->
+    <div class="card profile-card">
+      <div class="profile-header">
+
+        <div class="duck-icon">
+          🦆
+        </div>
+
+        <div class="profile-info">
+          <h2>Bem-vindo, {{ usuario.nome }}!</h2>
+        </div>
+      </div>
+
+      <!-- STATUS -->
+      <div class="stats-grid">
+        <div class="stat-card blue">
+          <div class="emoji">🏆</div>
+
+          <h3>{{ usuario.pontosFidelidade }}</h3>
+          
+          <p>Pontos de fidelidade</p>
+        </div>
+
+        <div class="stat-card green">
+          <div class="emoji">📅</div>
+          <h3>3</h3>
+
+          <p>Consultas agendadas</p>
+        </div>
+
+        <div class="stat-card purple">
+          <div class="emoji">📈</div>
+
+          <h3>85%</h3>
+
+          <p>Taxa de continuidade</p>
+        </div>
+      </div>
+
+      <!-- HUMOR -->
+      <div class="mood-section">
+        <div class="mood-duck">
+          🦆
+        </div>
+
+        <h3>
+          Como você está se sentindo hoje?
+        </h3>
+
+        <div class="container-botoes">
+          <ion-button
+            expand="block"
+            color="success"
+            [disabled]="humorRegistrado"
+            (click)="selecionarHumor('bem')">
+
+            😊 Bem
+
+          </ion-button>
+
+          <ion-button
+            expand="block"
+            color="warning"
+            [disabled]="humorRegistrado"
+            (click)="selecionarHumor('neutro')">
+
+            😐 Neutro
+
+          </ion-button>
+
+          <ion-button
+            expand="block"
+            color="danger"
+            [disabled]="humorRegistrado"
+            (click)="selecionarHumor('mal')">
+
+            😞 Mal
+
+          </ion-button>
+        </div>
+
+        <p
+        class="mensagem-humor"
+        *ngIf="mensagemHumor">
+
+        {{ this.mensagemHumor }}
+        </p>
+      </div>
+    </div>
+
+    <!-- PROGRESSO -->
+    <div class="progress-card">
+      <div class="progress-header">
+        <div class="heart-icon">
+          💛
+        </div>
+
+        <div>
+          <h3>
+            Continue sua jornada!
+          </h3>
+
+          <p>
+            Continue ganhando pontos para uma consulta gratuita
+          </p>
+        </div>
+      </div>
+
+      <ion-progress-bar
+        [value]="usuario.pontosFidelidade / 1000">
+      </ion-progress-bar>
+
+    </div>
+  </div>
+</ion-content>
