@@ -1,13 +1,5 @@
 package io.ionic.starter;
 
-import android.os.Bundle;
 import com.getcapacitor.BridgeActivity;
 
-public class MainActivity extends BridgeActivity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // O Capacitor 3+ registra os 
-        // plugins automaticamente aqui
-    }
-}
+public class MainActivity extends BridgeActivity {}

@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'perfil-psicologo/:id',
     loadChildren: () => import('./pages/perfil-psicologo/perfil-psicologo.module').then( m => m.PerfilPsicologoPageModule)
   },
+  {
+    path: 'consultas-psicologo',
+    loadChildren: () => import('./pagesPsico/consultas/consultas.module').then( m => m.ConsultasPageModule)
+  },
 ];
 
 @NgModule({

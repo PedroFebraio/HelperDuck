@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.thehelperduck.app',
-  appName: 'TheHelperDuck',
+  appId: 'io.ionic.starter',
+  appName: 'HelperDuck',
   webDir: 'www',
   server:{
     androidScheme: 'https'

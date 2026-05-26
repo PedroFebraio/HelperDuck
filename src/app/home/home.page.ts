@@ -20,14 +20,19 @@ export class HomePage {
     const usuario =
     localStorage.getItem('usuario');
 
-    if(usuario){
+    const psicologo =
+      localStorage.getItem('psicologo');
 
+    if(usuario){
       console.log('Usuário logado');
       this.router.navigateByUrl('/dashboard')
-
     } else {
-
       console.log('Não logado');
+    }
+
+    if(psicologo){
+      console.log('Psicólogo Logado');
+      this.router.navigateByUrl('/dashboard-psicologo')
     }
   }
 }

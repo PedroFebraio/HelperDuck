@@ -37,7 +37,7 @@ export class AgendamentoPage implements OnInit {
 
   constructor(
     private psicologoServices: PsicologoServices,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -86,6 +86,7 @@ export class AgendamentoPage implements OnInit {
       );
     });
   }
+  
 
   limparFiltros(){
 
@@ -97,4 +98,5 @@ export class AgendamentoPage implements OnInit {
 
     this.psicologos = this.todosPsicologos;
   }
+
 }

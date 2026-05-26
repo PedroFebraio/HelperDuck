@@ -18,7 +18,7 @@ export interface Usuario{
   dataNascimento: Date | null,
   pontosFidelidade?: number,
   consultaGratisUsada?: boolean,
-  chartedAt?: number
+  chartedAt?: Date
 }
 
 

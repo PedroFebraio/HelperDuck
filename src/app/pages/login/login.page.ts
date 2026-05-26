@@ -99,21 +99,19 @@ export class LoginPage implements OnInit {
 
   async loginGoogle(){
 
-    const load = await this.loading.create({message: 'Logando...'})
-    await load.present()
 
     try{
 
       const usuario = await this.authServices.loginWithGoogle();
-
-      await load.dismiss()
       
       if(!usuario){
+
         this.presentToast('Usuário não encontrado.', 'warning');
         return;
       }
 
       if(usuario['perfilCompleto'] === false){
+
         this.presentToast('Complete seu cadastro.','warning');
         this.router.navigateByUrl('/completar-cadastro');
 
@@ -121,10 +119,10 @@ export class LoginPage implements OnInit {
       }
 
       this.presentToast('Login realizado com sucesso!', 'success');
+
       this.router.navigateByUrl('/dashboard');
 
     }catch(error: any){
-      await load.dismiss();
 
       let mensagem ='Erro ao logar com Google.';
 

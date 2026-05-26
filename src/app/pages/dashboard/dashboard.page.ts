@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { AuthServices } from 'src/app/services/auth';
+import { AppComponent } from 'src/app/app.component';
 import { HumorServices } from 'src/app/services/humor';
 
 @Component({
@@ -20,14 +18,13 @@ export class DashboardPage implements OnInit {
 
   constructor(
 
-    private authServices: AuthServices,
     private humorServices: HumorServices,
-    private router: Router,
-    private toastCrtl: ToastController,
-    private loading: LoadingController
+    private app: AppComponent
   ) { }
 
- async ngOnInit() {
+  async ngOnInit() {
+    this.app.carregarUsuario()
+
     const usuarioStorage = localStorage.getItem('usuario')
 
     if(usuarioStorage){
@@ -59,31 +56,6 @@ export class DashboardPage implements OnInit {
         this.mensagemHumor =
           'Você não precisa enfrentar tudo sozinho 🫂';
       }
-    }
-  }
-
-  
-  async logout(){
-
-    const load = await this.loading.create({message: 'Saindo...'})
-    await load.present()
-
-    try {
-    
-      this.authServices.logout();
-
-      await load.dismiss()
-
-      this.presentToast('Deslogado com sucesso!', 'success')
-      localStorage.removeItem('usuario');
-      this.router.navigateByUrl('/home')    
-    
-    } catch (error) {
-      
-      await load.dismiss()
-
-      this.presentToast('Erro desconhecido ao deslogar', 'danger')
-
     }
   }
   
@@ -118,17 +90,4 @@ export class DashboardPage implements OnInit {
     }
   }
   
-
-
-  async presentToast(message: string, color: string = 'primary'){
-
-    const toast = await this.toastCrtl.create({
-
-      message,
-      duration:2000,
-      color
-    });
-
-    toast.present();
-  }
 }

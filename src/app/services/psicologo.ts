@@ -20,7 +20,7 @@ export interface Psicologo{
   valorConsulta: number
   fotoPerfil?: string,
   aprovado?: boolean,
-  createdAt?: number
+  createdAt?: Date
 }
 
 @Injectable({
