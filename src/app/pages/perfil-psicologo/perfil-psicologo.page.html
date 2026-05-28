@@ -126,10 +126,11 @@
       <ion-item
         lines="none"
         class="datetime-item">
-<!-- [min]="dataMinima" -->
+        
         <ion-datetime
           presentation="date-time"
-          [(ngModel)]="dataConsulta">
+          [(ngModel)]="dataConsulta"
+          [min]="dataMinima">
 
         </ion-datetime>
 

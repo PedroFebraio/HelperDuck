@@ -20,6 +20,7 @@ export class PerfilPsicologoPage implements OnInit {
   usuario: any
   carregando = true;
   dataConsulta = ''
+  dataMinima = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +29,11 @@ export class PerfilPsicologoPage implements OnInit {
     private toastController: ToastController
   ) {}
 
+
   ngOnInit() {
+
+    this.dataMinima =
+    new Date().toISOString();
 
     this.usuario = JSON.parse(
       localStorage.getItem('usuario') || '{}'
@@ -46,7 +51,31 @@ export class PerfilPsicologoPage implements OnInit {
     }
   }
 
+
   async agendarConsulta(){
+
+    const agora = new Date();
+
+    const dataSelecionada =
+      new Date(this.dataConsulta);
+
+    const possuiConsultaAtiva = await this.consultaServices.
+      verificarConsultaAtiva(this.usuario.id, this.psicologo.id);
+
+    if(possuiConsultaAtiva){
+
+      this.presentToast('Você já possui uma consulta ativa com este psicólogo.',
+        'warning');
+
+      return;
+    }
+
+    if(dataSelecionada <= agora){
+
+      this.presentToast('Escolha uma data futura.', 'warning');
+
+      return;
+    }
 
     // VALIDA DATA
     if(!this.dataConsulta){

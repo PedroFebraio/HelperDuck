@@ -55,16 +55,16 @@ export class RegisterPage implements OnInit {
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/)]],
 
       telefone: ['', [Validators.required, Validators.pattern(
-            /^\(\d{2}\)\s\d{5}-\d{4}$/)]],
+            /^\(\d{2}\)\s\d{5}\d{4}$/)]],
 
       crp: ['', [Validators.required, Validators.minLength(4)]],
 
       estadoCrp: ['', [Validators.required, Validators.maxLength(2)]],
 
       bio: ['', [Validators.required, 
-        Validators.minLength(20), Validators.maxLength(500)]],
+        Validators.minLength(20), Validators.maxLength(1000)]],
 
-      valorConsulta: ['', [Validators.required, Validators.min(50), Validators.max(400)]],
+      valorConsulta: ['', [Validators.required, Validators.min(50), Validators.max(3000)]],
 
       especialidades: [[], [Validators.required]]
 

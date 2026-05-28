@@ -31,7 +31,7 @@ export class RegisterPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       
       telefone: ['', [Validators.required, 
-        Validators.pattern( /^\(\d{2}\)\s\d{5}-\d{4}$/ )]],
+        Validators.pattern( /^\(\d{2}\)\s\d{5}\d{4}$/ )]],
       
       dataNascimento: ['', [Validators.required, 
       this.validarMaiorIdade]],

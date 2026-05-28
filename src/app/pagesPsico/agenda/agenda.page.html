@@ -1,0 +1,279 @@
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Agenda
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content
+  id="main-content"
+  class="agenda-content">
+
+
+  <!-- LOADING -->
+
+  <div
+    *ngIf="carregando"
+    class="loading-box">
+
+    <ion-spinner
+      name="crescent">
+    </ion-spinner>
+
+  </div>
+
+
+  <!-- CONTEÚDO -->
+
+  <div
+    *ngIf="!carregando"
+    class="agenda-container">
+
+
+    <!-- HEADER -->
+
+    <div class="hero-card">
+
+      <div class="hero-info">
+
+        <h1>
+          Configuração da Agenda
+        </h1>
+
+        <p>
+          Defina os dias e horários
+          disponíveis para consultas.
+        </p>
+
+      </div>
+
+      <div class="hero-icon">
+        🗓️
+      </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="card">
+
+      <div class="card-header">
+
+        <div>
+
+          <h2>
+            Agenda Ativa
+          </h2>
+
+          <p>
+            Permitir novos agendamentos
+          </p>
+
+        </div>
+
+        <ion-toggle
+          [(ngModel)]="agenda.ativo"
+          color="warning">
+        </ion-toggle>
+
+      </div>
+
+    </div>
+
+
+    <!-- DIAS -->
+
+    <div class="card">
+
+      <h2>
+        Dias Disponíveis
+      </h2>
+
+      <p class="subtitulo">
+        Selecione os dias de atendimento.
+      </p>
+
+
+      <div class="dias-grid">
+
+        <div
+
+          *ngFor="
+            let dia
+            of diasSemana
+          "
+
+          class="dia-card"
+
+          [class.ativo]="
+            diaSelecionado(dia)
+          "
+
+          (click)="
+            selecionarDia(dia)
+          ">
+
+          {{ dia }}
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- HORÁRIOS -->
+
+    <div class="card">
+
+      <h2>
+        Horários
+      </h2>
+
+      <p class="subtitulo">
+        Defina o período de atendimento.
+      </p>
+
+
+      <div class="horarios-grid">
+
+
+        <!-- INÍCIO -->
+
+        <ion-item class="custom-item">
+
+          <ion-label position="stacked">
+            Horário Inicial
+          </ion-label>
+
+          <ion-input
+
+            type="time"
+
+            [(ngModel)]="
+              agenda.horarioInicio
+            ">
+
+          </ion-input>
+
+        </ion-item>
+
+
+        <!-- FIM -->
+
+        <ion-item class="custom-item">
+
+          <ion-label position="stacked">
+            Horário Final
+          </ion-label>
+
+          <ion-input
+
+            type="time"
+
+            [(ngModel)]="
+              agenda.horarioFim
+            ">
+
+          </ion-input>
+
+        </ion-item>
+
+      </div>
+
+    </div>
+
+
+    <!-- DURAÇÃO -->
+
+    <div class="card">
+
+      <h2>
+        Duração da Consulta
+      </h2>
+
+      <p class="subtitulo">
+        Tempo médio por consulta.
+      </p>
+
+
+      <ion-item class="custom-item">
+
+        <ion-select
+
+          interface="popover"
+
+          [(ngModel)]="
+            agenda.duracaoConsulta
+          ">
+
+          <ion-select-option
+            [value]="50">
+
+            50 minutos
+
+          </ion-select-option>
+
+          <ion-select-option
+            [value]="60">
+
+            60 minutos
+
+          </ion-select-option>
+
+          <ion-select-option
+            [value]="70">
+
+            70 minutos
+
+          </ion-select-option>
+
+        </ion-select>
+
+      </ion-item>
+
+    </div>
+
+
+    <!-- BOTÃO -->
+
+    <ion-button
+
+      expand="block"
+
+      color="warning"
+
+      class="salvar-btn"
+
+      [disabled]="salvando"
+
+      (click)="salvarAgenda()">
+
+      <ion-spinner
+
+        *ngIf="salvando"
+
+        slot="start"
+
+        name="crescent">
+
+      </ion-spinner>
+
+      Salvar Agenda
+
+    </ion-button>
+
+  </div>
+
+</ion-content>

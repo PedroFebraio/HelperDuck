@@ -75,6 +75,10 @@ const routes: Routes = [
     path: 'consultas-psicologo',
     loadChildren: () => import('./pagesPsico/consultas/consultas.module').then( m => m.ConsultasPageModule)
   },
+  {
+    path: 'agenda-psicologo',
+    loadChildren: () => import('./pagesPsico/agenda/agenda.module').then( m => m.AgendaPageModule)
+  },
 ];
 
 @NgModule({

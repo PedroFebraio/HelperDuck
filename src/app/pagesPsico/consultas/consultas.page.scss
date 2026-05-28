@@ -1,13 +1,8 @@
-/* FUNDO */
-
 .consultas-content {
 
-  --background:
-    linear-gradient(
-      180deg,
-      #fff8ea 0%,
-      #ffffff 100%
-    );
+  --background: #f5f7fb;
+
+  --color: #000;
 }
 
 
@@ -19,17 +14,27 @@
 
   display: flex;
 
+  align-items: center;
+
   justify-content: center;
 
-  align-items: center;
+  padding:
+    20px
+    20px
+    calc(env(safe-area-inset-bottom) + 20px);
 }
 
 
-/* EMPTY STATE */
+/* EMPTY */
 
 .empty-state {
 
-  height: 100%;
+  min-height: 100%;
+
+  padding:
+    32px
+    24px
+    calc(env(safe-area-inset-bottom) + 120px);
 
   display: flex;
 
@@ -41,17 +46,19 @@
 
   text-align: center;
 
-  padding: 30px;
+  color: #64748b;
 }
+
 
 .empty-state ion-icon {
 
-  font-size: 90px;
+  font-size: 72px;
 
   color: #f5b700;
 
   margin-bottom: 18px;
 }
+
 
 .empty-state h2 {
 
@@ -61,14 +68,15 @@
 
   color: #1e293b;
 
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
+
 
 .empty-state p {
 
-  color: #64748b;
+  max-width: 320px;
 
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 
@@ -76,7 +84,158 @@
 
 .consultas-container {
 
-  padding: 18px;
+  width: 100%;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding:
+    18px
+    18px
+    calc(env(safe-area-inset-bottom) + 120px);
+
+  box-sizing: border-box;
+}
+
+
+/* TOPO */
+
+.top-bar {
+
+  margin-bottom: 20px;
+}
+
+
+.top-bar h1 {
+
+  font-size: 1.7rem;
+
+  font-weight: 800;
+
+  color: #1e293b;
+
+  margin-bottom: 6px;
+}
+
+
+.top-bar p {
+
+  color: #64748b;
+
+  font-size: .95rem;
+
+  line-height: 1.5;
+}
+
+
+/* FILTROS */
+
+.filtros-wrapper {
+
+  margin-bottom: 24px;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+
+  padding-top: 4px;
+
+  backdrop-filter: blur(8px);
+}
+
+
+.filtros-segment {
+
+  background: white;
+
+  border-radius: 22px;
+
+  padding: 6px;
+
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.06);
+
+  border:
+    1px solid #edf2f7;
+}
+
+
+.filtros-segment ion-segment-button {
+
+  min-height: 58px;
+
+  --border-radius: 16px;
+
+  --indicator-color: #f5b700;
+
+  --color: #1e293b;
+
+  --color-checked: #1e293b;
+
+  text-transform: none;
+
+  font-weight: 700;
+
+  letter-spacing: 0;
+
+  transition: .2s ease;
+}
+
+
+.filtros-segment ion-label {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  font-size: .95rem;
+
+  white-space: nowrap;
+}
+
+
+.filtros-segment span {
+
+  min-width: 22px;
+
+  height: 22px;
+
+  border-radius: 999px;
+
+  background: rgba(245,183,0,0.15);
+
+  color: #8b5e00;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: .78rem;
+
+  font-weight: 700;
+
+  padding: 0 6px;
+}
+
+
+/* LISTA */
+
+.cards-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
 }
 
 
@@ -84,26 +243,33 @@
 
 .consulta-card {
 
-  background: #ffffff;
+  background: white;
 
-  border-radius: 28px;
+  border-radius: 26px;
 
-  padding: 20px;
+  padding: 22px;
 
-  margin-bottom: 20px;
+  border: 1px solid #edf2f7;
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,.06);
+    0 8px 22px rgba(0,0,0,0.06);
 
-  border:
-    1px solid rgba(255,255,255,.8);
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
 
-  transition: .2s;
+  width: 100%;
+
+  box-sizing: border-box;
 }
+
 
 .consulta-card:hover {
 
   transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.08);
 }
 
 
@@ -113,9 +279,9 @@
 
   display: flex;
 
-  justify-content: space-between;
+  align-items: center;
 
-  align-items: flex-start;
+  justify-content: space-between;
 
   gap: 12px;
 
@@ -132,7 +298,10 @@
   align-items: center;
 
   gap: 14px;
+
+  min-width: 0;
 }
+
 
 .avatar {
 
@@ -140,7 +309,9 @@
 
   height: 58px;
 
-  border-radius: 18px;
+  min-width: 58px;
+
+  border-radius: 50%;
 
   background:
     linear-gradient(
@@ -151,31 +322,40 @@
 
   display: flex;
 
-  justify-content: center;
-
   align-items: center;
 
-  font-size: 28px;
+  justify-content: center;
+
+  font-size: 1.4rem;
+
+  box-shadow:
+    0 4px 12px rgba(245,183,0,0.3);
 }
+
 
 .paciente-info h2 {
 
-  margin: 0;
-
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 
   font-weight: 700;
 
   color: #1e293b;
+
+  margin-bottom: 4px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
 }
+
 
 .paciente-info p {
 
-  margin-top: 4px;
-
   color: #64748b;
 
-  font-size: .9rem;
+  font-size: .88rem;
 }
 
 
@@ -183,37 +363,45 @@
 
 .status {
 
-  padding: 8px 14px;
+  padding: 10px 14px;
 
   border-radius: 999px;
 
-  font-size: .8rem;
+  font-size: .82rem;
 
   font-weight: 700;
 
   text-transform: capitalize;
+
+  white-space: nowrap;
 }
+
+
+/* STATUS COLORS */
 
 .pendente {
 
-  background: #fff7d6;
+  background: #fff7db;
 
-  color: #b7791f;
+  color: #a16207;
 }
+
 
 .confirmada {
 
   background: #dcfce7;
 
-  color: #15803d;
+  color: #166534;
 }
+
 
 .cancelada {
 
   background: #fee2e2;
 
-  color: #b91c1c;
+  color: #991b1b;
 }
+
 
 .finalizada {
 
@@ -223,13 +411,17 @@
 }
 
 
-/* GRID */
+/* INFO GRID */
 
 .info-grid {
 
   display: grid;
 
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(180px, 1fr)
+    );
 
   gap: 14px;
 
@@ -237,9 +429,15 @@
 }
 
 
-/* ITEM */
+/* INFO ITEM */
 
 .info-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
 
   background: #f8fafc;
 
@@ -247,36 +445,41 @@
 
   padding: 16px;
 
-  display: flex;
+  border: 1px solid #edf2f7;
 
-  align-items: center;
-
-  gap: 12px;
+  min-width: 0;
 }
+
 
 .info-item ion-icon {
 
-  font-size: 24px;
+  font-size: 1.4rem;
 
   color: #f5b700;
+
+  min-width: 22px;
 }
+
 
 .info-item span {
 
   display: block;
 
-  font-size: .8rem;
-
   color: #64748b;
+
+  font-size: .82rem;
 
   margin-bottom: 4px;
 }
+
 
 .info-item strong {
 
   color: #1e293b;
 
-  font-size: .95rem;
+  font-size: .96rem;
+
+  word-break: break-word;
 }
 
 
@@ -287,15 +490,14 @@
   margin-bottom: 20px;
 }
 
-.mensagem-status p {
 
-  margin: 0;
+.mensagem-status p {
 
   color: #475569;
 
   line-height: 1.5;
 
-  font-size: .95rem;
+  font-size: .93rem;
 }
 
 
@@ -307,17 +509,214 @@
 
   flex-direction: column;
 
-  gap: 10px;
+  gap: 12px;
 }
 
 
-/* BOTÕES */
-
 .acoes ion-button {
 
-  --border-radius: 16px;
+  height: 50px;
 
   font-weight: 700;
 
-  height: 48px;
+  --border-radius: 16px;
+
+  text-transform: none;
+}
+
+
+/* SEM CONSULTAS */
+
+.sem-consultas {
+
+  background: white;
+
+  border-radius: 26px;
+
+  padding: 40px 24px;
+
+  text-align: center;
+
+  border: 1px solid #edf2f7;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.05);
+}
+
+
+.sem-consultas ion-icon {
+
+  font-size: 56px;
+
+  color: #f5b700;
+
+  margin-bottom: 14px;
+}
+
+
+.sem-consultas h3 {
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+  color: #1e293b;
+
+  margin-bottom: 8px;
+}
+
+
+.sem-consultas p {
+
+  color: #64748b;
+
+  line-height: 1.5;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 768px){
+
+  .consultas-container {
+
+    padding:
+      14px
+      14px
+      calc(env(safe-area-inset-bottom) + 120px);
+  }
+
+  .top-bar {
+
+    margin-bottom: 18px;
+  }
+
+  .top-bar h1 {
+
+    font-size: 1.45rem;
+
+    line-height: 1.3;
+  }
+
+  .top-bar p {
+
+    font-size: .92rem;
+  }
+
+  .consulta-card {
+
+    padding: 18px;
+
+    border-radius: 22px;
+  }
+
+  .card-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .status {
+
+    align-self: flex-start;
+  }
+
+  .info-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+  .filtros-segment {
+
+    overflow-x: auto;
+
+    border-radius: 18px;
+  }
+
+  .filtros-segment ion-segment-button {
+
+    min-width: 140px;
+
+    min-height: 54px;
+  }
+
+  .paciente-info {
+
+    width: 100%;
+  }
+
+  .paciente-info h2 {
+
+    max-width: 100%;
+  }
+
+  .acoes ion-button {
+
+    height: 48px;
+  }
+}
+
+
+/* TELAS MUITO PEQUENAS */
+
+@media (max-width: 420px){
+
+  .consultas-container {
+
+    padding:
+      12px
+      12px
+      calc(env(safe-area-inset-bottom) + 120px);
+  }
+
+  .consulta-card {
+
+    padding: 16px;
+  }
+
+  .avatar {
+
+    width: 52px;
+
+    height: 52px;
+
+    min-width: 52px;
+
+    font-size: 1.2rem;
+  }
+
+  .paciente-info h2 {
+
+    font-size: .98rem;
+  }
+
+  .status {
+
+    font-size: .76rem;
+
+    padding: 8px 12px;
+  }
+
+  .info-item {
+
+    padding: 14px;
+  }
+
+  .filtros-segment ion-segment-button {
+
+    min-width: 125px;
+  }
+}
+
+
+/* SAFE AREA */
+
+ion-content::part(scroll) {
+
+  padding-bottom:
+    calc(
+      env(safe-area-inset-bottom)
+      + 35px
+    );
 }

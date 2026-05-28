@@ -166,7 +166,11 @@
         </p>
 
         <p *ngIf="cadastroForm.get('valorConsulta')?.hasError('min')">
-          O valor mínimo é R$ 20.
+          O valor mínimo é R$ 50.
+        </p>
+
+        <p *ngIf="cadastroForm.get('valorConsulta')?.hasError('max')">
+          O valor máximo é R$ 500.
         </p>
       </div>
 
@@ -177,7 +181,8 @@
 
         <ion-input
           type="text"
-          placeholder="(11) 91234-5678"
+          placeholder="(11) 912345678"
+          mask="(00) 000000000"
           formControlName="telefone">
         </ion-input>
       </ion-item>

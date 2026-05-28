@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, collectionData, doc, Firestore, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { collection, collectionData, doc, Firestore, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 
 
 export interface Consulta{
@@ -75,6 +75,39 @@ export class ConsultaServices {
 
     }catch(error){
 
+      console.log(error);
+
+      return false;
+    }
+  }
+
+
+  async verificarConsultaAtiva(usuarioId: string, psicologoId: string){
+
+    try{
+
+      const consultasRef = collection(this.firestore, 'Consultas');
+
+      const q = query(consultasRef, where('usuarioId', '==', usuarioId),
+        where('psicologoId', '==', psicologoId));
+
+      const resultado = await getDocs(q);
+
+      let possuiConsultaAtiva = false;
+
+      resultado.forEach((doc) => {
+        const consulta = doc.data();
+
+        if(consulta['status'] === 'pendente' ||
+          consulta['status'] === 'confirmada'){
+
+          possuiConsultaAtiva = true;
+        }
+      });
+
+      return possuiConsultaAtiva;
+
+    }catch(error){
       console.log(error);
 
       return false;
