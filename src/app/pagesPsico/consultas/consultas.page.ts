@@ -1,103 +1,84 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
-import { ConsultaServices } from 'src/app/services/consulta';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+
+// Interface para definir o formato de uma consulta
+export interface Consulta {
+  id: number;
+  usuarioNome: string;
+  status: 'pendente' | 'confirmada' | 'finalizada' | 'cancelada';
+  dataConsulta: string;
+  valorConsulta: string;
+}
 
 @Component({
   selector: 'app-consultas',
   templateUrl: './consultas.page.html',
   styleUrls: ['./consultas.page.scss'],
-  standalone: false
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ConsultasPage implements OnInit {
 
-  consultas: any[] = [];
+  // Variáveis de controle de estado
+  carregando: boolean = true;
+  filtroAtual: string = 'pendente';
   
-  consultasPendentes: any[] = [];
-  consultasConfirmadas: any[] = [];
-  consultasFinalizadas: any[] = [];
-  consultasCanceladas: any[] = [];
-  
-  psicologo: any;
+  // Array principal que armazena todas as consultas
+  consultas: Consulta[] = [];
 
-  carregando = true;
-
-  filtroAtual = 'pendente';
-
-  constructor(
-    private consultaService: ConsultaServices,
-
-    private toastController: ToastController
-  ) {}
+  constructor() { }
 
   ngOnInit() {
-
-    const psicologo = localStorage.getItem('psicologo');
-
-    if(psicologo){
-      this.psicologo =JSON.parse(psicologo);
-
-      this.carregarConsultas();
-    }
+    this.carregarConsultas();
   }
 
-  carregarConsultas(){
+  // Simula o carregamento dos dados (substitua futuramente pela chamada ao Service/API)
+  carregarConsultas() {
+    this.carregando = true;
 
-    this.consultaService.listarConsultasPsicologo(this.psicologo.id)
-    .subscribe((dados: any) => {
-
-      this.consultas = dados;
-
-      /* SEPARAÇÃO */
-
-      this.consultasPendentes = this.consultas.filter(
-        consulta => consulta.status ==='pendente');
-
-      this.consultasConfirmadas = this.consultas.filter(
-        consulta => consulta.status === 'confirmada');
-
-      this.consultasFinalizadas = this.consultas.filter(
-        consulta => consulta.status === 'finalizada');
-
-      this.consultasCanceladas = this.consultas.filter(
-        consulta => consulta.status === 'cancelada');
-
+    setTimeout(() => {
+      this.consultas = [
+        { id: 1, usuarioNome: 'Maria Joaquina', status: 'pendente', dataConsulta: '10/06/2026 às 14:00', valorConsulta: '150,00' },
+        { id: 2, usuarioNome: 'João Pedro', status: 'confirmada', dataConsulta: '11/06/2026 às 09:30', valorConsulta: '150,00' },
+        { id: 3, usuarioNome: 'Ana Clara', status: 'finalizada', dataConsulta: '01/06/2026 às 16:00', valorConsulta: '120,00' },
+        { id: 4, usuarioNome: 'Carlos Silva', status: 'cancelada', dataConsulta: '05/06/2026 às 10:00', valorConsulta: '150,00' },
+        { id: 5, usuarioNome: 'Beatriz Costa', status: 'pendente', dataConsulta: '12/06/2026 às 11:00', valorConsulta: '180,00' }
+      ];
       this.carregando = false;
-    });
+    }, 1500); // Simula 1.5 segundos de carregamento
   }
 
-  get consultasFiltradas(){
-
-  return this.consultas.filter(consulta => 
-    consulta.status === this.filtroAtual);
+  // --- GETTERS PARA OS CONTADORES DO ION-SEGMENT ---
+  get consultasPendentes() {
+    return this.consultas.filter(c => c.status === 'pendente');
   }
 
-  async alterarStatus(consultaId: string, status: string){
+  get consultasConfirmadas() {
+    return this.consultas.filter(c => c.status === 'confirmada');
+  }
 
-    const sucesso = await this.consultaService.atualizarStatus(consultaId, status);
+  get consultasFinalizadas() {
+    return this.consultas.filter(c => c.status === 'finalizada');
+  }
 
-    if(sucesso){
+  get consultasCanceladas() {
+    return this.consultas.filter(c => c.status === 'cancelada');
+  }
 
-      this.presentToast('Status atualizado!', 'success');
+  // --- GETTER PARA A LISTA FILTRADA EXIBIDA NA TELA ---
+  get consultasFiltradas() {
+    return this.consultas.filter(c => c.status === this.filtroAtual);
+  }
 
-    }else{
-
-      this.presentToast('Erro ao atualizar.', 'danger');
+  // --- FUNÇÃO PARA ALTERAR O STATUS NO CLIQUE DO BOTÃO ---
+  alterarStatus(id: number, novoStatus: 'pendente' | 'confirmada' | 'finalizada' | 'cancelada') {
+    const index = this.consultas.findIndex(c => c.id === id);
+    if (index !== -1) {
+      this.consultas[index].status = novoStatus;
+      console.log(`Consulta ${id} alterada para ${novoStatus}`);
     }
-  }
-
-  async presentToast(mensagem: string, cor: string
-  ){
-
-    const toast = await this.toastController.create({
-
-        message: mensagem,
-
-        duration: 2000,
-
-        color: cor
-      });
-
-    toast.present();
   }
 
 }

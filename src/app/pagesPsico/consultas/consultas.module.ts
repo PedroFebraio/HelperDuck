@@ -13,8 +13,9 @@ import { ConsultasPage } from './consultas.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ConsultasPageRoutingModule
+    ConsultasPageRoutingModule,
+    ConsultasPage
   ],
-  declarations: [ConsultasPage]
+  declarations: []
 })
 export class ConsultasPageModule {}

@@ -1,469 +1,136 @@
 <ion-header>
-
   <ion-toolbar color="warning">
-
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
-    <ion-title>
-      Consultas
-    </ion-title>
-
+    <ion-title>Consultas</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
+<ion-content id="main-content" class="consultas-content">
 
-<ion-content
-  id="main-content"
-  class="consultas-content">
-
-  <!-- LOADING -->
-
-  <div
-    *ngIf="carregando"
-    class="loading-box">
-
-    <ion-spinner
-      name="crescent">
-    </ion-spinner>
-
+  <div *ngIf="carregando" class="loading-box">
+    <ion-spinner name="crescent"></ion-spinner>
   </div>
 
-
-  <!-- SEM CONSULTAS -->
-
-  <div
-    *ngIf="
-      !carregando &&
-      consultas.length === 0
-    "
-    class="empty-state">
-
-    <ion-icon
-      name="calendar-clear-outline">
-    </ion-icon>
-
-    <h2>
-      Nenhuma consulta encontrada
-    </h2>
-
-    <p>
-      Quando pacientes agendarem consultas,
-      elas aparecerão aqui.
-    </p>
-
+  <div *ngIf="!carregando && consultas.length === 0" class="empty-state">
+    <ion-icon name="calendar-clear-outline"></ion-icon>
+    <h2>Nenhuma consulta encontrada</h2>
+    <p>Quando pacientes agendarem consultas, elas aparecerão aqui.</p>
   </div>
 
-
-  <!-- CONTEÚDO -->
-
-  <div
-    *ngIf="
-      !carregando &&
-      consultas.length > 0
-    "
-    class="consultas-container">
-
-
-    <!-- TOPO -->
+  <div *ngIf="!carregando && consultas.length > 0" class="consultas-container">
 
     <div class="top-bar">
-
       <div>
-
-        <h1>
-          Gerenciamento de Consultas
-        </h1>
-
-        <p>
-          Organize e acompanhe os atendimentos.
-        </p>
-
+        <h1>Gerenciamento de Consultas</h1>
+        <p>Organize e acompanhe os atendimentos.</p>
       </div>
-
     </div>
 
-
-    <!-- FILTROS -->
-
     <div class="filtros-wrapper">
-
-      <ion-segment
-        [(ngModel)]="filtroAtual"
-        scrollable="true"
-        class="filtros-segment">
-
-        <!-- PENDENTES -->
-
-        <ion-segment-button
-          value="pendente">
-
+      <ion-segment [(ngModel)]="filtroAtual" scrollable="true" class="filtros-segment">
+        
+        <ion-segment-button value="pendente">
           <ion-label>
-
             Pendentes
-
-            <span>
-              {{
-                consultasPendentes.length
-              }}
-            </span>
-
+            <span>{{ consultasPendentes.length }}</span>
           </ion-label>
-
         </ion-segment-button>
 
-
-        <!-- CONFIRMADAS -->
-
-        <ion-segment-button
-          value="confirmada">
-
+        <ion-segment-button value="confirmada">
           <ion-label>
-
             Confirmadas
-
-            <span>
-              {{
-                consultasConfirmadas.length
-              }}
-            </span>
-
+            <span>{{ consultasConfirmadas.length }}</span>
           </ion-label>
-
         </ion-segment-button>
 
-
-        <!-- FINALIZADAS -->
-
-        <ion-segment-button
-          value="finalizada">
-
+        <ion-segment-button value="finalizada">
           <ion-label>
-
             Finalizadas
-
-            <span>
-              {{
-                consultasFinalizadas.length
-              }}
-            </span>
-
+            <span>{{ consultasFinalizadas.length }}</span>
           </ion-label>
-
         </ion-segment-button>
 
-
-        <!-- CANCELADAS -->
-
-        <ion-segment-button
-          value="cancelada">
-
+        <ion-segment-button value="cancelada">
           <ion-label>
-
             Canceladas
-
-            <span>
-              {{
-                consultasCanceladas.length
-              }}
-            </span>
-
+            <span>{{ consultasCanceladas.length }}</span>
           </ion-label>
-
         </ion-segment-button>
 
       </ion-segment>
-
     </div>
-
-
-    <!-- LISTA -->
 
     <div class="cards-list">
 
-
-      <!-- CARD -->
-
-      <div
-        *ngFor="
-          let consulta
-          of consultasFiltradas
-        "
-        class="consulta-card">
-
-
-        <!-- HEADER -->
+      <div *ngFor="let consulta of consultasFiltradas" class="consulta-card">
 
         <div class="card-header">
-
           <div class="paciente-info">
-
-            <div class="avatar">
-              👤
-            </div>
-
+            <div class="avatar">👤</div>
             <div>
-
-              <h2>
-                {{ consulta.usuarioNome }}
-              </h2>
-
-              <p>
-                Paciente
-              </p>
-
+              <h2>{{ consulta.usuarioNome }}</h2>
+              <p>Paciente</p>
             </div>
-
           </div>
 
-
-          <!-- STATUS -->
-
-          <div
-            class="status"
-            [ngClass]="consulta.status">
-
+          <div class="status" [ngClass]="consulta.status">
             {{ consulta.status }}
-
           </div>
-
         </div>
-
-
-        <!-- INFO -->
 
         <div class="info-grid">
-
-
-          <!-- DATA -->
-
           <div class="info-item">
-
-            <ion-icon
-              name="calendar-outline">
-            </ion-icon>
-
+            <ion-icon name="calendar-outline"></ion-icon>
             <div>
-
-              <span>
-                Data
-              </span>
-
-              <strong>
-                {{ consulta.dataConsulta }}
-              </strong>
-
+              <span>Data</span>
+              <strong>{{ consulta.dataConsulta }}</strong>
             </div>
-
           </div>
 
-
-          <!-- VALOR -->
-
           <div class="info-item">
-
-            <ion-icon
-              name="cash-outline">
-            </ion-icon>
-
+            <ion-icon name="cash-outline"></ion-icon>
             <div>
-
-              <span>
-                Valor
-              </span>
-
-              <strong>
-                R$
-                {{ consulta.valorConsulta }}
-              </strong>
-
+              <span>Valor</span>
+              <strong>R$ {{ consulta.valorConsulta }}</strong>
             </div>
-
           </div>
-
         </div>
-
-
-        <!-- STATUS TEXTO -->
 
         <div class="mensagem-status">
-
-          <p
-            *ngIf="
-              consulta.status ===
-              'pendente'
-            ">
-
-            Aguardando confirmação da consulta.
-
-          </p>
-
-
-          <p
-            *ngIf="
-              consulta.status ===
-              'confirmada'
-            ">
-
-            Consulta confirmada com sucesso.
-
-          </p>
-
-
-          <p
-            *ngIf="
-              consulta.status ===
-              'cancelada'
-            ">
-
-            Consulta cancelada.
-
-          </p>
-
-
-          <p
-            *ngIf="
-              consulta.status ===
-              'finalizada'
-            ">
-
-            Consulta realizada.
-
-          </p>
-
+          <p *ngIf="consulta.status === 'pendente'">Aguardando confirmação da consulta.</p>
+          <p *ngIf="consulta.status === 'confirmada'">Consulta confirmada com sucesso.</p>
+          <p *ngIf="consulta.status === 'cancelada'">Consulta cancelada.</p>
+          <p *ngIf="consulta.status === 'finalizada'">Consulta realizada.</p>
         </div>
 
-
-        <!-- BOTÕES -->
-
         <div class="acoes">
-
-
-          <!-- CONFIRMAR -->
-
-          <ion-button
-
-            *ngIf="
-              consulta.status ===
-              'pendente'
-            "
-
-            expand="block"
-
-            color="success"
-
-            (click)="
-              alterarStatus(
-                consulta.id,
-                'confirmada'
-              )
-            ">
-
-            <ion-icon
-              slot="start"
-              name="checkmark-outline">
-            </ion-icon>
-
+          <ion-button *ngIf="consulta.status === 'pendente'" expand="block" color="success" (click)="alterarStatus(consulta.id, 'confirmada')">
+            <ion-icon slot="start" name="checkmark-outline"></ion-icon>
             Confirmar
-
           </ion-button>
 
-
-          <!-- FINALIZAR -->
-
-          <ion-button
-
-            *ngIf="
-              consulta.status ===
-              'confirmada'
-            "
-
-            expand="block"
-
-            color="warning"
-
-            (click)="
-              alterarStatus(
-                consulta.id,
-                'finalizada'
-              )
-            ">
-
-            <ion-icon
-              slot="start"
-              name="checkmark-done-outline">
-            </ion-icon>
-
+          <ion-button *ngIf="consulta.status === 'confirmada'" expand="block" color="warning" (click)="alterarStatus(consulta.id, 'finalizada')">
+            <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
             Finalizar
-
           </ion-button>
 
-
-          <!-- CANCELAR -->
-
-          <ion-button
-
-            *ngIf="
-              consulta.status !==
-              'cancelada'
-              &&
-              consulta.status !==
-              'finalizada'
-            "
-
-            expand="block"
-
-            fill="outline"
-
-            color="danger"
-
-            (click)="
-              alterarStatus(
-                consulta.id,
-                'cancelada'
-              )
-            ">
-
-            <ion-icon
-              slot="start"
-              name="close-outline">
-            </ion-icon>
-
+          <ion-button *ngIf="consulta.status !== 'cancelada' && consulta.status !== 'finalizada'" expand="block" fill="outline" color="danger" (click)="alterarStatus(consulta.id, 'cancelada')">
+            <ion-icon slot="start" name="close-outline"></ion-icon>
             Cancelar
-
           </ion-button>
-
         </div>
 
       </div>
 
-
-      <!-- SEM RESULTADO -->
-
-      <div
-        *ngIf="
-          consultasFiltradas.length === 0
-        "
-        class="sem-consultas">
-
-        <ion-icon
-          name="filter-outline">
-        </ion-icon>
-
-        <h3>
-          Nenhuma consulta encontrada
-        </h3>
-
-        <p>
-          Não existem consultas neste filtro.
-        </p>
-
+      <div *ngIf="consultasFiltradas.length === 0" class="sem-consultas">
+        <ion-icon name="filter-outline"></ion-icon>
+        <h3>Nenhuma consulta encontrada</h3>
+        <p>Não existem consultas neste filtro.</p>
       </div>
 
     </div>
 
   </div>
-
 </ion-content>
