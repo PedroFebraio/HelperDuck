@@ -1,13 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Perfil do Psicólogo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <form (ngSubmit)="salvarPerfil()">
+    
+    <div class="ion-text-center ion-padding-bottom">
+      <ion-avatar style="margin: 0 auto; width: 100px; height: 100px;">
+        <img [src]="psicologo.foto || 'assets/shapes.svg'" alt="Foto de Perfil">
+      </ion-avatar>
+      <ion-button fill="clear" size="small">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Alterar Foto
+      </ion-button>
+    </div>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-label position="floating">Nome Completo</ion-label>
+      <ion-input type="text" [(ngModel)]="psicologo.nome" name="nome" required></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-label position="floating">CRP (Conselho Regional de Psicologia)</ion-label>
+      <ion-input type="text" [(ngModel)]="psicologo.crp" name="crp" required></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-label position="floating">Especialidades (ex: TCC, Ansiedade)</ion-label>
+      <ion-input type="text" [(ngModel)]="psicologo.especialidades" name="especialidades"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-label position="floating">Descrição / Biografia</ion-label>
+      <ion-textarea [(ngModel)]="psicologo.descricao" name="descricao" rows="4"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">
+      Salvar Perfil
+    </ion-button>
+
+  </form>
 </ion-content>
