@@ -1,12 +1,75 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Minhas Consultas</ion-title>
+    <ion-title>
+      Minhas Consultas
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  ...
+<ion-content class="ion-padding">
+
+  <div *ngIf="consultas.length === 0">
+    <ion-card>
+      <ion-card-content>
+        Nenhuma consulta encontrada.
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-card *ngFor="let consulta of consultas">
+
+    <ion-card-header>
+      <ion-card-title>
+        Consulta
+      </ion-card-title>
+
+      <ion-card-subtitle>
+        {{ consulta.dataConsulta }}
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p>
+        <strong>Data:</strong>
+        {{ consulta.createdAt }}
+      </p>
+
+      <p>
+        <strong>Status:</strong>
+        {{ consulta.status }}
+      </p>
+
+      <p>
+        <strong>Valor:</strong>
+        R$ {{ consulta.valorConsulta }}
+      </p>
+
+      <ion-button
+        expand="block"
+        fill="outline">
+        Ver Detalhes
+      </ion-button>
+
+      <ion-button
+        *ngIf="consulta.status === 'confirmada'"
+        expand="block"
+        color="danger">
+        Cancelar Consulta
+      </ion-button>
+
+      <ion-button
+        *ngIf="consulta.status === 'finalizada'"
+        expand="block"
+        color="success">
+        Avaliar Psicólogo
+      </ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+
 </ion-content>

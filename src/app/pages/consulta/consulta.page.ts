@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Consulta, ConsultaServices } from 'src/app/services/consulta';
 
 @Component({
   selector: 'app-consulta',
@@ -8,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultaPage implements OnInit {
 
-  constructor() { }
+  consultas: Consulta[] = [];
+  usuario: any;
 
-  ngOnInit() {
+  constructor(
+
+    private consultaServices:
+      ConsultaServices
+
+  ) {}
+
+  async ngOnInit() {
+
+    const user = localStorage.getItem('usuario')
+
+    if(user){
+      this.usuario = JSON.parse(user)
+
+      this.consultas =
+        await this.consultaServices.buscarConsultasUsuario(this.usuario.id)
+    }
+
   }
 
 }

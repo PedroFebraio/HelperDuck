@@ -3,7 +3,7 @@ import { collection, collectionData, doc, Firestore, getDocs, query, setDoc, upd
 
 
 export interface Consulta{
-  
+
   id?: string;
   usuarioId: string;
   usuarioNome: string;
@@ -20,7 +20,7 @@ export interface Consulta{
   providedIn: 'root',
 })
 export class ConsultaServices {
-  
+
   constructor(
     private firestore: Firestore
   ) {}
@@ -113,4 +113,55 @@ export class ConsultaServices {
       return false;
     }
   }
+
+
+  async buscarConsultasUsuario(
+  usuarioId: string
+): Promise<Consulta[]> {
+
+  try {
+
+    const consultasRef =
+      collection(
+        this.firestore,
+        'consultas'
+      );
+
+    const q = query(
+      consultasRef,
+      where(
+        'pacienteId',
+        '==',
+        usuarioId
+      )
+    );
+
+    const snapshot =
+      await getDocs(q);
+
+    const consultas: Consulta[] = [];
+
+    snapshot.forEach((doc) => {
+
+      consultas.push({
+
+        id: doc.id,
+
+        ...doc.data()
+
+      } as Consulta);
+
+    });
+
+    return consultas;
+
+  } catch(error){
+
+    console.log(error);
+
+    return [];
+
+  }
+
+}
 }
