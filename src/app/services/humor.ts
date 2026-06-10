@@ -3,10 +3,6 @@ import { Injectable } from '@angular/core';
 import{
   Firestore, doc ,getDoc, setDoc} from '@angular/fire/firestore';
 
-
-
-// ********************** HÚMOR ***************************** //
-
 export interface Humor {
   id?: string;
   idUsuario: string;

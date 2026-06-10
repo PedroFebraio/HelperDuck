@@ -11,10 +11,28 @@ export interface Consulta{
   psicologoNome: string;
   dataConsulta: string;
   valorConsulta: number;
-  status: string;
-  observacoes?: string;
+  status: | 'pendente'
+    | 'confirmada'
+    | 'finalizada'
+    | 'cancelada';
+  salaVideo?: string;
+  checkinUsuario?: boolean;
+  checkinPsicologo?: boolean;
+  presencaUsuario?: boolean;
+  presencaPsicologo?: boolean;
+  horaEntradaUsuario?: string;
+  horaEntradaPsicologo?: string;
+  horaSaidaUsuario?: string;
+  horaSaidaPsicologo?: string;
+  iniciada?: boolean;
+  finalizada?: boolean;
+  duracaoConsulta?: number;
+  duracaoReal?: number;
+  avaliacao?: number;
+  comentario?: string;
   createdAt?: number;
 }
+
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +42,7 @@ export class ConsultaServices {
   constructor(
     private firestore: Firestore
   ) {}
+
 
   async addConsulta(consulta: Consulta){
 
@@ -51,6 +70,7 @@ export class ConsultaServices {
   }
 
 
+
   listarConsultasPsicologo(psicologoId: string){
 
     const consultasRef =
@@ -63,7 +83,25 @@ export class ConsultaServices {
   }
 
 
-   async atualizarStatus(consultaId: string, status: string){
+
+  listarConsultasUsuario(usuarioId: string){
+
+    const consultasRef =
+      collection(this.firestore, 'Consultas');
+
+    const q = query(
+      consultasRef,
+      where('usuarioId', '==', usuarioId)
+    );
+
+    return collectionData(q, {
+      idField: 'id'
+    });
+  }
+
+
+
+   async atualizarStatus(consultaId: string, status: Consulta['status']){
 
     try{
 
@@ -80,6 +118,7 @@ export class ConsultaServices {
       return false;
     }
   }
+
 
 
   async verificarConsultaAtiva(usuarioId: string, psicologoId: string){
@@ -108,6 +147,26 @@ export class ConsultaServices {
       return possuiConsultaAtiva;
 
     }catch(error){
+      console.log(error);
+
+      return false;
+    }
+  }
+
+
+
+  async atualizarConsulta(consultaId: string, dados: any){
+
+    try{
+
+      const consultaRef = doc(this.firestore, `Consultas/${consultaId}`);
+
+      await updateDoc(consultaRef, dados);
+
+      return true;
+
+    }catch(error){
+
       console.log(error);
 
       return false;

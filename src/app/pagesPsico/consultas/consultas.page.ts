@@ -14,7 +14,6 @@ export class ConsultasPage implements OnInit {
   
   consultasPendentes: any[] = [];
   consultasConfirmadas: any[] = [];
-  consultasFinalizadas: any[] = [];
   consultasCanceladas: any[] = [];
   
   psicologo: any;
@@ -40,6 +39,8 @@ export class ConsultasPage implements OnInit {
     }
   }
 
+  
+  
   carregarConsultas(){
 
     this.consultaService.listarConsultasPsicologo(this.psicologo.id)
@@ -55,9 +56,6 @@ export class ConsultasPage implements OnInit {
       this.consultasConfirmadas = this.consultas.filter(
         consulta => consulta.status === 'confirmada');
 
-      this.consultasFinalizadas = this.consultas.filter(
-        consulta => consulta.status === 'finalizada');
-
       this.consultasCanceladas = this.consultas.filter(
         consulta => consulta.status === 'cancelada');
 
@@ -65,28 +63,62 @@ export class ConsultasPage implements OnInit {
     });
   }
 
+
+
   get consultasFiltradas(){
 
   return this.consultas.filter(consulta => 
     consulta.status === this.filtroAtual);
   }
 
+
+
+
   async alterarStatus(consultaId: string, status: string){
 
-    const sucesso = await this.consultaService.atualizarStatus(consultaId, status);
+  let dadosAtualizacao: any = {status};
 
-    if(sucesso){
+  // QUANDO CONFIRMAR
 
-      this.presentToast('Status atualizado!', 'success');
+  if(status === 'confirmada'){
 
-    }else{
+    dadosAtualizacao = {
 
-      this.presentToast('Erro ao atualizar.', 'danger');
-    }
+      status: 'confirmada',
+
+      salaVideo:
+        'menteleve-' +
+        Math.random()
+          .toString(36)
+          .substring(2, 10),
+
+      checkinUsuario: false,
+      checkinPsicologo: false,
+
+      presencaUsuario: false,
+      presencaPsicologo: false,
+
+      iniciada: false,
+      finalizada: false,
+
+      duracaoConsulta: 50
+    };
   }
 
-  async presentToast(mensagem: string, cor: string
-  ){
+  const sucesso = await this.consultaService.atualizarConsulta(consultaId, dadosAtualizacao);
+
+  if(sucesso){
+    this.presentToast('Status atualizado com sucesso!', 'success');
+
+  }else{
+    this.presentToast('Erro ao atualizar consulta.', 'danger'
+    );
+  }
+}
+
+
+
+  async presentToast(mensagem: string, cor: string){
 
     const toast = await this.toastController.create({
 
@@ -99,5 +131,4 @@ export class ConsultasPage implements OnInit {
 
     toast.present();
   }
-
 }

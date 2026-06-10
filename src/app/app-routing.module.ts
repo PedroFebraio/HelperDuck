@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/agendamento/agendamento.module').then( m => m.AgendamentoPageModule)
   },
   {
-    path: 'consulta',
+    path: 'minhas-consulta',
     loadChildren: () => import('./pages/consulta/consulta.module').then( m => m.ConsultaPageModule)
   },
   {
@@ -78,6 +78,22 @@ const routes: Routes = [
   {
     path: 'agenda-psicologo',
     loadChildren: () => import('./pagesPsico/agenda/agenda.module').then( m => m.AgendaPageModule)
+  },
+  {
+    path: 'perfil-usuario',
+    loadChildren: () => import('./pages/perfil-usuario/perfil-usuario.module').then( m => m.PerfilUsuarioPageModule)
+  },
+  {
+    path: 'video-consulta',
+    loadChildren: () => import('./pages/video-consulta/video-consulta.module').then( m => m.VideoConsultaPageModule)
+  },
+  {
+    path: 'detalhes-consulta/:id',
+    loadChildren: () => import('./pages/detalhes-consulta/detalhes-consulta.module').then( m => m.DetalhesConsultaPageModule)
+  },
+  {
+    path: 'detalhes-consulta-psicologo/:id',
+    loadChildren: () => import('./pagesPsico/detalhes-consulta/detalhes-consulta.module').then( m => m.DetalhesConsultaPageModule)
   },
 ];
 

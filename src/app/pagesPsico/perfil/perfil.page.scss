@@ -1,0 +1,457 @@
+/* ========================================
+   FUNDO DA PÁGINA
+======================================== */
+
+ion-content {
+  --background: linear-gradient(
+    180deg,
+    #fab49a 0%,
+    #ffb85b 100%
+  );
+}
+
+/* ========================================
+   CENTRALIZAÇÃO
+======================================== */
+
+ion-content::part(scroll) {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  min-height: 100%;
+
+  padding: 24px 16px;
+
+  box-sizing: border-box;
+}
+
+/* ========================================
+   CARD PRINCIPAL
+======================================== */
+
+form {
+
+  width: 100%;
+  max-width: 850px;
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  padding: 28px;
+
+  margin-bottom: 40px;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.08);
+
+  box-sizing: border-box;
+}
+
+/* ========================================
+   CABEÇALHO DO PERFIL
+======================================== */
+
+.perfil-header {
+
+  text-align: center;
+
+  margin-bottom: 32px;
+}
+
+.duck-avatar {
+
+  width: 110px;
+  height: 110px;
+
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #facc15,
+    #f59e0b
+  );
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  box-shadow:
+    0 8px 20px rgba(245, 158, 11, 0.25);
+}
+
+.duck-icon {
+
+  font-size: 52px;
+
+  color: white;
+}
+
+.perfil-header h2 {
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  color: #111827;
+
+  margin-bottom: 6px;
+}
+
+.perfil-header p {
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+/* ========================================
+   CAMPOS
+======================================== */
+
+ion-item {
+
+  --background: #f8fafc;
+
+  --border-radius: 16px;
+
+  margin-bottom: 16px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  transition: .25s ease;
+}
+
+ion-item:hover {
+
+  border-color: #f59e0b;
+}
+
+ion-item.item-has-focus {
+
+  border-color: #f59e0b;
+
+  box-shadow:
+    0 0 0 4px rgba(245, 158, 11, 0.15);
+}
+
+/* ========================================
+   LABELS
+======================================== */
+
+ion-label {
+
+  color: #374151 !important;
+
+  font-weight: 600;
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+
+ion-input,
+ion-select,
+ion-textarea {
+
+  color: #111827;
+
+  font-size: 15px;
+}
+
+ion-textarea {
+
+  min-height: 120px;
+}
+
+/* ========================================
+   INPUTS SOMENTE LEITURA
+======================================== */
+
+ion-input[readonly] {
+
+  opacity: 0.75;
+}
+
+/* ========================================
+   NOTAS
+======================================== */
+
+ion-note {
+
+  display: block;
+
+  margin-top: -6px;
+
+  margin-bottom: 14px;
+
+  padding-left: 4px;
+
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+/* ========================================
+   CARD DA AGENDA
+======================================== */
+
+ion-card {
+
+  margin-top: 24px;
+
+  border-radius: 20px;
+
+  background: #fffefc;
+
+  border-left: 6px solid #f59e0b;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+ion-card-header {
+
+  padding-bottom: 8px;
+}
+
+ion-card-title {
+
+  color: #111827;
+
+  font-size: 1.15rem;
+
+  font-weight: 700;
+}
+
+ion-card-content {
+
+  color: #1f2937;
+}
+
+ion-card-content p {
+
+  margin-bottom: 10px;
+
+  line-height: 1.6;
+}
+
+/* ========================================
+   CHIPS
+======================================== */
+
+ion-chip {
+
+  margin-top: 8px;
+
+  margin-right: 8px;
+
+  font-weight: 600;
+}
+
+/* ========================================
+   ÁREA DOS BOTÕES
+======================================== */
+
+.acoes {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-top: 24px;
+}
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+ion-button {
+
+  height: 54px;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  text-transform: none;
+
+  --border-radius: 16px;
+}
+
+/* Configurar Agenda */
+
+ion-button[color="warning"] {
+
+  --background: #f59e0b;
+
+  --color: #111827;
+}
+
+/* Salvar Perfil */
+
+ion-button[type="submit"] {
+
+  --background: #2563eb;
+
+  --color: #ffffff;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (min-width: 768px) {
+
+  form {
+
+    max-width: 900px;
+
+    padding: 40px;
+  }
+
+  .acoes {
+
+    flex-direction: row;
+
+    justify-content: center;
+  }
+
+  .acoes ion-button {
+
+    width: 280px;
+  }
+
+  .duck-avatar {
+
+    width: 130px;
+    height: 130px;
+  }
+
+  .duck-icon {
+
+    font-size: 60px;
+  }
+}
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 1200px) {
+
+  form {
+
+    max-width: 1000px;
+  }
+
+  .acoes ion-button {
+
+    width: 320px;
+  }
+
+  .perfil-header h2 {
+
+    font-size: 32px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+
+  ion-content::part(scroll) {
+
+    padding: 14px 10px;
+  }
+
+  form {
+
+    padding: 22px 16px;
+
+    border-radius: 22px;
+
+    margin-bottom: 60px;
+  }
+
+  .duck-avatar {
+
+    width: 90px;
+    height: 90px;
+  }
+
+  .duck-icon {
+
+    font-size: 42px;
+  }
+
+  .perfil-header h2 {
+
+    font-size: 22px;
+  }
+
+  .perfil-header p {
+
+    font-size: 13px;
+  }
+
+  ion-input,
+  ion-select,
+  ion-textarea {
+
+    font-size: 14px;
+  }
+
+  ion-button {
+
+    height: 50px;
+
+    font-size: 14px;
+  }
+}
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 360px) {
+
+  form {
+
+    padding: 18px 14px;
+  }
+
+  .duck-avatar {
+
+    width: 75px;
+    height: 75px;
+  }
+
+  .duck-icon {
+
+    font-size: 34px;
+  }
+
+  .perfil-header h2 {
+
+    font-size: 20px;
+  }
+
+  .perfil-header p {
+
+    font-size: 12px;
+  }
+}

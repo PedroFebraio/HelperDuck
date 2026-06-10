@@ -37,6 +37,7 @@
         <ion-label position="stacked">Nome Completo</ion-label>
 
         <ion-input
+          placeholder="Digite seu nome completo"
           type="text"
           formControlName="nome">
         </ion-input>
@@ -44,7 +45,8 @@
 
       <div
         class="erro"
-        *ngIf="cadastroForm.get('nome')?.touched">
+        *ngIf="cadastroForm.get('nome')?.touched &&
+        cadastroForm.get('nome')?.invalid">
 
         <p *ngIf="cadastroForm.get('nome')?.hasError('required')">
           Nome é obrigatório.
@@ -52,6 +54,10 @@
 
         <p *ngIf="cadastroForm.get('nome')?.hasError('minlength')">
           Nome deve ter no mínimo 3 caracteres.
+        </p>
+
+        <p *ngIf="cadastroForm.get('nome')?.hasError('maxlength')">
+          Nome deve ter no máximo 50 caracteres.
         </p>
       </div>
 
@@ -61,6 +67,7 @@
         <ion-label position="stacked">E-mail</ion-label>
 
         <ion-input
+          placeholder="Ex: exemplo@email.com"
           type="email"
           formControlName="email">
         </ion-input>
@@ -68,7 +75,8 @@
 
       <div
         class="erro"
-        *ngIf="cadastroForm.get('email')?.touched">
+        *ngIf="cadastroForm.get('email')?.touched &&
+        cadastroForm.get('email')?.invalid">
 
         <p *ngIf="cadastroForm.get('email')?.hasError('required')">
           Email é obrigatório.
@@ -93,14 +101,24 @@
       <div
         class="erro"
         *ngIf="cadastroForm.get('senha')?.touched &&
-          cadastroForm.get('senha')?.errors?.['pattern']">
+        cadastroForm.get('senha')?.invalid ">
 
-        <p>A senha deve conter:</p>
-        <p>• Letra maiúscula</p>
-        <p>• Letra minúscula</p>
-        <p>• Número</p>
-        <p>• Caractere especial</p>
-        <p>• Mínimo de 8 caracteres</p>
+        <p *ngIf="cadastroForm.get('senha')?.hasError('required')">
+          Senha é obrigatória.
+        </p>
+
+        <div *ngIf="cadastroForm.get('senha')?.hasError('pattern')">
+          <p>A senha deve conter:</p>
+
+          <ul>
+            <li>Letra maiúscula</li>
+            <li>Letra minúscula</li>
+            <li>Número</li>
+            <li>Caractere especial</li>
+            <li>Mínimo de 8 caracteres</li>
+          </ul>
+        
+        </div>
       </div>
 
 
@@ -117,10 +135,19 @@
 
       <div
         class="erro"
-        *ngIf="cadastroForm.get('crp')?.touched">
+        *ngIf="cadastroForm.get('crp')?.touched && 
+        cadastroForm.get('crp')?.invalid">
 
         <p *ngIf="cadastroForm.get('crp')?.hasError('required')">
           CRP é obrigatório.
+        </p>
+
+        <p *ngIf="cadastroForm.get('crp')?.hasError('minlength')">
+          CRP precisa ter pelo menos os 5 caracteres sem os 2 números da região.
+        </p>
+
+        <p *ngIf="cadastroForm.get('crp')?.hasError('maxlength')">
+          CRP deve ter no máximo 7 caracteres.
         </p>
       </div>
 
@@ -138,7 +165,8 @@
 
       <div
         class="erro"
-        *ngIf="cadastroForm.get('estadoCrp')?.touched">
+        *ngIf="cadastroForm.get('estadoCrp')?.touched && 
+        cadastroForm.get('estadoCrp')?.invalid">
 
         <p *ngIf="cadastroForm.get('estadoCrp')?.hasError('required')">
           Estado do CRP é obrigatório.
@@ -159,7 +187,8 @@
 
       <div
         class="erro"
-        *ngIf="cadastroForm.get('valorConsulta')?.touched">
+        *ngIf="cadastroForm.get('valorConsulta')?.touched && 
+        cadastroForm.get('ValorConsulta')?.invalid">
 
         <p *ngIf="cadastroForm.get('valorConsulta')?.hasError('required')">
           Valor da consulta é obrigatório.
@@ -170,7 +199,7 @@
         </p>
 
         <p *ngIf="cadastroForm.get('valorConsulta')?.hasError('max')">
-          O valor máximo é R$ 500.
+          O valor máximo é R$ 400.
         </p>
       </div>
 
@@ -189,7 +218,8 @@
 
       <div
         class="erro"
-        *ngIf="cadastroForm.get('telefone')?.touched">
+        *ngIf="cadastroForm.get('telefone')?.touched && 
+        cadastroForm.get('telefone')?.invalid">
 
         <p *ngIf="cadastroForm.get('telefone')?.hasError('required')">
           Telefone é obrigatório.
@@ -223,7 +253,8 @@
 
       <div
         class="erro"
-        *ngIf="cadastroForm.get('especialidades')?.touched">
+        *ngIf="cadastroForm.get('especialidades')?.touched && 
+        cadastroForm.get('especialidades')?.invalid">
 
         <p *ngIf="cadastroForm.get('especialidades')?.hasError('required')">
           Selecione pelo menos uma especialidade.
@@ -244,7 +275,8 @@
 
       <div
         class="erro"
-        *ngIf="cadastroForm.get('bio')?.touched">
+        *ngIf="cadastroForm.get('bio')?.touched && 
+        cadastroForm.get('bio')?.invalid">
 
         <p *ngIf="cadastroForm.get('bio')?.hasError('required')">
           A biografia é obrigatória.

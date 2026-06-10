@@ -131,4 +131,29 @@ export class PsicologoServices {
     return docData(docRef, { idField: 'id' });
   }
   
+
+
+  async atualizarPsicologo( id: string, 
+    dados: Partial<Psicologo> ): Promise<boolean>{
+
+    try{
+
+      const psicologoRef = doc(
+        this.firestore,
+        `Psicologos/${id}`
+      );
+
+      await setDoc( psicologoRef, dados, { merge: true });
+
+      return true;
+
+    }catch(error){
+
+      console.log('Erro ao atualizar psicólogo:', error);
+
+      return false;
+
+    }
+
+  }
 }

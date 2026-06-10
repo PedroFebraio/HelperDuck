@@ -111,20 +111,37 @@
         <div>
 
           <strong>
-            {{ consulta.paciente }}
+            {{ consulta.usuarioNome }}
           </strong>
 
           <p>
-            {{ consulta.horario }}
+            {{ consulta.dataConsulta | date:'dd/MM HH:mm' }}
           </p>
+
+          <ion-chip
+            [color]="consulta.status === 'confirmada'
+            ? 'success'
+            : 'warning'">
+
+            <ion-label>
+
+              {{ consulta.status === 'confirmada'
+                ? 'Confirmada'
+                : 'Pendente' }}
+
+            </ion-label>
+
+          </ion-chip>
 
         </div>
 
         <ion-button
           fill="outline"
-          size="small">
+          size="small"
+          [routerLink]="['/detalhes-consulta-psicologo', consulta.id]">
 
           Ver
+
         </ion-button>
 
       </div>
@@ -141,7 +158,7 @@
 
         color="warning"
 
-        routerLink="/perfil-psicologo-editar">
+        routerLink="/perfil-psicologo">
 
         Editar Perfil
 
@@ -153,7 +170,7 @@
 
         fill="outline"
 
-        color="warning"
+        color="primary"
 
         routerLink="/agenda-psicologo">
 

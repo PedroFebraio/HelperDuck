@@ -135,26 +135,6 @@
         </ion-segment-button>
 
 
-        <!-- FINALIZADAS -->
-
-        <ion-segment-button
-          value="finalizada">
-
-          <ion-label>
-
-            Finalizadas
-
-            <span>
-              {{
-                consultasFinalizadas.length
-              }}
-            </span>
-
-          </ion-label>
-
-        </ion-segment-button>
-
-
         <!-- CANCELADAS -->
 
         <ion-segment-button
@@ -371,10 +351,8 @@
           </ion-button>
 
 
-          <!-- FINALIZAR -->
-
+          <!-- Ver Detalhes -->
           <ion-button
-
             *ngIf="
               consulta.status ===
               'confirmada'
@@ -382,21 +360,21 @@
 
             expand="block"
 
-            color="warning"
+            fill="outline"
 
-            (click)="
-              alterarStatus(
-                consulta.id,
-                'finalizada'
-              )
-            ">
+            color="primary"
+
+            [routerLink]="[
+              '/detalhes-consulta-psicologo',
+              consulta.id
+            ]">
 
             <ion-icon
               slot="start"
-              name="checkmark-done-outline">
+              name="eye-outline">
             </ion-icon>
 
-            Finalizar
+            Ver Detalhes
 
           </ion-button>
 
@@ -407,11 +385,7 @@
 
             *ngIf="
               consulta.status !==
-              'cancelada'
-              &&
-              consulta.status !==
-              'finalizada'
-            "
+              'cancelada'"
 
             expand="block"
 

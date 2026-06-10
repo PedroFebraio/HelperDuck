@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-title>
+      Consulta Online
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+
+    <ion-icon
+      name="videocam"
+      class="video-icon">
+    </ion-icon>
+
+    <h2>
+      Sala da Consulta
+    </h2>
+
+    <p>
+      {{ sala }}
+    </p>
+
+    <ion-button
+      expand="block"
+      color="warning"
+      (click)="entrarNaSala()">
+
+      Entrar na Consulta
+
+    </ion-button>
+
+  </div>
+
+</ion-content>

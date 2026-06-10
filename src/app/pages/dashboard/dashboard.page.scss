@@ -244,6 +244,179 @@ ion-content::part(scroll){
   line-height: 1.5;
 }
 
+/* PRÓXIMAS CONSULTAS */
+
+.proximas-consultas {
+
+  margin-top: 28px;
+}
+
+.proximas-consultas h3 {
+
+  font-size: 1.15rem;
+
+  font-weight: 700;
+
+  color: #111827;
+
+  margin-bottom: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+/* CARD CONSULTA */
+
+.consulta-card {
+
+  margin: 0 0 14px 0;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.08);
+
+  transition: 0.25s ease;
+}
+
+.consulta-card:hover {
+
+  transform: translateY(-2px);
+}
+
+.consulta-card ion-card-content {
+
+  padding: 18px;
+}
+
+/* NOME PSICÓLOGO */
+
+.consulta-card h4 {
+
+  margin: 0 0 12px;
+
+  color: #111827;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+}
+
+/* DATA */
+
+.consulta-card p {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #4b5563;
+
+  margin-bottom: 14px;
+
+  font-size: 0.95rem;
+}
+
+.consulta-card ion-icon {
+
+  color: #f59e0b;
+
+  font-size: 18px;
+}
+
+/* STATUS */
+
+.consulta-card ion-chip {
+
+  margin-bottom: 14px;
+
+  font-weight: 600;
+}
+
+/* BOTÃO */
+
+.consulta-card ion-button {
+
+  --border-radius: 12px;
+
+  --border-color: #f59e0b;
+
+  --color: #f59e0b;
+
+  font-weight: 600;
+
+  text-transform: none;
+
+  height: 42px;
+}
+
+/* SEM CONSULTAS */
+
+.sem-consultas-dashboard {
+
+  background: rgba(255, 255, 255, 0.8);
+
+  border-radius: 18px;
+
+  padding: 18px;
+
+  text-align: center;
+
+  color: #6b7280;
+
+  font-size: 0.95rem;
+
+  border: 1px dashed rgba(245, 158, 11, 0.3);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .proximas-consultas {
+
+    margin-top: 22px;
+  }
+
+  .proximas-consultas h3 {
+
+    font-size: 1rem;
+  }
+
+  .consulta-card ion-card-content {
+
+    padding: 14px;
+  }
+
+  .consulta-card h4 {
+
+    font-size: 0.95rem;
+  }
+
+  .consulta-card p {
+
+    font-size: 0.9rem;
+  }
+
+  .consulta-card ion-button {
+
+    height: 40px;
+
+    font-size: 0.9rem;
+  }
+}
+
 /* PROGRESSO */
 
 .progress-header{

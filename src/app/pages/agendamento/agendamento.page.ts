@@ -19,7 +19,7 @@ export class AgendamentoPage implements OnInit {
 
   estadoSelecionado = '';
 
-  precoMaximo = 300;
+  precoMaximo = 200;
 
   carregando = true;
 
@@ -94,7 +94,7 @@ export class AgendamentoPage implements OnInit {
 
     this.especialidadeSelecionada = '';
 
-    this.precoMaximo = 300;
+    this.precoMaximo = 200;
 
     this.psicologos = this.todosPsicologos;
   }

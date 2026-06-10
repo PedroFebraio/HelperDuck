@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConsultaServices } from 'src/app/services/consulta';
 
 @Component({
   selector: 'app-consulta',
@@ -8,9 +9,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultaPage implements OnInit {
 
-  constructor() { }
+  consultas: any[] = [];
 
+  usuario: any;
+
+  filtroStatus = 'todos';
+
+
+  constructor(
+    private consultaServices: ConsultaServices
+  ) {}
+
+  
   ngOnInit() {
+
+    this.usuario = JSON.parse(
+      localStorage.getItem('usuario') || '{}'
+    );
+
+    this.carregarConsultas();
   }
 
+  
+  carregarConsultas(){
+
+    this.consultaServices.listarConsultasUsuario(this.usuario.id)
+    .subscribe((dados: any) => {
+
+        this.consultas = dados;
+      });
+  }
+
+
+  get consultasFiltradas() {
+
+    if(this.filtroStatus === 'todos'){
+    return this.consultas;
+  }
+
+    return this.consultas.filter(
+      consulta => consulta.status === this.filtroStatus
+    );
+  }
 }

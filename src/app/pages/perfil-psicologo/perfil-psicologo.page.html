@@ -16,13 +16,20 @@
 
 <ion-content class="perfil-content">
 
+
   <!-- LOADING -->
   <div
     *ngIf="carregando"
-    class="loading-box">
+    class="loading-container">
 
-    <ion-spinner name="crescent"></ion-spinner>
+    <ion-spinner
+      name="crescent">
+    </ion-spinner>
+
+    <p>Carregando perfil...</p>
+
   </div>
+
 
   <!-- PERFIL -->
   <div
@@ -33,35 +40,78 @@
     <div class="hero-card">
 
       <div class="avatar">
-        🧠
+
+        <ion-icon
+          name="happy-outline">
+        </ion-icon>
+
       </div>
 
-      <div class="hero-info">
+      <h1>
+        {{ psicologo.nome }}
+      </h1>
 
-        <h1>
-          {{ psicologo.nome }}
-        </h1>
+      <p class="crp">
+        CRP {{ psicologo.crp }}
+      </p>
 
-        <p class="crp">
-          CRP {{ psicologo.crp }}
-        </p>
+      <div class="valor-consulta">
 
-        <div class="valor">
+        <span class="valor">
           R$ {{ psicologo.valorConsulta }}
+        </span>
 
-          <span>
-            / consulta
-          </span>
-        </div>
+        <span class="consulta">
+          por consulta
+        </span>
 
       </div>
+
     </div>
 
-    <!-- BIO -->
+
+    <!-- ESPECIALIDADES -->
     <div class="card">
 
-      <div class="card-header">
-        <h2>Sobre</h2>
+      <div class="section-title">
+
+        <ion-icon
+          name="ribbon-outline">
+        </ion-icon>
+
+        <h2>
+          Especialidades
+        </h2>
+
+      </div>
+
+      <div class="chips-container">
+
+        <ion-chip
+          *ngFor="let especialidade of psicologo.especialidades">
+          <ion-label>
+            {{ especialidade }}
+          </ion-label>
+        </ion-chip>
+
+      </div>
+
+    </div>
+
+
+    <!-- SOBRE -->
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="person-outline">
+        </ion-icon>
+
+        <h2>
+          Sobre o Psicólogo
+        </h2>
+
       </div>
 
       <p class="descricao">
@@ -70,67 +120,123 @@
 
     </div>
 
-    <!-- ESPECIALIDADES -->
-    <div class="card">
-
-      <div class="card-header">
-        <h2>Especialidades</h2>
-      </div>
-
-      <div class="especialidades">
-
-        <span
-          *ngFor="
-            let especialidade
-            of psicologo.especialidades">
-
-          {{ especialidade }}
-
-        </span>
-
-      </div>
-    </div>
 
     <!-- CONTATO -->
     <div class="card">
 
-      <div class="card-header">
-        <h2>Contato</h2>
-      </div>
-
-      <div class="contato-box">
+      <div class="section-title">
 
         <ion-icon
           name="mail-outline">
         </ion-icon>
 
+        <h2>
+          Contato
+        </h2>
+
+      </div>
+
+      <p>
+        {{ psicologo.email }}
+      </p>
+
+    </div>
+
+
+    <!-- AGENDA -->
+    <div
+      class="card"
+      *ngIf="agenda">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="calendar-outline">
+        </ion-icon>
+
+        <h2>
+          Agenda
+        </h2>
+
+      </div>
+
+      <div class="agenda-info">
+
         <p>
-          {{ psicologo.email }}
+          <strong>Dias disponíveis:</strong>
         </p>
+
+        <div class="chips-container">
+
+          <ion-chip
+            color="warning"
+            *ngFor="
+              let dia of agenda.diasDisponiveis">
+            <ion-label>
+              {{ formatarDia(dia) }}
+            </ion-label>
+          </ion-chip>
+
+        </div>
+
+        <p>
+
+          <strong>Horário:</strong>
+          {{ agenda.horarioInicio }}
+          às
+          {{ agenda.horarioFim }}
+        </p>
+
+        <p>
+          <strong>Duração:</strong>
+          {{ agenda.duracaoConsulta }}
+          minutos
+        </p>
+
+        <ion-chip
+          [color]="agenda.ativo ? 'success' : 'danger'">
+          <ion-label>
+            {{ agenda.ativo ? 'Agenda Aberta' : 'Agenda Fechada' }}
+          </ion-label>
+        </ion-chip>
 
       </div>
 
     </div>
 
-    <!-- AGENDAMENTO -->
-    <div class="card">
 
-      <div class="card-header">
-        <h2>Agendar Consulta</h2>
+    <!-- AGENDAR -->
+    <div
+      class="card"
+      *ngIf="agenda && agenda.ativo">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="add-circle-outline">
+        </ion-icon>
+
+        <h2>
+          Agendar Consulta
+        </h2>
+
       </div>
 
       <p class="subtitulo">
-        Escolha uma data e horário disponível
+        Escolha uma data para sua consulta.
       </p>
 
       <ion-item
-        lines="none"
         class="datetime-item">
-        
+
+        <ion-label position="stacked">
+          Data e Horário
+        </ion-label>
+
         <ion-datetime
           presentation="date-time"
-          [(ngModel)]="dataConsulta"
-          [min]="dataMinima">
+          [min]="dataMinima"
+          [(ngModel)]="dataConsulta">
 
         </ion-datetime>
 
@@ -138,18 +244,44 @@
 
     </div>
 
+
+    <!-- SEM AGENDA -->
+    <div
+      class="card"
+      *ngIf="!agenda">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="alert-circle-outline">
+        </ion-icon>
+
+        <h2>
+          Agenda Indisponível
+        </h2>
+
+      </div>
+
+      <p>
+        Este psicólogo ainda não cadastrou horários de atendimento.
+      </p>
+
+    </div>
+
     <!-- BOTÃO -->
+
     <ion-button
-
       expand="block"
-
       size="large"
-
       color="warning"
-
       class="agendar-btn"
-
+      [disabled]="!agenda || !agenda.ativo"
       (click)="agendarConsulta()">
+
+      <ion-icon
+        slot="start"
+        name="calendar-outline">
+      </ion-icon>
 
       Confirmar Agendamento
 

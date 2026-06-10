@@ -1,0 +1,406 @@
+/* =========================
+   FUNDO
+========================= */
+
+.perfil-content {
+  --background: linear-gradient(
+    to bottom,
+    #fab49a,
+    #ffb85b
+  );
+
+  --padding-bottom:
+    calc(env(safe-area-inset-bottom) + 80px);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.perfil-container {
+
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 20px 16px 40px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero-card {
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 28px 20px;
+
+  text-align: center;
+
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+  animation: fadeUp .4s ease;
+}
+
+.avatar {
+
+  width: 120px;
+  height: 120px;
+
+  margin: 0 auto 16px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #facc15,
+    #f59e0b
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 8px 18px rgba(245,158,11,.3);
+
+  transition: .3s ease;
+}
+
+.avatar:hover {
+
+  transform: scale(1.05);
+}
+
+.avatar ion-icon {
+
+  font-size: 58px;
+
+  color: white;
+}
+
+.hero-card h1 {
+
+  color: #111827;
+
+  font-size: 1.7rem;
+
+  font-weight: 700;
+
+  margin-bottom: 6px;
+}
+
+.hero-card p {
+
+  color: #6b7280;
+
+  font-size: .95rem;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 20px;
+
+  margin-bottom: 18px;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.08);
+
+  animation: fadeUp .4s ease;
+}
+
+.section-title {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+}
+
+.section-title ion-icon {
+
+  font-size: 24px;
+
+  color: #f59e0b;
+}
+
+.section-title h2 {
+
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 1.15rem;
+
+  font-weight: 700;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+ion-item {
+
+  --background: #f8fafc;
+
+  --border-radius: 14px;
+
+  margin-bottom: 14px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+}
+
+ion-label {
+
+  color: #111827 !important;
+
+  font-weight: 600;
+}
+
+ion-input {
+
+  color: #111827;
+}
+
+/* readonly */
+
+ion-input[readonly] {
+
+  opacity: .75;
+}
+
+/* =========================
+   ESTATÍSTICAS
+========================= */
+
+.estatistica {
+
+  text-align: center;
+
+  margin-bottom: 12px;
+}
+
+.estatistica h3 {
+
+  margin: 0;
+
+  font-size: 2rem;
+
+  color: #f59e0b;
+
+  font-weight: 700;
+}
+
+.estatistica p {
+
+  margin-top: 4px;
+
+  color: #6b7280;
+}
+
+/* =========================
+   CHIPS
+========================= */
+
+ion-chip {
+
+  margin-top: 8px;
+
+  font-weight: 600;
+}
+
+/* =========================
+   TEXTO
+========================= */
+
+.card p {
+
+  color: #374151;
+
+  line-height: 1.6;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+ion-button {
+
+  height: 52px;
+
+  font-weight: 600;
+
+  --border-radius: 14px;
+
+  text-transform: none;
+}
+
+.salvar-btn {
+
+  margin-top: 20px;
+
+  --background: #f59e0b;
+
+  --color: white;
+}
+
+.salvar-btn:hover {
+
+  --background: #d97706;
+}
+
+/* =========================
+   AÇÕES
+========================= */
+
+.acoes {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+
+@keyframes fadeUp {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(12px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .perfil-container {
+
+    padding: 14px 10px 80px;
+  }
+
+  .hero-card {
+
+    padding: 22px 16px;
+  }
+
+  .avatar {
+
+    width: 95px;
+    height: 95px;
+  }
+
+  .avatar ion-icon {
+
+    font-size: 48px;
+  }
+
+  .hero-card h1 {
+
+    font-size: 1.4rem;
+  }
+
+  .card {
+
+    padding: 16px;
+  }
+
+  .section-title h2 {
+
+    font-size: 1rem;
+  }
+
+  ion-button {
+
+    height: 48px;
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width: 768px) {
+
+  .perfil-container {
+
+    padding: 30px;
+  }
+
+  .hero-card {
+
+    padding: 36px;
+  }
+
+  .avatar {
+
+    width: 130px;
+    height: 130px;
+  }
+
+  .avatar ion-icon {
+
+    font-size: 64px;
+  }
+
+  .card {
+
+    padding: 24px;
+  }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 1200px) {
+
+  .perfil-container {
+
+    max-width: 1000px;
+  }
+
+  .hero-card h1 {
+
+    font-size: 2rem;
+  }
+
+  .section-title h2 {
+
+    font-size: 1.25rem;
+  }
+}

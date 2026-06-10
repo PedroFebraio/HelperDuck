@@ -1,13 +1,246 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Meu Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <form (ngSubmit)="salvarPerfil()">
+
+    <div class="perfil-header">
+
+      <div class="duck-avatar">
+
+        <ion-icon
+          name="person"
+          class="duck-icon">
+        </ion-icon>
+
+      </div>
+
+      <h2>
+        {{ psicologo.nome || 'Psicólogo' }}
+      </h2>
+
+      <p>
+        {{ psicologo.crp || 'CRP não informado' }}
+      </p>
+
+    </div>
+
+
+    <!-- NOME -->
+    <ion-item class="ion-margin-bottom">
+
+      <ion-label position="stacked">
+        Nome Completo
+      </ion-label>
+
+      <ion-input
+        [(ngModel)]="psicologo.nome"
+        name="nome"
+        maxlength="100"
+        required>
+      </ion-input>
+
+    </ion-item>
+
+
+    <!-- EMAIL -->
+    <ion-item class="ion-margin-bottom">
+
+      <ion-label position="stacked">E-mail</ion-label>
+
+      <ion-input
+        [value]="psicologo.email"
+        readonly>
+      </ion-input>
+
+    </ion-item>
+
+
+    <!-- CRP -->
+    <ion-note color="medium">
+      O CRP só pode ser alterado entrando em contato com o suporte.
+    </ion-note>
+
+    <ion-item class="ion-margin-top ion-margin-bottom">
+
+      <ion-label position="stacked">CRP</ion-label>
+
+      <ion-input
+        [(ngModel)]="psicologo.crp"
+        name="crp"
+        readonly>
+      </ion-input>
+
+    </ion-item>
+
+
+    <!-- ESTADO CRP -->
+    <ion-item class="ion-margin-bottom">
+
+      <ion-label position="stacked">
+        Estado do CRP
+      </ion-label>
+
+      <ion-input
+        [(ngModel)]="psicologo.estadoCrp"
+        name="estadoCrp"
+        readonly>
+      </ion-input>
+
+    </ion-item>
+
+
+    <!-- TELEFONE -->
+    <ion-item class="ion-margin-bottom">
+
+      <ion-label position="stacked">
+        Telefone
+      </ion-label>
+
+      <ion-input
+        type="tel"
+        maxlength="15"
+        [(ngModel)]="psicologo.telefone"
+        (ionInput)="formatarTelefone($event)"
+        name="telefone">
+      </ion-input>
+
+    </ion-item>
+
+
+    <!-- VALOR CONSULTA -->
+    <ion-item class="ion-margin-bottom">
+
+      <ion-label position="stacked">
+        Valor da Consulta (R$)
+      </ion-label>
+
+      <ion-input
+        type="number"
+        min="50"
+        max="400"
+        [(ngModel)]="psicologo.valorConsulta"
+        name="valorConsulta">
+      </ion-input>
+
+    </ion-item>
+
+
+    <!-- ESPECIALIDADES -->
+    <ion-item class="ion-margin-bottom">
+
+      <ion-label>Especialidades</ion-label>
+
+      <ion-select
+        multiple="true"
+        [(ngModel)]="especialidades"
+        name="especialidades">
+
+        <ion-select-option
+          *ngFor="let esp of especialidadesDisponiveis"
+          [value]="esp">
+
+          {{ esp }}
+
+        </ion-select-option>
+
+      </ion-select>
+
+    </ion-item>
+
+    <ion-note color="medium">
+      Selecione uma ou mais especialidades.
+    </ion-note>
+
+
+    <!-- BIO -->
+    <ion-item class="ion-margin-top ion-margin-bottom">
+
+      <ion-label position="stacked">
+        Biografia
+      </ion-label>
+
+      <ion-textarea
+        rows="5"
+        [(ngModel)]="psicologo.bio"
+        name="bio">
+      </ion-textarea>
+
+    </ion-item>
+
+
+    <!-- AGENDA -->
+    <ion-card
+      *ngIf="agenda"
+      class="ion-margin-top">
+
+      <ion-card-header>
+
+        <ion-card-title>
+          Minha Agenda
+        </ion-card-title>
+
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <p>
+          <strong>Dias:</strong>
+          {{ agenda.diasDisponiveis.join(', ') }}
+        </p>
+
+        <p>
+          <strong>Horário:</strong>
+          {{ agenda.horarioInicio }}
+          às
+          {{ agenda.horarioFim }}
+        </p>
+
+        <ion-chip color="primary">
+          <ion-label>
+            {{ agenda.duracaoConsulta }} min
+          </ion-label>
+        </ion-chip>
+
+        <ion-chip
+          [color]="agenda.ativo ? 'success' : 'danger'">
+          
+          <ion-label>
+            {{ agenda.ativo ? 'Ativa' : 'Inativa' }}
+          </ion-label>
+        </ion-chip>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <!-- BOTÃO -->
+     <ion-button
+      expand="block"
+      color="warning"
+      routerLink="/agenda-psicologo">
+
+      Configurar Agenda
+
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      class="ion-margin-top">
+
+      Salvar Perfil
+
+    </ion-button>
+
+  </form>
+
 </ion-content>

@@ -59,6 +59,7 @@
         <p *ngIf="cadastroForm.get('nome')?.hasError('minlength')">
           Nome precisa ter pelo menos 3 caracteres.
         </p>
+
         <p *ngIf="cadastroForm.get('nome')?.hasError('maxlength')">
           Nome deve ter no máximo 50 caracteres.
         </p>
@@ -70,7 +71,7 @@
         <ion-label position="stacked">E-mail</ion-label>
 
         <ion-input
-        placeholder="Ex: exemplo@email.com"
+          placeholder="Ex: exemplo@email.com"
           type="email"
           formControlName="email">
         </ion-input>
@@ -97,7 +98,7 @@
 
         <ion-input
           type="tel"
-          placeholder="Ex: (11) 12345-6789"
+          placeholder="Ex: (11) 123456789"
           mask="(00) 000000000"
           formControlName="telefone">
         </ion-input>

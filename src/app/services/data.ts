@@ -94,8 +94,53 @@ export class DataServices {
   }
 
 
-  // ********************** HÚMOR ***************************** //
+  async buscarUsuario(id: string){
+
+    try{
+
+      const usuarioRef =
+        doc(this.firestore, `Usuarios/${id}`);
+
+      const usuarioSnap =
+        await getDoc(usuarioRef);
+
+      if(usuarioSnap.exists()){
+
+        return usuarioSnap.data() as Usuario;
+      }
+
+      return null;
+
+    }catch(error){
+
+      console.log(error);
+
+      return null;
+    }
+  }
 
 
 
+  async atualizarUsuario( id: string, usuario: Usuario){
+
+    try{
+
+      const usuarioRef =
+        doc(this.firestore, `Usuarios/${id}`);
+
+      await setDoc(
+        usuarioRef,
+        { ...usuario },
+        { merge: true }
+      );
+
+      return true;
+
+    }catch(error){
+
+      console.log(error);
+
+      return false;
+    }
+  }
 }

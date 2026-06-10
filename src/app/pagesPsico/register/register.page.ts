@@ -57,14 +57,14 @@ export class RegisterPage implements OnInit {
       telefone: ['', [Validators.required, Validators.pattern(
             /^\(\d{2}\)\s\d{5}\d{4}$/)]],
 
-      crp: ['', [Validators.required, Validators.minLength(4)]],
+      crp: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(7)]],
 
       estadoCrp: ['', [Validators.required, Validators.maxLength(2)]],
 
       bio: ['', [Validators.required, 
-        Validators.minLength(20), Validators.maxLength(1000)]],
+        Validators.minLength(20), Validators.maxLength(3000)]],
 
-      valorConsulta: ['', [Validators.required, Validators.min(50), Validators.max(3000)]],
+      valorConsulta: ['', [Validators.required, Validators.min(50), Validators.max(400)]],
 
       especialidades: [[], [Validators.required]]
 

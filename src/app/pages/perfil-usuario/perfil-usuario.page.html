@@ -1,0 +1,277 @@
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Meu Perfil
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="perfil-content">
+
+  <div
+    class="perfil-container"
+    *ngIf="usuario">
+
+    <!-- HERO -->
+
+    <div class="hero-card">
+
+      <div class="avatar">
+
+        <ion-icon
+          name="person">
+        </ion-icon>
+
+      </div>
+
+      <h1>
+        {{ usuario.nome }}
+      </h1>
+
+      <p>
+        {{ usuario.email }}
+      </p>
+
+    </div>
+
+    <!-- DADOS PESSOAIS -->
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="person-outline">
+        </ion-icon>
+
+        <h2>
+          Dados Pessoais
+        </h2>
+
+      </div>
+
+      <!-- NOME -->
+
+      <ion-item>
+
+        <ion-label position="stacked">
+          Nome
+        </ion-label>
+
+        <ion-input
+          [(ngModel)]="usuario.nome"
+          name="nome"
+          maxlength="100">
+        </ion-input>
+
+      </ion-item>
+
+      <!-- EMAIL -->
+
+      <ion-item>
+
+        <ion-label position="stacked">
+          E-mail
+        </ion-label>
+
+        <ion-input
+          [value]="usuario.email"
+          readonly>
+        </ion-input>
+
+      </ion-item>
+
+      <!-- TELEFONE -->
+
+      <ion-item>
+
+        <ion-label position="stacked">
+          Telefone
+        </ion-label>
+
+        <ion-input
+          type="tel"
+          maxlength="15"
+          [(ngModel)]="usuario.telefone"
+          (ionInput)="formatarTelefone($event)">
+        </ion-input>
+
+      </ion-item>
+
+      <!-- DATA NASCIMENTO -->
+
+      <ion-item>
+
+        <ion-label position="stacked">
+          Data de Nascimento
+        </ion-label>
+
+        <ion-input
+          [value]="dataNascimentoFormatada"
+          readonly>
+        </ion-input>
+
+      </ion-item>
+
+    </div>
+
+    <!-- FIDELIDADE -->
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="gift-outline">
+        </ion-icon>
+
+        <h2>
+          Programa de Fidelidade
+        </h2>
+
+      </div>
+
+      <div class="estatistica">
+
+        <h3>
+          {{ usuario.pontosFidelidade || 0 }}
+        </h3>
+
+        <p>
+          Duck Points
+        </p>
+
+      </div>
+
+      <ion-chip
+        [color]="usuario.consultaGratisUsada ? 'danger' : 'success'">
+
+        <ion-label>
+
+          {{
+            usuario.consultaGratisUsada
+            ? 'Consulta Gratuita Utilizada'
+            : 'Consulta Gratuita Disponível'
+          }}
+
+        </ion-label>
+
+      </ion-chip>
+
+    </div>
+
+    <!-- CONSULTAS -->
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="calendar-outline">
+        </ion-icon>
+
+        <h2>
+          Consultas
+        </h2>
+
+      </div>
+
+      <div class="acoes">
+
+        <ion-button
+          expand="block"
+          fill="outline"
+          routerLink="/consultas">
+
+          Ver Minhas Consultas
+
+        </ion-button>
+
+      </div>
+
+    </div>
+
+    <!-- RECOMPENSAS -->
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="trophy-outline">
+        </ion-icon>
+
+        <h2>
+          Recompensas
+        </h2>
+
+      </div>
+
+      <p>
+
+        Troque seus Duck Points por benefícios exclusivos.
+
+      </p>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        routerLink="/recompensas">
+
+        Ver Recompensas
+
+      </ion-button>
+
+    </div>
+
+    <!-- SUPORTE -->
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon
+          name="help-circle-outline">
+        </ion-icon>
+
+        <h2>
+          Suporte
+        </h2>
+
+      </div>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        routerLink="/suporte">
+
+        Abrir Chamado
+
+      </ion-button>
+
+    </div>
+
+    <!-- SALVAR -->
+
+    <ion-button
+      expand="block"
+      size="large"
+      color="warning"
+      class="salvar-btn"
+      (click)="salvarPerfil()">
+
+      Salvar Alterações
+
+    </ion-button>
+
+  </div>
+
+</ion-content>

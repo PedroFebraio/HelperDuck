@@ -1,0 +1,318 @@
+/* =========================
+   FUNDO
+========================= */
+
+.consultas-content {
+
+  --background:
+    linear-gradient(
+      to bottom,
+      #fab49a,
+      #ffb85b
+    );
+
+  --padding-bottom:
+    calc(env(safe-area-inset-bottom) + 90px);
+}
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 16px;
+
+  padding-bottom: 140px;
+}
+
+/* =========================
+   FILTRO
+========================= */
+
+.filtro-segment {
+
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 6px;
+
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08);
+
+  overflow-x: auto;
+
+  white-space: nowrap;
+
+  scrollbar-width: none;
+}
+
+.filtro-segment::-webkit-scrollbar {
+
+  display: none;
+}
+
+ion-segment-button {
+
+  --border-radius: 12px;
+
+  min-height: 42px;
+
+  font-weight: 600;
+
+  text-transform: none;
+
+  color: #374151;
+}
+
+ion-segment-button.segment-button-checked {
+
+  --background: #1f2937;
+
+  color: #facc15;
+
+  font-weight: 700;
+}
+
+/* =========================
+   SEM CONSULTAS
+========================= */
+
+.sem-consultas {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 40px 24px;
+
+  text-align: center;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sem-consultas ion-icon {
+
+  font-size: 70px;
+
+  color: #f59e0b;
+
+  margin-bottom: 12px;
+}
+
+.sem-consultas h2 {
+
+  color: #111827;
+
+  font-size: 1.3rem;
+
+  font-weight: 700;
+
+  margin-bottom: 8px;
+}
+
+.sem-consultas p {
+
+  color: #6b7280;
+
+  line-height: 1.5;
+}
+
+/* =========================
+   CARDS CONSULTAS
+========================= */
+
+ion-card {
+
+  margin: 0 0 18px 0;
+
+  border-radius: 22px;
+
+  background: white;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+
+  transition: 0.25s ease;
+}
+
+ion-card:hover {
+
+  transform: translateY(-2px);
+}
+
+ion-card-header {
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff7ed,
+      #fef3c7
+    );
+
+  padding: 18px;
+}
+
+ion-card-title {
+
+  color: #111827;
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+}
+
+ion-card-content {
+
+  padding: 18px;
+}
+
+ion-card-content p {
+
+  color: #374151;
+
+  margin-bottom: 10px;
+
+  font-size: 0.95rem;
+
+  line-height: 1.5;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+ion-chip {
+
+  margin-top: 10px;
+
+  margin-bottom: 14px;
+
+  font-weight: 600;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+ion-button {
+
+  height: 48px;
+
+  --border-radius: 14px;
+
+  font-weight: 600;
+
+  text-transform: none;
+}
+
+ion-button[fill="outline"] {
+
+  --border-color: #f59e0b;
+
+  --color: #f59e0b;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+ion-toolbar {
+
+  --color: #111827;
+}
+
+ion-title {
+
+  font-weight: 700;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .container {
+
+    padding: 12px;
+  }
+
+  .filtro-segment {
+
+    margin-bottom: 16px;
+  }
+
+  ion-card-header {
+
+    padding: 14px;
+  }
+
+  ion-card-content {
+
+    padding: 14px;
+  }
+
+  ion-card-title {
+
+    font-size: 1rem;
+  }
+
+  .sem-consultas {
+
+    padding: 30px 18px;
+  }
+
+  .sem-consultas ion-icon {
+
+    font-size: 60px;
+  }
+
+  .sem-consultas h2 {
+
+    font-size: 1.1rem;
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width: 768px) {
+
+  .container {
+
+    padding: 24px;
+  }
+
+  ion-card {
+
+    border-radius: 24px;
+  }
+
+  ion-card-title {
+
+    font-size: 1.2rem;
+  }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 1200px) {
+
+  .container {
+
+    max-width: 1000px;
+  }
+}

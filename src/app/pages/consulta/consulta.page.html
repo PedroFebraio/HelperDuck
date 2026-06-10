@@ -1,13 +1,134 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>consulta</ion-title>
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Minhas Consultas
+    </ion-title>
+
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">consulta</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="consultas-content">
+
+  <div class="container">
+    <!-- FILTRO -->
+
+    <ion-segment
+      [(ngModel)]="filtroStatus"
+      scrollable="true"
+      class="filtro-segment">
+
+      <ion-segment-button value="todos">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="pendente">
+        <ion-label>Pendentes</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="confirmada">
+        <ion-label>Confirmadas</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="concluida">
+        <ion-label>Finalizadas</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="cancelada">
+        <ion-label>Canceladas</ion-label>
+      </ion-segment-button>
+
+    </ion-segment>
+
+    <div
+      *ngIf="consultas.length === 0"
+      class="sem-consultas">
+
+      <ion-icon
+        name="calendar-outline">
+      </ion-icon>
+
+      <h2>
+        Nenhuma consulta encontrada
+      </h2>
+
+      <p>
+        Você ainda não possui consultas agendadas.
+      </p>
+
+    </div>
+
+    <ion-card
+      *ngFor="let consulta of consultasFiltradas">
+
+      <ion-card-header>
+        <ion-card-title>
+          {{ consulta.psicologoNome }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <p>
+          <strong>Data:</strong>
+          {{ consulta.dataConsulta | date:'dd/MM/yyyy HH:mm' }}
+        </p>
+
+        <p>
+          <strong>Valor:</strong>
+          R$ {{ consulta.valorConsulta }}
+        </p>
+
+        <ion-chip
+          [color]=" consulta.status === 'pendente'
+              ? 'warning'
+              : consulta.status === 'confirmada'
+              ? 'primary'
+              : consulta.status === 'concluida'
+              ? 'success' : 'danger'">
+
+          <ion-label>
+            {{ consulta.status === 'pendente' 
+            ? 'Pendente' : 
+            consulta.status === 'confirmada'
+             ? 'Confirmada' : 
+            consulta.status === 'concluida' 
+            ? 'Finalizada' : 'Cancelada' }}
+          </ion-label>
+
+        </ion-chip>
+
+        <!-- DEMAIS STATUS -->
+        <ion-button
+          expand="block"
+          fill="outline"
+          [routerLink]="['/detalhes-consulta', consulta.id]">
+
+          <ion-icon
+            slot="start"
+            [name]="consulta.status === 'confirmada'
+              ? 'videocam-outline'
+              : 'document-text-outline'">
+          </ion-icon>
+
+          {{
+            consulta.status === 'confirmada'
+              ? 'Entrar na Consulta'
+              : 'Ver Detalhes'
+          }}
+
+        </ion-button>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+
 </ion-content>

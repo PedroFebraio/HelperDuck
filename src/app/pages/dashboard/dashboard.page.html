@@ -31,14 +31,17 @@
         <div class="stat-card blue">
           <div class="emoji">🏆</div>
 
+          <p>Duck Points</p>
+
           <h3>{{ usuario.pontosFidelidade }}</h3>
           
           <p>Pontos de fidelidade</p>
+          
         </div>
 
         <div class="stat-card green">
           <div class="emoji">📅</div>
-          <h3>3</h3>
+          <h3>{{quantidadeConsultas}}</h3>
 
           <p>Consultas agendadas</p>
         </div>
@@ -100,8 +103,85 @@
 
         {{ this.mensagemHumor }}
         </p>
+
+        
       </div>
+
     </div>
+
+
+    <!-- PRÓXIMAS CONSULTAS -->
+      <div
+        class="proximas-consultas"
+        *ngIf="consultasProximas.length > 0">
+
+        <h3>
+          📅 Próximas Consultas
+        </h3>
+
+        <ion-card
+          class="consulta-card"
+          *ngFor="let consulta of consultasProximas">
+
+          <ion-card-content>
+
+            <h4>
+              {{ consulta.psicologoNome }}
+            </h4>
+
+            <p>
+
+              <ion-icon name="time-outline"></ion-icon>
+
+              {{ consulta.dataConsulta | date:'dd/MM/yyyy HH:mm' }}
+
+            </p>
+
+            <ion-chip
+              [color]="consulta.status === 'confirmada'
+              ? 'success'
+              : 'warning'">
+
+              <ion-label>
+
+                {{ consulta.status === 'confirmada'
+                ? 'Confirmada'
+                : 'Pendente' }}
+
+              </ion-label>
+
+            </ion-chip>
+
+            <ion-button
+              expand="block"
+              fill="outline"
+              size="small"
+              [routerLink]="['/detalhes-consulta', consulta.id]">
+
+              Ver Detalhes
+
+            </ion-button>
+
+          </ion-card-content>
+
+        </ion-card>
+
+      </div>
+
+      <div
+      class="proximas-consultas"
+      *ngIf="consultasProximas.length === 0">
+
+      <h3>
+        📅 Próximas Consultas
+      </h3>
+
+      <p class="sem-consultas-dashboard">
+        Você não possui consultas agendadas no momento.
+      </p>
+
+    </div>
+    
 
     <!-- PROGRESSO -->
     <div class="progress-card">
@@ -116,7 +196,7 @@
           </h3>
 
           <p>
-            Continue ganhando pontos para uma consulta gratuita
+            Continue ganhando Duck Points para uma consulta gratuita
           </p>
         </div>
       </div>
