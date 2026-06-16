@@ -2,13 +2,25 @@
 
   --background: #f5f7fb;
 
-  --color: #000
+  --padding-bottom: 80px;
 }
 
 
+/* CONTAINER */
+
 .dashboard-container {
 
-  padding: 20px;
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 16px;
+
+  padding-bottom: calc(
+    env(safe-area-inset-bottom) + 100px
+  );
+
+  box-sizing: border-box;
 }
 
 
@@ -32,36 +44,38 @@
 
   align-items: center;
 
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 
   color: #1e293b;
 
   box-shadow:
-    0 10px 24px rgba(0,0,0,0.08);
+    0 10px 24px rgba(0,0,0,.08);
 }
-
 
 .welcome-card h1 {
 
-  font-size: 1.5rem;
+  margin: 0;
+
+  font-size: 1.6rem;
 
   font-weight: 700;
-
-  margin-bottom: 6px;
 }
-
 
 .welcome-card p {
 
-  opacity: .8;
+  margin-top: 6px;
+
+  opacity: .85;
 }
 
 
+/* AVATAR */
+
 .avatar {
 
-  width: 70px;
+  width: 72px;
 
-  height: 70px;
+  height: 72px;
 
   border-radius: 50%;
 
@@ -69,11 +83,13 @@
 
   display: flex;
 
-  align-items: center;
-
   justify-content: center;
 
+  align-items: center;
+
   font-size: 34px;
+
+  flex-shrink: 0;
 }
 
 
@@ -84,13 +100,12 @@
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(140px,1fr));
+    repeat(auto-fit, minmax(150px,1fr));
 
   gap: 16px;
 
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
-
 
 .stat-card {
 
@@ -106,22 +121,22 @@
     0 6px 20px rgba(0,0,0,.05);
 }
 
-
 .stat-card h2 {
 
-  font-size: 1.7rem;
+  margin: 0 0 8px;
+
+  font-size: 1.8rem;
 
   color: #f5b700;
 
-  margin-bottom: 8px;
+  font-weight: 700;
 }
-
 
 .stat-card p {
 
-  color: #64748b;
+  margin: 0;
 
-  font-size: .95rem;
+  color: #64748b;
 }
 
 
@@ -135,28 +150,30 @@
 
   padding: 22px;
 
+  margin-bottom: 22px;
+
   box-shadow:
     0 6px 20px rgba(0,0,0,.05);
-
-  margin-bottom: 24px;
 }
-
 
 .section-header {
 
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
-
 .section-header h2 {
+
+  margin: 0;
 
   font-size: 1.2rem;
 
   font-weight: 700;
+
+  color: #111827;
 }
 
 
-/* CONSULTA */
+/* CONSULTAS */
 
 .consulta-item {
 
@@ -166,15 +183,37 @@
 
   align-items: center;
 
-  padding: 14px 0;
+  gap: 14px;
 
-  border-bottom: 1px solid #edf2f7;
+  padding: 16px 0;
+
+  border-bottom:
+    1px solid #edf2f7;
 }
-
 
 .consulta-item:last-child {
 
   border-bottom: none;
+}
+
+.consulta-item strong {
+
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #111827;
+
+  font-size: 1rem;
+}
+
+.consulta-item p {
+
+  margin: 4px 0 8px;
+
+  color: #64748b;
+
+  font-size: .95rem;
 }
 
 
@@ -189,14 +228,121 @@
   gap: 14px;
 }
 
+.actions ion-button {
 
-ion-button {
+  height: 52px;
 
   --border-radius: 18px;
-
-  height: 50px;
 
   font-weight: 600;
 
   text-transform: none;
+}
+
+
+/* BOTÕES DA LISTA */
+
+.consulta-item ion-button {
+
+  --border-radius: 14px;
+
+  min-width: 80px;
+
+  text-transform: none;
+
+  flex-shrink: 0;
+}
+
+
+/* TABLET */
+
+@media (max-width: 768px) {
+
+  .dashboard-container {
+
+    padding: 14px;
+
+    padding-bottom: calc(
+      env(safe-area-inset-bottom) + 100px
+    );
+  }
+
+  .welcome-card {
+
+    padding: 20px;
+  }
+
+  .welcome-card h1 {
+
+    font-size: 1.4rem;
+  }
+
+  .avatar {
+
+    width: 64px;
+
+    height: 64px;
+
+    font-size: 30px;
+  }
+}
+
+
+/* CELULAR */
+
+@media (max-width: 480px) {
+
+  .dashboard-container {
+
+    padding: 12px;
+
+    padding-bottom: calc(
+      env(safe-area-inset-bottom) + 120px
+    );
+  }
+
+  .welcome-card {
+
+    flex-direction: column;
+
+    text-align: center;
+
+    gap: 16px;
+  }
+
+  .avatar {
+
+    width: 60px;
+
+    height: 60px;
+
+    font-size: 28px;
+  }
+
+  .stats-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+  .consulta-item {
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .consulta-item ion-button {
+
+    width: 100%;
+  }
+
+  .section-card {
+
+    padding: 18px;
+  }
+
+  .stat-card {
+
+    padding: 18px;
+  }
 }

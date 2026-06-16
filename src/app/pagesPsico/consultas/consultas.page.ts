@@ -87,10 +87,10 @@ export class ConsultasPage implements OnInit {
       status: 'confirmada',
 
       salaVideo:
-        'menteleve-' +
+        'helperduck-' +
         Math.random()
           .toString(36)
-          .substring(2, 10),
+          .substring(2,10),
 
       checkinUsuario: false,
       checkinPsicologo: false,
@@ -99,9 +99,16 @@ export class ConsultasPage implements OnInit {
       presencaPsicologo: false,
 
       iniciada: false,
+
       finalizada: false,
 
-      duracaoConsulta: 50
+      inicioSessao: null,
+
+      fimSessao: null,
+
+      duracaoConsulta: 50,
+
+      duracaoReal: 0
     };
   }
 

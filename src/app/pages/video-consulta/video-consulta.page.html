@@ -2,39 +2,362 @@
 
   <ion-toolbar color="warning">
 
+    <ion-buttons slot="start">
+
+      <ion-back-button>
+      </ion-back-button>
+
+    </ion-buttons>
+
     <ion-title>
+
       Consulta Online
+
     </ion-title>
 
   </ion-toolbar>
 
 </ion-header>
 
-<ion-content>
+<ion-content class="video-consulta-content">
 
-  <div class="container">
+  <!-- LOADING -->
 
-    <ion-icon
-      name="videocam"
-      class="video-icon">
-    </ion-icon>
+  <div
+    *ngIf="carregando"
+    class="loading-box">
 
-    <h2>
-      Sala da Consulta
-    </h2>
+    <ion-spinner name="crescent">
+    </ion-spinner>
 
-    <p>
-      {{ sala }}
-    </p>
+  </div>
+
+  <!-- CONSULTA -->
+
+  <div
+    *ngIf="!carregando && consulta"
+    class="container">
+
+    <!-- HERO -->
+
+    <div class="hero-card">
+
+      <div class="hero-icon">
+        🎥
+      </div>
+
+      <h1>
+        Consulta Online
+      </h1>
+
+      <p>
+        Prepare-se para sua sessão psicológica
+      </p>
+
+      <ion-chip
+        [color]="consulta.status === 'confirmada'
+        ? 'success'
+        : consulta.status === 'pendente'
+        ? 'warning'
+        : 'danger'">
+
+        <ion-label>
+
+          {{ consulta.status }}
+
+        </ion-label>
+
+      </ion-chip>
+
+    </div>
+
+    <!-- INFORMAÇÕES -->
+
+    <div class="info-card">
+
+      <h2>
+
+        <ion-icon
+          name="document-text-outline">
+        </ion-icon>
+
+        Informações da Consulta
+
+      </h2>
+
+      <p *ngIf="tipoUsuario === 'usuario'">
+
+        <strong>Psicólogo:</strong>
+
+        {{ consulta.psicologoNome }}
+
+      </p>
+
+      <p *ngIf="tipoUsuario === 'psicologo'">
+
+        <strong>Paciente:</strong>
+
+        {{ consulta.usuarioNome }}
+
+      </p>
+
+      <p>
+
+        <strong>Data:</strong>
+
+        {{ consulta.dataConsulta
+        | date:'dd/MM/yyyy HH:mm' }}
+
+      </p>
+
+      <p>
+
+        <strong>Duração:</strong>
+
+        {{ consulta.duracaoConsulta || 50 }}
+        minutos
+
+      </p>
+
+    </div>
+
+    <!-- PRESENÇA -->
+
+    <div class="info-card">
+
+      <h2>
+
+        <ion-icon
+          name="checkmark-circle-outline">
+        </ion-icon>
+
+        Presença
+
+      </h2>
+
+      <div class="presenca-item">
+
+        <span>
+          Usuário
+        </span>
+
+        <ion-chip
+          [color]="consulta.checkinUsuario
+          ? 'success'
+          : 'medium'">
+
+          <ion-label>
+
+            {{
+              consulta.checkinUsuario
+              ? 'Presente'
+              : 'Aguardando'
+            }}
+
+          </ion-label>
+
+        </ion-chip>
+
+      </div>
+
+      <div class="presenca-item">
+
+        <span>
+          Psicólogo
+        </span>
+
+        <ion-chip
+          [color]="consulta.checkinPsicologo
+          ? 'success'
+          : 'medium'">
+
+          <ion-label>
+
+            {{
+              consulta.checkinPsicologo
+              ? 'Presente'
+              : 'Aguardando'
+            }}
+
+          </ion-label>
+
+        </ion-chip>
+
+      </div>
+
+    </div>
+
+    <!-- PRIVACIDADE -->
+
+    <div class="info-card">
+
+      <h2>
+
+        <ion-icon
+          name="shield-checkmark-outline">
+        </ion-icon>
+
+        Privacidade
+
+      </h2>
+
+      <p>
+
+        Esta consulta é confidencial. Procure um ambiente
+        silencioso, privado e com boa conexão à internet.
+
+      </p>
+
+      <p>
+
+        Recomendamos o uso de fones de ouvido para maior
+        conforto e privacidade.
+
+      </p>
+
+    </div>
+
+    <!-- CONFIRMAR PRESENÇA -->
 
     <ion-button
-      expand="block"
-      color="warning"
-      (click)="entrarNaSala()">
 
-      Entrar na Consulta
+      *ngIf="!presencaConfirmada"
+
+      expand="block"
+
+      color="success"
+
+      (click)="confirmarPresenca()">
+
+      <ion-icon
+        slot="start"
+        name="checkmark-circle-outline">
+      </ion-icon>
+
+      Confirmar Presença
 
     </ion-button>
+
+    <!-- AGUARDANDO -->
+
+    <ion-card
+      *ngIf="
+      presencaConfirmada &&
+      !consultaLiberada">
+
+      <ion-card-content>
+
+        ⏳ Aguardando o outro participante confirmar presença.
+
+      </ion-card-content>
+
+    </ion-card>
+
+    <!-- CONSULTA LIBERADA -->
+
+    <div *ngIf="consultaLiberada">
+
+      <ion-card class="consulta-liberada-card">
+
+        <ion-card-content>
+
+          ✅ Ambos os participantes confirmaram presença.
+
+        </ion-card-content>
+
+      </ion-card>
+
+      <!-- VÍDEOS -->
+
+      <div class="videos-container">
+
+        <!-- VÍDEO REMOTO -->
+
+        <video
+          #remoteVideo
+          autoplay
+          playsinline
+          controls="false"
+          class="remote-video">
+        </video>
+
+        <video
+          #localVideo
+          autoplay
+          muted
+          playsinline
+          controls="false"
+          class="local-video">
+        </video>
+
+        <ion-card>
+
+          <ion-card-content>
+
+            <p>
+              Chamada iniciada:
+              {{ chamadaIniciada }}
+            </p>
+
+            <p>
+              Consulta liberada:
+              {{ consultaLiberada }}
+            </p>
+
+            <p>
+              Tipo:
+              {{ tipoUsuario }}
+            </p>
+
+          </ion-card-content>
+
+        </ion-card>
+
+      </div>
+
+      <!-- ENTRAR -->
+
+      <ion-button
+
+        expand="block"
+
+        size="large"
+
+        color="warning"
+
+        (click)="entrarNaSala()">
+
+        <ion-icon
+          slot="start"
+          name="videocam-outline">
+        </ion-icon>
+
+        Entrar na Sala
+
+      </ion-button>
+
+      <!-- SAIR -->
+
+      <ion-button
+
+        expand="block"
+
+        fill="outline"
+
+        color="danger"
+
+        (click)="sairDaConsulta()">
+
+        <ion-icon
+          slot="start"
+          name="exit-outline">
+        </ion-icon>
+
+        Sair da Consulta
+
+      </ion-button>
+
+    </div>
 
   </div>
 

@@ -112,7 +112,7 @@ export class DashboardPage implements OnInit {
 
         return ((c.status === 'pendente' ||
           c.status === 'confirmada') &&
-          dataConsulta > agora
+          dataConsulta.toDateString() > agora.toDateString()
         );
 
       });

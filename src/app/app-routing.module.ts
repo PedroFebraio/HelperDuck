@@ -84,7 +84,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/perfil-usuario/perfil-usuario.module').then( m => m.PerfilUsuarioPageModule)
   },
   {
-    path: 'video-consulta',
+    path: 'video-consulta/:id',
     loadChildren: () => import('./pages/video-consulta/video-consulta.module').then( m => m.VideoConsultaPageModule)
   },
   {

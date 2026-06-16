@@ -1,0 +1,358 @@
+.detalhes-content {
+
+  --background:
+    linear-gradient(
+      to bottom,
+      #fab49a,
+      #ffb85b
+    );
+
+  --padding-bottom: 80px;
+}
+
+
+/* LOADING */
+
+.loading-box {
+
+  height: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+
+/* CONTAINER */
+
+.container {
+
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 16px;
+
+  padding-bottom: calc(
+    env(safe-area-inset-bottom) + 100px
+  );
+
+  box-sizing: border-box;
+}
+
+
+/* HERO */
+
+.hero-card {
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 28px 20px;
+
+  text-align: center;
+
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.08);
+}
+
+.avatar {
+
+  width: 80px;
+
+  height: 80px;
+
+  margin: 0 auto 16px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(245,183,0,.15);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 42px;
+}
+
+.hero-card h1 {
+
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 1.5rem;
+
+  font-weight: 700;
+}
+
+.hero-card p {
+
+  margin: 10px 0 16px;
+
+  color: #6b7280;
+}
+
+
+/* CARDS */
+
+.ficha-card,
+.info-card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 20px;
+
+  margin-bottom: 18px;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.08);
+}
+
+.ficha-card h2,
+.info-card h2 {
+
+  margin-top: 0;
+
+  margin-bottom: 18px;
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  color: #111827;
+}
+
+
+/* GRID */
+
+.info-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(150px,1fr));
+
+  gap: 14px;
+}
+
+.info-item {
+
+  background: #f8fafc;
+
+  border-radius: 16px;
+
+  padding: 14px;
+}
+
+.info-item span {
+
+  display: block;
+
+  color: #64748b;
+
+  font-size: .85rem;
+
+  margin-bottom: 6px;
+}
+
+.info-item strong {
+
+  color: #111827;
+
+  font-size: 1rem;
+}
+
+
+/* CHECK-IN */
+
+.presenca-grid {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.presenca-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 10px 0;
+}
+
+.presenca-item span {
+
+  color: #374151;
+
+  font-weight: 600;
+}
+
+
+/* SALA */
+
+.codigo-sala {
+
+  background: #f8fafc;
+
+  border: 2px dashed #f5b700;
+
+  border-radius: 16px;
+
+  padding: 18px;
+
+  text-align: center;
+
+  font-weight: 700;
+
+  color: #111827;
+
+  word-break: break-word;
+}
+
+
+/* LISTA */
+
+.info-card ul {
+
+  margin: 0;
+
+  padding-left: 20px;
+}
+
+.info-card li {
+
+  margin-bottom: 10px;
+
+  color: #374151;
+
+  line-height: 1.5;
+}
+
+
+/* OBSERVAÇÕES */
+
+ion-textarea {
+
+  --background: #f8fafc;
+
+  border-radius: 16px;
+
+  margin-top: 10px;
+
+  padding: 10px;
+}
+
+
+/* BOTÕES */
+
+ion-button {
+
+  height: 54px;
+
+  --border-radius: 18px;
+
+  font-weight: 600;
+
+  text-transform: none;
+
+  margin-bottom: 12px;
+}
+
+
+/* TABLET */
+
+@media (max-width: 768px) {
+
+  .container {
+
+    padding: 14px;
+
+    padding-bottom: calc(
+      env(safe-area-inset-bottom) + 100px
+    );
+  }
+
+  .avatar {
+
+    width: 72px;
+
+    height: 72px;
+
+    font-size: 38px;
+  }
+}
+
+
+/* CELULAR */
+
+@media (max-width: 480px) {
+
+  .container {
+
+    padding: 12px;
+
+    padding-bottom: calc(
+      env(safe-area-inset-bottom) + 120px
+    );
+  }
+
+  .hero-card {
+
+    padding: 22px 16px;
+  }
+
+  .hero-card h1 {
+
+    font-size: 1.25rem;
+  }
+
+  .avatar {
+
+    width: 64px;
+
+    height: 64px;
+
+    font-size: 34px;
+  }
+
+  .info-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+  .presenca-item {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 8px;
+  }
+
+  .ficha-card,
+  .info-card {
+
+    padding: 16px;
+  }
+
+  ion-button {
+
+    height: 52px;
+  }
+}

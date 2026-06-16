@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, collectionData, doc, Firestore, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { collection, collectionData, doc, docData, Firestore, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 
 
 export interface Consulta{
@@ -31,6 +31,10 @@ export interface Consulta{
   avaliacao?: number;
   comentario?: string;
   createdAt?: number;
+  offer?: any;
+  answer?: any;
+  iceCandidatesOferta?: any[];
+  iceCandidatesResposta?: any[];
 }
 
 
@@ -171,5 +175,104 @@ export class ConsultaServices {
 
       return false;
     }
+  }
+
+
+
+  async buscarConsultaPorId(id: string){
+
+    try{
+
+      const consultaRef = doc(this.firestore, `Consultas/${id}`);
+
+      const consultaSnap = await getDoc(consultaRef);
+
+      if(consultaSnap.exists()){
+        return consultaSnap.data();
+      }
+
+      return null;
+
+    }catch(error){
+
+      console.log(error);
+
+      return null;
+    }
+  }
+
+
+  escutarConsulta(id: string){
+
+    const consultaRef = doc(
+      this.firestore,
+      `Consultas/${id}`
+    );
+
+    return docData(
+      consultaRef,
+      { idField: 'id' }
+    );
+  }
+
+
+  async salvarOffer(consultaId: string, offer: any){
+
+    return await this.atualizarConsulta(
+      consultaId,
+      { offer }
+    );
+  }
+
+
+
+  async salvarAnswer(consultaId: string, answer: any){
+
+    return await this.atualizarConsulta(
+      consultaId,
+      { answer }
+    );
+  }
+
+
+
+  async limparWebRTC(consultaId: string){
+
+    return await this.atualizarConsulta(
+      consultaId,
+      {
+
+        offer: null,
+
+        answer: null,
+
+        iceCandidates: []
+
+      }
+    );
+  }
+
+
+
+
+  async salvarIceOferta(consultaId: string, candidatos: any[]){
+
+    return await this.atualizarConsulta(
+      consultaId,
+      {
+        iceCandidatesOferta: candidatos
+      }
+    );
+  }
+
+
+  async salvarIceResposta(consultaId: string, candidatos: any[]){
+
+    return await this.atualizarConsulta(
+      consultaId,
+      {
+        iceCandidatesResposta: candidatos
+      }
+    );
   }
 }

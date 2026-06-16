@@ -1,13 +1,322 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>detalhes-consulta</ion-title>
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+
+      <ion-back-button
+        defaultHref="/consultas-psicologo">
+      </ion-back-button>
+
+    </ion-buttons>
+
+    <ion-title>
+      Consulta do Paciente
+    </ion-title>
+
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detalhes-consulta</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="detalhes-content">
+
+  <!-- LOADING -->
+
+  <div
+    *ngIf="carregando"
+    class="loading-box">
+
+    <ion-spinner name="crescent"></ion-spinner>
+
+  </div>
+
+  <!-- CONTEÚDO -->
+
+  <div
+    *ngIf="!carregando && consulta"
+    class="container">
+
+    <!-- HERO -->
+
+    <div class="hero-card">
+
+      <div class="avatar">
+        🧠
+      </div>
+
+      <h1>
+        {{ consulta.usuarioNome }}
+      </h1>
+
+      <p>
+        Paciente agendado para atendimento
+      </p>
+
+      <ion-chip
+        [color]="consulta.status === 'confirmada'
+        ? 'success'
+        : consulta.status === 'pendente'
+        ? 'warning'
+        : 'danger'">
+
+        <ion-label>
+
+          {{
+            consulta.status === 'confirmada'
+            ? 'Confirmada'
+            : consulta.status === 'pendente'
+            ? 'Pendente'
+            : 'Cancelada'
+          }}
+
+        </ion-label>
+
+      </ion-chip>
+
+    </div>
+
+    <!-- RESUMO -->
+
+    <div class="ficha-card">
+
+      <h2>
+        📋 Resumo da Consulta
+      </h2>
+
+      <div class="info-grid">
+
+        <div class="info-item">
+
+          <span>Paciente</span>
+
+          <strong>
+            {{ consulta.usuarioNome }}
+          </strong>
+
+        </div>
+
+        <div class="info-item">
+
+          <span>Data</span>
+
+          <strong>
+
+            {{ consulta.dataConsulta
+            | date:'dd/MM/yyyy' }}
+
+          </strong>
+
+        </div>
+
+        <div class="info-item">
+
+          <span>Horário</span>
+
+          <strong>
+
+            {{ consulta.dataConsulta
+            | date:'HH:mm' }}
+
+          </strong>
+
+        </div>
+
+        <div class="info-item">
+
+          <span>Valor</span>
+
+          <strong>
+
+            R$
+            {{ consulta.valorConsulta }}
+
+          </strong>
+
+        </div>
+
+        <div class="info-item">
+
+          <span>Duração</span>
+
+          <strong>
+
+            {{
+              consulta.duracaoConsulta || 50
+            }} min
+
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PRESENÇA -->
+
+    <div class="info-card">
+
+      <h2>
+        ✅ Check-in
+      </h2>
+
+      <div class="presenca-grid">
+
+        <div class="presenca-item">
+
+          <span>
+            Paciente
+          </span>
+
+          <ion-chip
+            [color]="consulta.checkinUsuario
+            ? 'success'
+            : 'medium'">
+
+            <ion-label>
+
+              {{
+                consulta.checkinUsuario
+                ? 'Presente'
+                : 'Aguardando'
+              }}
+
+            </ion-label>
+
+          </ion-chip>
+
+        </div>
+
+        <div class="presenca-item">
+
+          <span>
+            Psicólogo
+          </span>
+
+          <ion-chip
+            [color]="consulta.checkinPsicologo
+            ? 'success'
+            : 'medium'">
+
+            <ion-label>
+
+              {{
+                consulta.checkinPsicologo
+                ? 'Presente'
+                : 'Aguardando'
+              }}
+
+            </ion-label>
+
+          </ion-chip>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SALA -->
+
+    <div
+      class="info-card"
+      *ngIf="consulta.salaVideo">
+
+      <h2>
+        🎥 Sala da Consulta
+      </h2>
+
+      <div class="codigo-sala">
+
+        {{ consulta.salaVideo }}
+
+      </div>
+
+    </div>
+
+    <!-- ORIENTAÇÕES -->
+
+    <div class="info-card">
+
+      <h2>
+        ℹ️ Orientações
+      </h2>
+
+      <ul>
+
+        <li>
+          Entrar na sala até 10 minutos antes.
+        </li>
+
+        <li>
+          Garantir ambiente privado.
+        </li>
+
+        <li>
+          Utilizar internet estável.
+        </li>
+
+        <li>
+          Conferir câmera e microfone.
+        </li>
+
+      </ul>
+
+    </div>
+
+    <!-- OBSERVAÇÕES -->
+
+    <div class="info-card">
+
+      <h2>
+        📝 Observações
+      </h2>
+
+      <ion-textarea
+
+        placeholder="Espaço reservado para futuras evoluções da sessão."
+
+        readonly="true">
+
+      </ion-textarea>
+
+    </div>
+
+    <!-- BOTÕES -->
+
+    <ion-button
+
+      *ngIf="consulta.status === 'confirmada'"
+
+      expand="block"
+
+      color="success"
+
+      size="large"
+
+      [routerLink]="[
+        '/video-consulta',
+        consulta.id
+      ]">
+
+      <ion-icon
+        slot="start"
+        name="videocam-outline">
+      </ion-icon>
+
+      Entrar na Consulta
+
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      color="tertiary"
+      routerLink="/consultas-psicologo">
+
+      Alterar o status da consulta
+
+    </ion-button>
+
+  </div>
+
 </ion-content>

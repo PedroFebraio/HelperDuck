@@ -1,4 +1,4 @@
-ion-content {
+.video-consulta-content {
 
   --background:
     linear-gradient(
@@ -6,44 +6,314 @@ ion-content {
       #fab49a,
       #ffb85b
     );
+
+  --padding-bottom: 80px;
 }
 
-.container {
+
+/* LOADING */
+
+.loading-box {
 
   height: 100%;
 
   display: flex;
 
-  flex-direction: column;
-
   justify-content: center;
 
   align-items: center;
+}
+
+
+/* CONTAINER */
+
+.container {
+
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 16px;
+
+  padding-bottom: calc(
+    env(safe-area-inset-bottom) + 100px
+  );
+
+  box-sizing: border-box;
+}
+
+
+/* HERO */
+
+.hero-card {
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 28px 20px;
 
   text-align: center;
 
-  padding: 24px;
+  margin-bottom: 18px;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.08);
 }
 
-.video-icon {
+.hero-icon {
 
-  font-size: 90px;
+  font-size: 64px;
+
+  margin-bottom: 10px;
+}
+
+.hero-card h1 {
+
+  margin: 0;
+
+  font-size: 1.5rem;
+
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.hero-card p {
+
+  margin: 10px 0 16px;
+
+  color: #6b7280;
+
+  line-height: 1.5;
+}
+
+
+/* CARDS */
+
+.info-card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 20px;
+
+  margin-bottom: 18px;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.08);
+}
+
+.info-card h2 {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.info-card h2 ion-icon {
 
   color: #f59e0b;
 
-  margin-bottom: 20px;
+  font-size: 22px;
 }
 
-h2 {
+.info-card p {
 
-  color: #111827;
-
-  font-weight: 700;
-}
-
-p {
+  margin: 10px 0;
 
   color: #374151;
 
-  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.info-card strong {
+
+  color: #111827;
+}
+
+
+/* PRESENÇA */
+
+.presenca-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 12px 0;
+
+  border-bottom:
+    1px solid #f3f4f6;
+}
+
+.presenca-item:last-child {
+
+  border-bottom: none;
+}
+
+.presenca-item span {
+
+  font-weight: 500;
+
+  color: #374151;
+}
+
+
+/* CONSULTA LIBERADA */
+
+.consulta-liberada-card {
+
+  margin-bottom: 18px;
+
+  border-left:
+    5px solid #10b981;
+}
+
+.consulta-liberada-card ion-card-content {
+
+  font-weight: 600;
+
+  color: #065f46;
+}
+
+
+/* AGUARDANDO */
+
+ion-card {
+
+  border-radius: 20px;
+
+  margin-bottom: 18px;
+}
+
+
+/* JITSI */
+
+#jitsi-container {
+
+  width: 100%;
+
+  min-height: 450px;
+
+  background: white;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.08);
+}
+
+
+/* BOTÕES */
+
+ion-button {
+
+  --border-radius: 18px;
+
+  height: 52px;
+
+  font-weight: 600;
+
+  text-transform: none;
+
+  margin-bottom: 12px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .container {
+
+    padding: 14px;
+
+    padding-bottom: calc(
+      env(safe-area-inset-bottom) + 100px
+    );
+  }
+
+  .hero-card {
+
+    padding: 22px 16px;
+  }
+
+  .hero-icon {
+
+    font-size: 54px;
+  }
+
+  .hero-card h1 {
+
+    font-size: 1.3rem;
+  }
+
+  #jitsi-container {
+
+    min-height: 350px;
+  }
+}
+
+
+/* CELULARES PEQUENOS */
+
+@media (max-width: 480px) {
+
+  .container {
+
+    padding: 12px;
+
+    padding-bottom: calc(
+      env(safe-area-inset-bottom) + 120px
+    );
+  }
+
+  .hero-card {
+
+    border-radius: 22px;
+  }
+
+  .info-card {
+
+    border-radius: 20px;
+
+    padding: 16px;
+  }
+
+  .presenca-item {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 8px;
+  }
+
+  #jitsi-container {
+
+    min-height: 280px;
+  }
+
+  ion-button {
+
+    height: 50px;
+  }
 }
