@@ -27,10 +27,12 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
   remoteStream?: MediaStream;
   chamadaIniciada = false;
   peerConnection!: RTCPeerConnection;
-  isPsicologo = false;  
+  isPsicologo = false;
 
   iceOferta: any[] = [];
   iceResposta: any[] = [];
+
+  answerCriada = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -85,8 +87,11 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
           consulta.offer &&
           !consulta.answer &&
           !this.isPsicologo &&
-          this.peerConnection
+          this.chamadaIniciada &&
+          this.peerConnection &&
+          !this.answerCriada
         ){
+          this.answerCriada = true;
 
           await this.criarAnswer(
             consulta.offer
@@ -114,7 +119,8 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
         if(
           consulta.iceCandidatesOferta &&
           !this.isPsicologo &&
-          this.peerConnection
+          this.peerConnection &&
+          this.peerConnection.remoteDescription
         ){
 
           for(
@@ -138,7 +144,8 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
         if(
           consulta.iceCandidatesResposta &&
           this.isPsicologo &&
-          this.peerConnection
+          this.peerConnection &&
+          this.peerConnection.remoteDescription
         ){
 
           for(
@@ -274,6 +281,9 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
           stream;
       }
 
+      this.iceOferta = [];
+      this.iceResposta = [];
+
       this.criarPeerConnection();
 
       stream.getTracks().forEach(track => {
@@ -365,8 +375,8 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
     }
   }
 
-  
-  
+
+
   criarPeerConnection(){
 
     const configuration = {
@@ -382,6 +392,10 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
       new RTCPeerConnection(configuration);
 
     this.peerConnection.ontrack = (event) => {
+
+      console.log(
+        'Vídeo remoto recebido'
+      );
 
       if(
         this.remoteVideo?.nativeElement
@@ -436,7 +450,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
       }
     };
   }
-    
+
 
 
 

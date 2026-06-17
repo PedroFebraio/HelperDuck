@@ -257,19 +257,58 @@
 
     <div *ngIf="consultaLiberada">
 
-      <ion-card class="consulta-liberada-card">
+      <!-- ANTES DE ENTRAR -->
 
-        <ion-card-content>
+      <div *ngIf="!chamadaIniciada">
 
-          ✅ Ambos os participantes confirmaram presença.
+        <ion-card class="consulta-liberada-card">
 
-        </ion-card-content>
+          <ion-card-content>
 
-      </ion-card>
+            ✅ Ambos os participantes confirmaram presença.
 
-      <!-- VÍDEOS -->
+          </ion-card-content>
 
-      <div class="videos-container">
+        </ion-card>
+
+        <ion-button
+
+          expand="block"
+
+          size="large"
+
+          color="warning"
+
+          (click)="entrarNaSala()">
+
+          <ion-icon
+            slot="start"
+            name="videocam-outline">
+          </ion-icon>
+
+          Entrar na Sala
+
+        </ion-button>
+
+      </div>
+
+      <!-- CHAMADA EM TELA CHEIA -->
+
+      <div
+        *ngIf="chamadaIniciada"
+        class="call-container">
+
+        <!-- NOME DO PARTICIPANTE -->
+
+        <div class="participant-name">
+
+          {{
+            tipoUsuario === 'usuario'
+            ? consulta.psicologoNome
+            : consulta.usuarioNome
+          }}
+
+        </div>
 
         <!-- VÍDEO REMOTO -->
 
@@ -277,85 +316,58 @@
           #remoteVideo
           autoplay
           playsinline
-          controls="false"
           class="remote-video">
         </video>
+
+        <!-- VÍDEO LOCAL -->
 
         <video
           #localVideo
           autoplay
           muted
           playsinline
-          controls="false"
           class="local-video">
         </video>
 
-        <ion-card>
+        <!-- CONTROLES -->
 
-          <ion-card-content>
+        <div class="call-controls">
 
-            <p>
-              Chamada iniciada:
-              {{ chamadaIniciada }}
-            </p>
+          <ion-button
+            shape="round">
 
-            <p>
-              Consulta liberada:
-              {{ consultaLiberada }}
-            </p>
+            <ion-icon
+              name="mic-outline">
+            </ion-icon>
 
-            <p>
-              Tipo:
-              {{ tipoUsuario }}
-            </p>
+          </ion-button>
 
-          </ion-card-content>
+          <ion-button
+            shape="round">
 
-        </ion-card>
+            <ion-icon
+              name="videocam-outline">
+            </ion-icon>
+
+          </ion-button>
+
+          <ion-button
+
+            color="danger"
+
+            shape="round"
+
+            (click)="sairDaConsulta()">
+
+            <ion-icon
+              name="call-outline">
+            </ion-icon>
+
+          </ion-button>
+
+        </div>
 
       </div>
-
-      <!-- ENTRAR -->
-
-      <ion-button
-
-        expand="block"
-
-        size="large"
-
-        color="warning"
-
-        (click)="entrarNaSala()">
-
-        <ion-icon
-          slot="start"
-          name="videocam-outline">
-        </ion-icon>
-
-        Entrar na Sala
-
-      </ion-button>
-
-      <!-- SAIR -->
-
-      <ion-button
-
-        expand="block"
-
-        fill="outline"
-
-        color="danger"
-
-        (click)="sairDaConsulta()">
-
-        <ion-icon
-          slot="start"
-          name="exit-outline">
-        </ion-icon>
-
-        Sair da Consulta
-
-      </ion-button>
 
     </div>
 
