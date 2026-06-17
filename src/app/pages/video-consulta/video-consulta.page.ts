@@ -33,6 +33,9 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
   iceResposta: any[] = [];
 
   answerCriada = false;
+  cameraLigada = true;
+  microfoneLigado = true;
+  candidatosRecebidos = new Set<string>();
 
   constructor(
     private route: ActivatedRoute,
@@ -123,21 +126,27 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
           this.peerConnection.remoteDescription
         ){
 
-          for(
-            const candidato
-            of consulta.iceCandidatesOferta
-          ){
+          for(const candidato of consulta.iceCandidatesOferta){
+
+            const chave = JSON.stringify(candidato);
+
+            if(this.candidatosRecebidos.has(chave)){
+              continue;
+            }
+
+            this.candidatosRecebidos.add(chave);
 
             try{
 
-              await this.peerConnection
-                .addIceCandidate(
-                  new RTCIceCandidate(
-                    candidato
-                  )
-                );
+              await this.peerConnection.addIceCandidate(
+                new RTCIceCandidate(candidato)
+              );
 
-            }catch{}
+            }catch(error){
+
+              console.log(error);
+
+            }
           }
         }
 
@@ -275,16 +284,59 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
 
       this.localStream = stream;
 
+      this.chamadaIniciada = true;
+
+      setTimeout(async () => {
+
+        if(this.localVideo?.nativeElement){
+
+          this.localVideo.nativeElement.srcObject = stream;
+
+          this.localVideo.nativeElement.muted = true;
+
+          await this.localVideo.nativeElement.play();
+
+          console.log('Vídeo local iniciado');
+        }
+
+      }, 500);
+
       if(this.localVideo?.nativeElement){
 
         this.localVideo.nativeElement.srcObject =
           stream;
+
+        this.localVideo.nativeElement.muted = true;
+
+        await this.localVideo.nativeElement.play();
+
+        console.log('Vídeo local iniciado');
       }
+      console.log(
+        'Tracks vídeo:',
+        stream.getVideoTracks().length
+      );
+
+      console.log(
+        'Tracks áudio:',
+        stream.getAudioTracks().length
+      );
 
       this.iceOferta = [];
       this.iceResposta = [];
 
       this.criarPeerConnection();
+
+        if(
+          !this.isPsicologo &&
+          this.consulta?.offer &&
+          !this.consulta?.answer
+        ){
+
+          await this.criarAnswer(
+            this.consulta.offer
+          );
+        }
 
       stream.getTracks().forEach(track => {
 
@@ -299,8 +351,6 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
         'Sala iniciada:',
         this.consultaId
       );
-
-      this.chamadaIniciada = true;
 
       if(this.isPsicologo){
 
@@ -360,6 +410,10 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
         iceCandidatesResposta: []
       }
     );
+
+    this.answerCriada = false;
+
+    this.candidatosRecebidos.clear();
   }
 
 
@@ -391,7 +445,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
     this.peerConnection =
       new RTCPeerConnection(configuration);
 
-    this.peerConnection.ontrack = (event) => {
+    this.peerConnection.ontrack = async (event) => {
 
       console.log(
         'Vídeo remoto recebido'
@@ -403,6 +457,8 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
 
         this.remoteVideo.nativeElement.srcObject =
           event.streams[0];
+
+          await this.remoteVideo.nativeElement.play();
       }
     };
 
@@ -448,6 +504,26 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
             this.iceResposta
           );
       }
+    };
+
+    this.peerConnection.oniceconnectionstatechange =
+    () => {
+
+      console.log(
+        'ICE:',
+        this.peerConnection.iceConnectionState
+      );
+
+    };
+
+    this.peerConnection.onicegatheringstatechange =
+    () => {
+
+      console.log(
+        'ICE Gathering:',
+        this.peerConnection.iceGatheringState
+      );
+
     };
   }
 
@@ -499,6 +575,52 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
 
     console.log(
       'Answer enviada'
+    );
+  }
+
+
+
+  toggleCamera() {
+
+    const videoTrack =
+      this.localStream?.getVideoTracks()[0];
+
+    if(!videoTrack){
+      return;
+    }
+
+    videoTrack.enabled =
+      !videoTrack.enabled;
+
+    this.cameraLigada =
+      videoTrack.enabled;
+
+    console.log(
+      'Câmera:',
+      this.cameraLigada
+    );
+  }
+
+
+
+  toggleMicrofone() {
+
+    const audioTrack =
+      this.localStream?.getAudioTracks()[0];
+
+    if(!audioTrack){
+      return;
+    }
+
+    audioTrack.enabled =
+      !audioTrack.enabled;
+
+    this.microfoneLigado =
+      audioTrack.enabled;
+
+    console.log(
+      'Microfone:',
+      this.microfoneLigado
     );
   }
 }

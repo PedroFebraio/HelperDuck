@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="!chamadaIniciada">
 
   <ion-toolbar color="warning">
 
@@ -35,8 +35,8 @@
   <!-- CONSULTA -->
 
   <div
-    *ngIf="!carregando && consulta"
-    class="container">
+    *ngIf="!carregando && consulta && !chamadaIniciada"
+  class="container">
 
     <!-- HERO -->
 
@@ -292,85 +292,80 @@
 
       </div>
 
-      <!-- CHAMADA EM TELA CHEIA -->
-
-      <div
-        *ngIf="chamadaIniciada"
-        class="call-container">
-
-        <!-- NOME DO PARTICIPANTE -->
-
-        <div class="participant-name">
-
-          {{
-            tipoUsuario === 'usuario'
-            ? consulta.psicologoNome
-            : consulta.usuarioNome
-          }}
-
-        </div>
-
-        <!-- VÍDEO REMOTO -->
-
-        <video
-          #remoteVideo
-          autoplay
-          playsinline
-          class="remote-video">
-        </video>
-
-        <!-- VÍDEO LOCAL -->
-
-        <video
-          #localVideo
-          autoplay
-          muted
-          playsinline
-          class="local-video">
-        </video>
-
-        <!-- CONTROLES -->
-
-        <div class="call-controls">
-
-          <ion-button
-            shape="round">
-
-            <ion-icon
-              name="mic-outline">
-            </ion-icon>
-
-          </ion-button>
-
-          <ion-button
-            shape="round">
-
-            <ion-icon
-              name="videocam-outline">
-            </ion-icon>
-
-          </ion-button>
-
-          <ion-button
-
-            color="danger"
-
-            shape="round"
-
-            (click)="sairDaConsulta()">
-
-            <ion-icon
-              name="call-outline">
-            </ion-icon>
-
-          </ion-button>
-
-        </div>
-
-      </div>
-
     </div>
 
   </div>
+
+  <!-- CHAMADA -->
+
+<div
+  *ngIf="chamadaIniciada"
+  class="call-container">
+
+  <div class="participant-name">
+
+    {{
+      tipoUsuario === 'usuario'
+      ? consulta.psicologoNome
+      : consulta.usuarioNome
+    }}
+
+  </div>
+
+  <video
+    #remoteVideo
+    autoplay
+    playsinline
+    class="remote-video">
+  </video>
+
+  <video
+    #localVideo
+    autoplay
+    muted
+    playsinline
+    class="local-video">
+  </video>
+
+  <div class="call-controls">
+
+    <ion-button
+      shape="round"
+      (click)="toggleMicrofone()">
+
+      <ion-icon
+        [name]="microfoneLigado
+        ? 'mic-outline'
+        : 'mic-off-outline'">
+      </ion-icon>
+
+    </ion-button>
+
+    <ion-button
+      shape="round"
+      (click)="toggleCamera()">
+
+      <ion-icon
+        [name]="cameraLigada
+        ? 'videocam-outline'
+        : 'videocam-off-outline'">
+      </ion-icon>
+
+    </ion-button>
+
+    <ion-button
+      color="danger"
+      shape="round"
+      (click)="sairDaConsulta()">
+
+      <ion-icon
+        name="call-outline">
+      </ion-icon>
+
+    </ion-button>
+
+  </div>
+
+</div>
 
 </ion-content>

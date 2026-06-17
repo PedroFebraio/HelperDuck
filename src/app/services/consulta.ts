@@ -238,19 +238,16 @@ export class ConsultaServices {
 
   async limparWebRTC(consultaId: string){
 
-    return await this.atualizarConsulta(
-      consultaId,
-      {
-
-        offer: null,
-
-        answer: null,
-
-        iceCandidates: []
-
-      }
-    );
-  }
+  return await this.atualizarConsulta(
+    consultaId,
+    {
+      offer: null,
+      answer: null,
+      iceCandidatesOferta: [],
+      iceCandidatesResposta: []
+    }
+  );
+}
 
 
 
