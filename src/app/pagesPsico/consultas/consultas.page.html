@@ -154,6 +154,25 @@
 
         </ion-segment-button>
 
+        <!-- FINALIZADAS -->
+
+        <ion-segment-button
+          value="finalizada">
+
+          <ion-label>
+
+            Finalizada
+
+            <span>
+              {{
+                consultasFinalizadas.length
+              }}
+            </span>
+
+          </ion-label>
+
+        </ion-segment-button>
+
       </ion-segment>
 
     </div>
@@ -320,6 +339,34 @@
 
         <div class="acoes">
 
+          <!-- Ver Detalhes -->
+          <ion-button
+            *ngIf="
+              consulta.status === 'pendente' ||
+              consulta.status === 'confirmada' ||
+              consulta.status === 'finalizada'
+            "
+
+            expand="block"
+
+            fill="outline"
+
+            color="primary"
+
+            [routerLink]="[
+              '/detalhes-consulta-psicologo',
+              consulta.id
+            ]">
+
+            <ion-icon
+              slot="start"
+              name="eye-outline">
+            </ion-icon>
+
+            Ver Detalhes
+
+          </ion-button>
+
 
           <!-- CONFIRMAR -->
 
@@ -351,41 +398,14 @@
           </ion-button>
 
 
-          <!-- Ver Detalhes -->
-          <ion-button
-            *ngIf="
-              consulta.status ===
-              'confirmada'
-            "
-
-            expand="block"
-
-            fill="outline"
-
-            color="primary"
-
-            [routerLink]="[
-              '/detalhes-consulta-psicologo',
-              consulta.id
-            ]">
-
-            <ion-icon
-              slot="start"
-              name="eye-outline">
-            </ion-icon>
-
-            Ver Detalhes
-
-          </ion-button>
-
 
           <!-- CANCELAR -->
 
           <ion-button
 
             *ngIf="
-              consulta.status !==
-              'cancelada'"
+              consulta.status ==='pendente' || 
+              consulta.status ==='confirmar' "
 
             expand="block"
 

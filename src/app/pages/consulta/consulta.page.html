@@ -17,34 +17,42 @@
 <ion-content class="consultas-content">
 
   <div class="container">
+    
     <!-- FILTRO -->
+    <div class="filtros-wrapper">
 
-    <ion-segment
-      [(ngModel)]="filtroStatus"
-      scrollable="true"
-      class="filtro-segment">
+      <ion-segment
+        [(ngModel)]="filtroStatus"
+        scrollable="true"
+        class="filtros-segment">
 
-      <ion-segment-button value="todos">
-        <ion-label>Todos</ion-label>
-      </ion-segment-button>
+        <ion-segment-button value="pendente">
+          <ion-label>Pendentes
+            <span>{{consultasPendentes.length}}</span>
+          </ion-label>
+        </ion-segment-button>
 
-      <ion-segment-button value="pendente">
-        <ion-label>Pendentes</ion-label>
-      </ion-segment-button>
+        <ion-segment-button value="confirmada">
+          <ion-label>Confirmadas
+            <span>{{consultasConfirmadas.length}}</span>
+          </ion-label>
+        </ion-segment-button>
 
-      <ion-segment-button value="confirmada">
-        <ion-label>Confirmadas</ion-label>
-      </ion-segment-button>
+        <ion-segment-button value="finalizada">
+          <ion-label>Finalizadas
+            <span>{{consultasFinalizadas.length}}</span>
+          </ion-label>
+        </ion-segment-button>
 
-      <ion-segment-button value="concluida">
-        <ion-label>Finalizadas</ion-label>
-      </ion-segment-button>
+        <ion-segment-button value="cancelada">
+          <ion-label>Canceladas
+            <span>{{consultasCanceladas.length}}</span>
+          </ion-label>
+        </ion-segment-button>
 
-      <ion-segment-button value="cancelada">
-        <ion-label>Canceladas</ion-label>
-      </ion-segment-button>
+      </ion-segment>
 
-    </ion-segment>
+    </div>
 
     <div
       *ngIf="consultas.length === 0"
@@ -90,7 +98,7 @@
               ? 'warning'
               : consulta.status === 'confirmada'
               ? 'primary'
-              : consulta.status === 'concluida'
+              : consulta.status === 'finalizada'
               ? 'success' : 'danger'">
 
           <ion-label>
@@ -98,7 +106,7 @@
             ? 'Pendente' : 
             consulta.status === 'confirmada'
              ? 'Confirmada' : 
-            consulta.status === 'concluida' 
+            consulta.status === 'finalizada' 
             ? 'Finalizada' : 'Cancelada' }}
           </ion-label>
 

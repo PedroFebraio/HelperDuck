@@ -95,6 +95,10 @@ const routes: Routes = [
     path: 'detalhes-consulta-psicologo/:id',
     loadChildren: () => import('./pagesPsico/detalhes-consulta/detalhes-consulta.module').then( m => m.DetalhesConsultaPageModule)
   },
+  {
+    path: 'fidelidade',
+    loadChildren: () => import('./pages/fidelidade/fidelidade.module').then( m => m.FidelidadePageModule)
+  },
 ];
 
 @NgModule({

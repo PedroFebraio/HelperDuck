@@ -133,6 +133,35 @@ export class PsicologoServices {
   
 
 
+  async buscarPsicologoPorId(id: string){
+
+    try{
+
+      const psicologoRef =
+        doc(this.firestore, `Psicologos/${id}`);
+
+      const psicologoSnap =
+        await getDoc(psicologoRef);
+
+      if(psicologoSnap.exists()){
+
+        return psicologoSnap.data();
+
+      }
+
+      return null;
+
+    }catch(error){
+
+      console.log(error);
+
+      return null;
+
+    }
+
+  }
+
+
   async atualizarPsicologo( id: string, 
     dados: Partial<Psicologo> ): Promise<boolean>{
 

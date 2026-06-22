@@ -148,16 +148,21 @@
 
 .ficha-item {
 
+  background: #f8fafc;
+
+  border-radius: 16px;
+
+  padding: 14px 16px;
+
+  margin-bottom: 12px;
+
   display: flex;
 
   justify-content: space-between;
 
   align-items: center;
 
-  padding: 14px 0;
-
-  border-bottom:
-    1px solid #f3f4f6;
+  border: 1px solid #e5e7eb;
 }
 
 .ficha-item:last-child {
@@ -283,6 +288,147 @@
   text-transform: none;
 
   margin-bottom: 20px;
+}
+
+/* REPUTAÇÃO */
+
+.card h1 {
+
+  margin: 0;
+
+  font-size: 2rem;
+
+  color: #f59e0b;
+
+  font-weight: 700;
+}
+
+.card > p {
+
+  color: #6b7280;
+
+  line-height: 1.5;
+}
+
+
+/* AVALIAÇÕES */
+
+.avaliacao-card {
+
+  background: #f8fafc;
+
+  border-radius: 18px;
+
+  padding: 16px;
+
+  margin-top: 14px;
+
+  border: 1px solid #e5e7eb;
+}
+
+.avaliacao-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+.avaliacao-header h3 {
+
+  margin: 0;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.avaliacao-header span {
+
+  font-weight: 700;
+
+  color: #f59e0b;
+
+  white-space: nowrap;
+}
+
+.avaliacao-data {
+
+  margin-top: 4px;
+
+  color: #6b7280;
+
+  font-size: .85rem;
+}
+
+.comentario {
+
+  margin: 0;
+
+  line-height: 1.6;
+
+  color: #374151;
+
+  font-style: italic;
+}
+
+
+/* REPUTAÇÃO DO PSICÓLOGO */
+
+.card h1 {
+
+  text-align: center;
+
+  margin-bottom: 8px;
+}
+
+.card p {
+
+  color: #6b7280;
+
+  text-align: center;
+}
+
+
+/* MELHORIA DA SALA */
+
+.sala-box {
+
+  background: #f8fafc;
+
+  border: 2px dashed #f59e0b;
+
+  border-radius: 18px;
+
+  padding: 18px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .avaliacao-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 8px;
+  }
+
+  .avaliacao-header span {
+
+    font-size: .95rem;
+  }
+
 }
 
 

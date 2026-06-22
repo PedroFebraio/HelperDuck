@@ -57,7 +57,8 @@
         ? 'success'
         : consulta.status === 'pendente'
         ? 'warning'
-        : 'danger'">
+        : consulta.status === 'finalizada'
+        ? 'primary' : 'danger'">
 
         <ion-label>
 
@@ -66,7 +67,8 @@
             ? 'Confirmada'
             : consulta.status === 'pendente'
             ? 'Pendente'
-            : 'Cancelada'
+            : consulta.status === 'finalizada' 
+            ? 'Finalizada' : 'Cancelada'
           }}
 
         </ion-label>
@@ -149,6 +151,106 @@
         </div>
 
       </div>
+
+    </div>
+
+    <div class="info-card" *ngIf="usuario">
+
+      <h2>
+        👤 Perfil do Paciente
+      </h2>
+
+      <div class="info-grid">
+
+        <div class="info-item">
+
+          <span>Nome</span>
+
+          <strong>
+            {{ usuario.nome }}
+          </strong>
+
+        </div>
+
+        <div class="info-item">
+
+          <span>Telefone</span>
+
+          <strong>
+            {{ usuario.telefone || 'Não informado' }}
+          </strong>
+
+        </div>
+
+        <div class="info-item">
+
+          <span>Pontos</span>
+
+          <strong>
+            {{ usuario.pontosFidelidade || 0 }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="info-card">
+
+      <h2>
+        ⭐ Reputação do Paciente
+      </h2>
+
+      <div *ngIf="avaliacoes.length > 0">
+
+        <h1>
+
+          ⭐ {{ mediaAvaliacoes | number:'1.1-1' }}
+
+        </h1>
+
+        <p>
+
+          Baseado em {{ avaliacoes.length }}
+          avaliações
+
+        </p>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length === 0">
+
+        Paciente ainda não possui avaliações.
+
+      </div>
+
+    </div>
+
+    <div class="info-card">
+
+      <h2>
+        📈 Histórico
+      </h2>
+
+      <ul>
+
+        <li>
+          Consultas realizadas:
+          {{ totalFinalizadas }}
+        </li>
+
+        <li>
+          Consultas canceladas:
+          {{ totalCanceladas }}
+        </li>
+
+        <li>
+          Consultas pendentes:
+          {{ totalPendentes }}
+        </li>
+
+      </ul>
 
     </div>
 
@@ -264,29 +366,12 @@
 
     </div>
 
-    <!-- OBSERVAÇÕES -->
-
-    <div class="info-card">
-
-      <h2>
-        📝 Observações
-      </h2>
-
-      <ion-textarea
-
-        placeholder="Espaço reservado para futuras evoluções da sessão."
-
-        readonly="true">
-
-      </ion-textarea>
-
-    </div>
-
     <!-- BOTÕES -->
 
     <ion-button
 
-      *ngIf="consulta.status === 'confirmada'"
+      *ngIf="consulta.status === 'confirmada'||
+        consulta.status === 'finalizada'"
 
       expand="block"
 
@@ -309,6 +394,8 @@
     </ion-button>
 
     <ion-button
+      *ngIf="consulta.status === 'confirmada'||
+        consulta.status === 'pendente'"
       expand="block"
       color="tertiary"
       routerLink="/consultas-psicologo">
@@ -316,6 +403,50 @@
       Alterar o status da consulta
 
     </ion-button>
+
+    <div class="info-card">
+
+      <h2>
+        ⭐ Avaliações do Usuário
+      </h2>
+
+      <div
+        class="avaliacao-card"
+        *ngFor="let avaliacao of avaliacoes">
+
+        <div class="avaliacao-header">
+
+          <div>
+
+            <h3>
+              {{ avaliacao.psicologoNome }}
+            </h3>
+
+            <div class="avaliacao-data">
+              {{ avaliacao.dataAvaliacao | date:'dd/MM/yyyy' }}
+            </div>
+
+          </div>
+
+          <span>
+            ⭐ {{ avaliacao.nota }}/5
+          </span>
+
+        </div>
+
+        <p class="comentario">
+          "{{ avaliacao.comentario }}"
+        </p>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length === 0">
+
+        Paciente ainda não possui avaliações.
+
+      </div>
+
+    </div>
 
   </div>
 

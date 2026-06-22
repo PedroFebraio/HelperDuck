@@ -1,0 +1,299 @@
+.fidelidade-content {
+
+  --background: #f5f7fb;
+
+  --padding-bottom: 80px;
+
+}
+
+
+/* CONTAINER */
+
+.container {
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 16px;
+
+  padding-bottom: calc(
+    env(safe-area-inset-bottom) + 100px
+  );
+
+}
+
+
+/* CARDS */
+
+.card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 22px;
+
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.05);
+
+}
+
+
+/* CARD PONTOS */
+
+.pontos-card {
+
+  background: linear-gradient(
+    135deg,
+    #f5b700,
+    #ffcc33
+  );
+
+  color: #1e293b;
+
+  text-align: center;
+
+}
+
+.pontos-card h1 {
+
+  margin: 0;
+
+  font-size: 2.3rem;
+
+  font-weight: 700;
+
+}
+
+.pontos-card p {
+
+  margin-top: 10px;
+
+  font-size: 1rem;
+
+}
+
+
+/* TÍTULOS */
+
+.card h2 {
+
+  margin-top: 0;
+
+  margin-bottom: 18px;
+
+  color: #111827;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+}
+
+
+/* BENEFÍCIOS */
+
+.beneficio-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 14px 0;
+
+  border-bottom: 1px solid #edf2f7;
+
+}
+
+.beneficio-item:last-child {
+
+  border-bottom: none;
+
+}
+
+.beneficio-item strong {
+
+  color: #111827;
+
+}
+
+.beneficio-item span {
+
+  color: #64748b;
+
+  font-weight: 600;
+
+}
+
+
+/* BOTÕES */
+
+ion-button {
+
+  margin-top: 12px;
+
+  height: 52px;
+
+  --border-radius: 18px;
+
+  text-transform: none;
+
+  font-weight: 600;
+
+}
+
+
+/* HISTÓRICO */
+
+.historico-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 16px 0;
+
+  border-bottom: 1px solid #edf2f7;
+
+}
+
+.historico-item:last-child {
+
+  border-bottom: none;
+
+}
+
+.historico-item strong {
+
+  display: block;
+
+  color: #111827;
+
+  margin-bottom: 4px;
+
+}
+
+.historico-item p {
+
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: .9rem;
+
+}
+
+
+/* SEM HISTÓRICO */
+
+.sem-historico {
+
+  text-align: center;
+
+  color: #94a3b8;
+
+  padding: 20px;
+
+}
+
+
+/* CHIP */
+
+ion-chip {
+
+  font-weight: 600;
+
+}
+
+
+/* TABLET */
+
+@media (max-width: 768px) {
+
+  .container {
+
+    padding: 14px;
+
+  }
+
+  .card {
+
+    padding: 20px;
+
+  }
+
+  .pontos-card h1 {
+
+    font-size: 2rem;
+
+  }
+
+}
+
+
+/* CELULAR */
+
+@media (max-width: 480px) {
+
+  .container {
+
+    padding: 12px;
+
+    padding-bottom: calc(
+      env(safe-area-inset-bottom) + 120px
+    );
+
+  }
+
+  .card {
+
+    padding: 18px;
+
+  }
+
+  .card h2 {
+
+    font-size: 1.1rem;
+
+  }
+
+  .pontos-card h1 {
+
+    font-size: 1.8rem;
+
+  }
+
+  .beneficio-item {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 6px;
+
+  }
+
+  .historico-item {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+  }
+
+  ion-chip {
+
+    margin-top: 8px;
+
+  }
+
+}

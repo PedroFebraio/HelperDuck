@@ -152,6 +152,87 @@
   font-weight: 700;
 }
 
+.resumo-avaliacoes{
+
+  text-align: center;
+
+  margin-bottom: 20px;
+}
+
+.nota-media{
+
+  font-size: 2.3rem;
+
+  font-weight: 800;
+
+  color: #f59e0b;
+
+  margin-bottom: 8px;
+}
+
+.avaliacao-card{
+
+  background: white;
+
+  border: 1px solid #222324;
+
+  border-radius: 20px;
+
+  padding: 20px;
+
+  margin-bottom: 16px;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,.06);
+}
+
+.avaliacao-header{
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 12px;
+}
+
+.avaliacao-header h3{
+
+  margin: 0;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.avaliacao-header span{
+
+  color: #f59e0b;
+
+  font-weight: 600;
+}
+
+.avaliacao-data{
+
+  font-size: 13px;
+
+  color: #6b7280;
+
+  margin-top: 4px;
+}
+
+.comentario{
+
+  color: #111827;
+
+  line-height: 1.6;
+
+  font-style: italic;
+}
+
 /* =========================
    INPUTS
 ========================= */
@@ -257,6 +338,8 @@ ion-button {
 .salvar-btn {
 
   margin-top: 20px;
+
+  margin-bottom: 20px;
 
   --background: #f59e0b;
 

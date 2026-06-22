@@ -13,7 +13,12 @@ export class ConsultaPage implements OnInit {
 
   usuario: any;
 
-  filtroStatus = 'todos';
+  filtroStatus = 'pendente';
+
+  consultasPendentes: any[] = [];
+  consultasConfirmadas: any[] = [];
+  consultasCanceladas: any[] = [];
+  consultasFinalizadas: any[] = [];
 
 
   constructor(
@@ -37,15 +42,23 @@ export class ConsultaPage implements OnInit {
     .subscribe((dados: any) => {
 
         this.consultas = dados;
+
+        this.consultasPendentes = this.consultas.filter(
+          consulta => consulta.status ==='pendente');
+
+        this.consultasConfirmadas = this.consultas.filter(
+          consulta => consulta.status === 'confirmada');
+
+        this.consultasCanceladas = this.consultas.filter(
+          consulta => consulta.status === 'cancelada');
+
+        this.consultasFinalizadas = this.consultas.filter(
+          consulta => consulta.status === 'finalizada');
       });
   }
 
 
   get consultasFiltradas() {
-
-    if(this.filtroStatus === 'todos'){
-    return this.consultas;
-  }
 
     return this.consultas.filter(
       consulta => consulta.status === this.filtroStatus

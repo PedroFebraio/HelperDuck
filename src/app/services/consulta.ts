@@ -28,13 +28,16 @@ export interface Consulta{
   finalizada?: boolean;
   duracaoConsulta?: number;
   duracaoReal?: number;
-  avaliacao?: number;
-  comentario?: string;
   createdAt?: number;
   offer?: any;
   answer?: any;
   iceCandidatesOferta?: any[];
   iceCandidatesResposta?: any[];
+  horaInicioConsulta?: string;
+  horaFimConsulta?: string;
+  ultimaAtividadeUsuario?: string;
+  ultimaAtividadePsicologo?: string;
+  pontosFidelidadeEntregues?: false
 }
 
 
@@ -201,6 +204,8 @@ export class ConsultaServices {
     }
   }
 
+  
+
 
   escutarConsulta(id: string){
 
@@ -269,6 +274,25 @@ export class ConsultaServices {
       consultaId,
       {
         iceCandidatesResposta: candidatos
+      }
+    );
+  }
+
+
+
+  async salvarAvaliacao(
+  consultaId: string,
+    dados: {
+      avaliacao: number;
+      comentario: string;
+    }
+  ){
+
+    return await this.atualizarConsulta(
+      consultaId,
+      {
+        ...dados,
+        dataAvaliacao: new Date().toISOString()
       }
     );
   }

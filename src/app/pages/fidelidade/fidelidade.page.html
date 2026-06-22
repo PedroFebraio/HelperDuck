@@ -1,0 +1,170 @@
+<ion-header>
+
+  <ion-toolbar color="warning">
+
+    <ion-buttons slot="start">
+
+      <ion-menu-button>
+      </ion-menu-button>
+
+    </ion-buttons>
+
+    <ion-title>
+
+      Fidelidade
+
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content class="fidelidade-content">
+
+  <div class="container">
+
+    
+    <!-- PONTOS -->
+    <div class="card pontos-card">
+
+      <h1>
+
+        ⭐ {{ pontos }}
+
+      </h1>
+
+      <p>
+
+        Pontos acumulados
+
+      </p>
+
+    </div>
+
+
+    <!-- BENEFÍCIOS -->
+    <div class="card">
+
+      <h2>
+        🎁 Benefícios disponíveis
+      </h2>
+
+      <div class="beneficio-item">
+
+        <strong>🎟 Cupom 10%</strong>
+
+        <span>
+          {{ beneficios.cupom10 }}
+        </span>
+
+      </div>
+
+      <div class="beneficio-item">
+
+        <strong>🎟 Cupom 25%</strong>
+
+        <span>
+          {{ beneficios.cupom25 }}
+        </span>
+
+      </div>
+
+      <div class="beneficio-item">
+
+        <strong>🎁 Consulta gratuita</strong>
+
+        <span>
+          {{ beneficios.consultaGratis }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- RESGATES -->
+    <div class="card">
+
+      <h2>
+        Resgatar benefícios
+      </h2>
+
+      <ion-button
+        expand="block"
+        color="success"
+        (click)="resgatarCupom10()">
+
+        Cupom 10% (300 pontos)
+
+      </ion-button>
+
+
+      <ion-button
+        expand="block"
+        color="warning"
+        (click)="resgatarCupom25()">
+
+        Cupom 25% (700 pontos)
+
+      </ion-button>
+
+
+      <ion-button
+        expand="block"
+        color="primary"
+        (click)="resgatarConsultaGratis()">
+
+        Consulta grátis (1000 pontos)
+
+      </ion-button>
+
+    </div>
+
+
+    <!-- HISTÓRICO -->
+    <div class="card">
+
+      <h2>
+        Histórico recente
+      </h2>
+
+      <div *ngIf="historico.length === 0">
+
+        Nenhuma movimentação encontrada.
+
+      </div>
+
+      <div
+        *ngFor="let item of historico">
+
+        <strong>
+          {{ item.descricao }}
+        </strong>
+
+        <p>
+          {{ item.dataMovimentacao |
+          date:'dd/MM/yyyy HH:mm' }}
+        </p>
+
+        <p>
+
+          {{ item.tipo === 'ganho'
+          ? '+'
+          : '-'
+          }}
+
+          {{ item.pontos }}
+
+          pontos
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

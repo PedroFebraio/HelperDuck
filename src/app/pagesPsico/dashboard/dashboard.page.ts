@@ -18,19 +18,68 @@ export class DashboardPage implements OnInit {
 
   ganhosMes = 0;
 
+  saudacao = '';
+
   proximasConsultas: any[] = [];
+
+  mensagens = [
+    'Hoje é uma oportunidade para transformar vidas 💙',
+    'Seu trabalho faz diferença todos os dias 🌱',
+    'Cada atendimento é uma conquista para alguém 🧠',
+    'Cuidar de pessoas é uma missão especial ✨'
+  ];
+
+  mensagemMotivacional = '';
+
+  consultasRealizadas = 0;
+
+  ticketMedio = 0;
+
+  historicoRecente: any[] = [];
+
+  proximaConsulta: any = null;
+
+  // Futuro
+  avaliacaoMedia = 0;
 
   constructor(
     private app: AppComponent,
     private consultaServices: ConsultaServices
   ) {}
 
-  ngOnInit() {
+
+
+  async ngOnInit() {
     this.app.carregarUsuario();
 
     this.psicologo = JSON.parse(
       localStorage.getItem('psicologo') || '{}'
     );
+
+    const hora = new Date().getHours();
+
+    if (hora < 12) {
+
+      this.saudacao = 'Bom dia';
+
+    }
+    else if (hora < 18) {
+
+      this.saudacao = 'Boa tarde';
+
+    }
+    else {
+
+      this.saudacao = 'Boa noite';
+
+    }
+
+    this.mensagemMotivacional =
+    this.mensagens[
+    Math.floor(
+    Math.random() * this.mensagens.length
+    )
+    ];
 
     this.carregarDashboard();
   }
@@ -42,7 +91,7 @@ export class DashboardPage implements OnInit {
     this.consultaServices.listarConsultasPsicologo(this.psicologo.id)
       .subscribe((consultas: any[]) => {
 
-      const hoje = new Date();
+      const agora = new Date();
 
       /* CONSULTAS DE HOJE */
 
@@ -51,7 +100,7 @@ export class DashboardPage implements OnInit {
         const data = new Date(c.dataConsulta);
 
         return (
-          data.toDateString() === hoje.toDateString()
+          data.toDateString() === agora.toDateString()
           && c.status === 'confirmada'
         );
 
@@ -64,25 +113,46 @@ export class DashboardPage implements OnInit {
 
       this.totalPacientes = pacientesUnicos.size;
 
+      this.consultasRealizadas =
+        consultas.filter(c =>
+        c.status === 'finalizada'
+        ).length;
+
 
         /* GANHOS */
 
       this.ganhosMes = consultas.filter(c => c.status === 'finalizada')
         .reduce((total, c) => total + Number(c.valorConsulta), 0);
 
+        if (this.consultasRealizadas > 0) {
+
+          this.ticketMedio =
+            this.ganhosMes / this.consultasRealizadas;
+
+        }
+        else {
+
+          this.ticketMedio = 0;
+
+        }
+
+        this.historicoRecente = [...consultas]
+        .filter(c => c.status === 'finalizada')
+        .sort((a,b) =>
+        new Date(b.dataConsulta).getTime() -
+        new Date(a.dataConsulta).getTime()
+        )
+        .slice(0,3);
 
       /* PRÓXIMAS CONSULTAS */
 
-      this.proximasConsultas = consultas.filter(c => {
+      const consultasFuturas = consultas
+      .filter(c => {
 
         const data = new Date(c.dataConsulta);
 
-        const hoje = new Date();
-
-        hoje.setHours(0,0,0,0);
-
         return (
-          data >= hoje &&
+          data >= agora &&
           (
             c.status === 'pendente' ||
             c.status === 'confirmada'
@@ -91,10 +161,23 @@ export class DashboardPage implements OnInit {
 
       })
       .sort((a,b) =>
-        new Date(a.dataConsulta).getTime() -
-        new Date(b.dataConsulta).getTime()
-      )
-      .slice(0,5);
-    });
+      new Date(a.dataConsulta).getTime() -
+      new Date(b.dataConsulta).getTime()
+      );
+
+      this.proximasConsultas =
+      consultasFuturas.slice(0,5);
+
+      if (consultasFuturas.length > 0) {
+
+        this.proximaConsulta = consultasFuturas[0];
+
+      }
+      else {
+
+        this.proximaConsulta = null;
+
+      }
+    })
   }
 }

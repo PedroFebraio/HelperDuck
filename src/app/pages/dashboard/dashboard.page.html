@@ -1,20 +1,21 @@
 <ion-header>
   <ion-toolbar color="warning">
-
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
     <ion-title>TheHelperDuck</ion-title>
-
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="dashboard-content" >
+<ion-content class="dashboard-content">
   <div class="dashboard-container">
 
-    <!-- PERFIL -->
+    <!-- ===================== -->
+    <!-- SAUDAÇÃO -->
+    <!-- ===================== -->
     <div class="card profile-card">
+
       <div class="profile-header">
 
         <div class="duck-icon">
@@ -22,102 +23,162 @@
         </div>
 
         <div class="profile-info">
-          <h2>Bem-vindo, {{ usuario.nome }}!</h2>
-        </div>
-      </div>
 
-      <!-- STATUS -->
-      <div class="stats-grid">
-        <div class="stat-card blue">
-          <div class="emoji">🏆</div>
+          <div class="motivacao-card">
 
-          <p>Duck Points</p>
+            <h2>
+              {{ saudacao }}, {{ usuario.nome }}!
+            </h2>
 
-          <h3>{{ usuario.pontosFidelidade }}</h3>
-          
-          <p>Pontos de fidelidade</p>
-          
+            <p>
+              ✨ {{ mensagemMotivacional }}
+            </p>
+
+          </div>
+
         </div>
 
-        <div class="stat-card green">
-          <div class="emoji">📅</div>
-          <h3>{{quantidadeConsultas}}</h3>
-
-          <p>Consultas agendadas</p>
-        </div>
-
-        <div class="stat-card purple">
-          <div class="emoji">📈</div>
-
-          <h3>85%</h3>
-
-          <p>Taxa de continuidade</p>
-        </div>
-      </div>
-
-      <!-- HUMOR -->
-      <div class="mood-section">
-        <div class="mood-duck">
-          🦆
-        </div>
-
-        <h3>
-          Como você está se sentindo hoje?
-        </h3>
-
-        <div class="container-botoes">
-          <ion-button
-            expand="block"
-            color="success"
-            [disabled]="humorRegistrado"
-            (click)="selecionarHumor('bem')">
-
-            😊 Bem
-
-          </ion-button>
-
-          <ion-button
-            expand="block"
-            color="warning"
-            [disabled]="humorRegistrado"
-            (click)="selecionarHumor('neutro')">
-
-            😐 Neutro
-
-          </ion-button>
-
-          <ion-button
-            expand="block"
-            color="danger"
-            [disabled]="humorRegistrado"
-            (click)="selecionarHumor('mal')">
-
-            😞 Mal
-
-          </ion-button>
-        </div>
-
-        <p
-        class="mensagem-humor"
-        *ngIf="mensagemHumor">
-
-        {{ this.mensagemHumor }}
-        </p>
-
-        
       </div>
 
     </div>
 
 
-    <!-- PRÓXIMAS CONSULTAS -->
-      <div
-        class="proximas-consultas"
-        *ngIf="consultasProximas.length > 0">
+    <!-- ===================== -->
+    <!-- ESTATÍSTICAS -->
+    <!-- ===================== -->
+    <div class="stats-grid">
 
-        <h3>
-          📅 Próximas Consultas
-        </h3>
+      <div class="stat-card blue">
+        <div class="emoji">🏆</div>
+
+        <p>Duck Points</p>
+
+        <h3>{{ usuario.pontosFidelidade }}</h3>
+
+        <p>Pontos de fidelidade</p>
+      </div>
+
+
+      <div class="stat-card green">
+        <div class="emoji">✅</div>
+
+        <h3>{{ consultasRealizadas }}</h3>
+
+        <p>Consultas realizadas</p>
+      </div>
+
+
+      <div class="stat-card orange">
+        <div class="emoji">🧠</div>
+
+        <h3>{{ psicologosAtendidos }}</h3>
+
+        <p>Psicólogos atendidos</p>
+      </div>
+
+    </div>
+
+
+    <!-- ===================== -->
+    <!-- HUMOR -->
+    <!-- ===================== -->
+    <div class="card mood-section">
+
+      <div class="mood-duck">
+        🦆
+      </div>
+
+      <h3>
+        Como você está se sentindo hoje?
+      </h3>
+
+      <div class="container-botoes">
+
+        <ion-button
+          expand="block"
+          color="success"
+          [disabled]="humorRegistrado"
+          (click)="selecionarHumor('bem')">
+
+          😊 Bem
+
+        </ion-button>
+
+
+        <ion-button
+          expand="block"
+          color="warning"
+          [disabled]="humorRegistrado"
+          (click)="selecionarHumor('neutro')">
+
+          😐 Neutro
+
+        </ion-button>
+
+
+        <ion-button
+          expand="block"
+          color="danger"
+          [disabled]="humorRegistrado"
+          (click)="selecionarHumor('mal')">
+
+          😞 Mal
+
+        </ion-button>
+
+      </div>
+
+      <p
+        class="mensagem-humor"
+        *ngIf="mensagemHumor">
+
+        {{ mensagemHumor }}
+
+      </p>
+
+      <p
+        class="humor-registrado"
+        *ngIf="humorRegistrado">
+
+        Humor registrado hoje ✅
+
+      </p>
+
+    </div>
+
+
+    <!-- ===================== -->
+    <!-- PRÓXIMA CONSULTA -->
+    <!-- ===================== -->
+    <div
+      class="card consulta-destaque"
+      *ngIf="consultasProximas.length > 0">
+
+      <h3>
+        ⏰ Próxima consulta
+      </h3>
+
+      <h2>
+        {{ consultasProximas[0].psicologoNome }}
+      </h2>
+
+      <p>
+        {{ consultasProximas[0].dataConsulta | date:'dd/MM/yyyy HH:mm' }}
+      </p>
+
+    </div>
+
+
+    <!-- ===================== -->
+    <!-- PRÓXIMAS CONSULTAS -->
+    <!-- ===================== -->
+    <div class="card proximas-consultas">
+
+      <h3>
+        📅 Próximas consultas
+      </h3>
+
+      <ng-container *ngIf="consultasProximas.length > 0">
 
         <ion-card
           class="consulta-card"
@@ -135,6 +196,18 @@
 
               {{ consulta.dataConsulta | date:'dd/MM/yyyy HH:mm' }}
 
+            </p>
+
+            <p>
+              <ion-icon name="videocam-outline"></ion-icon>
+
+              Consulta online
+            </p>
+
+            <p>
+              <ion-icon name="calendar-outline"></ion-icon>
+
+              {{ consulta.especialidade }}
             </p>
 
             <ion-chip
@@ -158,7 +231,7 @@
               size="small"
               [routerLink]="['/detalhes-consulta', consulta.id]">
 
-              Ver Detalhes
+              Ver detalhes
 
             </ion-button>
 
@@ -166,45 +239,105 @@
 
         </ion-card>
 
-      </div>
+      </ng-container>
+
 
       <div
-      class="proximas-consultas"
-      *ngIf="consultasProximas.length === 0">
+        class="sem-consultas-dashboard"
+        *ngIf="consultasProximas.length === 0">
 
-      <h3>
-        📅 Próximas Consultas
-      </h3>
-
-      <p class="sem-consultas-dashboard">
         Você não possui consultas agendadas no momento.
-      </p>
+
+      </div>
 
     </div>
-    
 
+
+    <!-- ===================== -->
+    <!-- HISTÓRICO -->
+    <!-- ===================== -->
+    <div class="card historico-card">
+
+      <h3>
+        🕒 Histórico recente
+      </h3>
+
+      <div
+        class="historico-item"
+        *ngFor="let consulta of historicoRecente">
+
+        <div class="historico-icone">
+          ✅
+        </div>
+
+        <div class="historico-info">
+
+          <h4>
+            {{ consulta.psicologoNome }}
+          </h4>
+
+          <p>
+            {{ consulta.dataConsulta | date:'dd/MM/yyyy HH:mm' }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================== -->
     <!-- PROGRESSO -->
+    <!-- ===================== -->
     <div class="progress-card">
+
       <div class="progress-header">
+
         <div class="heart-icon">
           💛
         </div>
 
         <div>
+
           <h3>
             Continue sua jornada!
           </h3>
 
           <p>
-            Continue ganhando Duck Points para uma consulta gratuita
+
+            {{ usuario.pontosFidelidade }}/1000 pontos
+
           </p>
+
+          <p>
+
+            Faltam
+            {{ 1000 - usuario.pontosFidelidade }}
+            pontos para uma consulta gratuita 🦆
+
+          </p>
+
         </div>
+
       </div>
 
       <ion-progress-bar
         [value]="usuario.pontosFidelidade / 1000">
+
       </ion-progress-bar>
 
     </div>
+
+
+    <!-- ===================== -->
+    <!-- RODAPÉ -->
+    <!-- ===================== -->
+    <div class="footer-dashboard">
+
+      🦆 Cada pequeno passo é uma conquista.
+
+    </div>
+
   </div>
 </ion-content>

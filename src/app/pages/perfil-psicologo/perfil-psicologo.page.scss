@@ -163,6 +163,85 @@
     0 6px 18px rgba(0,0,0,.06);
 }
 
+.resumo-avaliacoes{
+
+  text-align: center;
+}
+
+.nota-media{
+
+  font-size: 2.3rem;
+
+  font-weight: 800;
+
+  color: #f59e0b;
+
+  margin-bottom: 8px;
+}
+
+.avaliacao-card{
+
+  background: white;
+
+  border: 1px solid #111827;
+
+  border-radius: 20px;
+
+  padding: 20px;
+
+  margin-bottom: 16px;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,.06);
+}
+
+.avaliacao-header{
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 12px;
+}
+
+.avaliacao-header h3{
+
+  margin: 0;
+
+  font-size: 16px;
+
+  color: #111827;
+
+  font-weight: 700;
+}
+
+.avaliacao-header span{
+
+  color: #f59e0b;
+
+  font-weight: 600;
+}
+
+.comentario{
+
+  color: #4b5563;
+
+  line-height: 1.6;
+
+  font-style: italic;
+}
+
+.avaliacao-data{
+
+  font-size: 13px;
+
+  color: #6b7280;
+
+  font-weight: 500;
+}
+
 /* =========================
    TÍTULOS
 ========================= */
@@ -288,6 +367,8 @@ ion-datetime {
 .agendar-btn {
 
   margin-top: 10px;
+
+  margin-bottom: 20px;
 
   height: 56px;
 

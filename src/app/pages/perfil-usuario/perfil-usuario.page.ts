@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ToastController } from '@ionic/angular';
+import { AvalicaoServices } from 'src/app/services/avalicao';
 
 import {
   DataServices,
@@ -20,10 +21,13 @@ implements OnInit {
 
   usuario!: Usuario;
   dataNascimentoFormatada = '';
+  avaliacoes: any[] = [];
+  mediaAvaliacoes = 0;
 
   constructor(
     private dataServices: DataServices,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private avaliacaoService: AvalicaoServices
   ) {}
 
 
@@ -44,6 +48,25 @@ implements OnInit {
     }
 
     this.usuario = JSON.parse(usuarioStorage);
+
+    this.avaliacaoService
+    .buscarAvaliacoesUsuario(this.usuario.id!)
+    .subscribe((dados: any[]) => {
+
+      this.avaliacoes = dados;
+
+      if(this.avaliacoes.length > 0){
+
+        const soma = this.avaliacoes.reduce(
+          (total, a) => total + a.nota,
+          0
+        );
+
+        this.mediaAvaliacoes =
+          soma / this.avaliacoes.length;
+      }
+
+    });
 
     const timestamp: any = this.usuario.dataNascimento;
 

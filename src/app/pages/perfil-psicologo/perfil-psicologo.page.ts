@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 import { Agenda, AgendaServices } from 'src/app/services/agenda';
+import { AvalicaoServices } from 'src/app/services/avalicao';
 import { Consulta, ConsultaServices } from 'src/app/services/consulta';
+import { DataServices } from 'src/app/services/data';
 
 import { PsicologoServices }
 from 'src/app/services/psicologo';
@@ -23,6 +25,9 @@ export class PerfilPsicologoPage implements OnInit {
   carregando = true;
   dataConsulta = ''
   dataMinima = '';
+  avaliacoes: any[] = [];
+  mediaAvaliacoes = 0;
+  usarConsultaGratis = false;
 
   ordemDias = [
     'segunda',
@@ -35,12 +40,15 @@ export class PerfilPsicologoPage implements OnInit {
   ];
 
   constructor(
-    private route: ActivatedRoute,
-    private psicologoServices: PsicologoServices,
-    private consultaServices: ConsultaServices,
-    private agendaServices: AgendaServices,
-    private toastController: ToastController
-  ) {}
+  private route: ActivatedRoute,
+  private psicologoServices: PsicologoServices,
+  private consultaServices: ConsultaServices,
+  private agendaServices: AgendaServices,
+  private toastController: ToastController,
+  private avaliacaoService: AvalicaoServices,
+  private alertController: AlertController,
+  private dataServices: DataServices
+) {}
 
 
   ngOnInit() {
@@ -55,18 +63,43 @@ export class PerfilPsicologoPage implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
 
     if(id){
-      this.psicologoServices.buscarPsicologo(id).subscribe( async (dados: any) => {
+
+    this.psicologoServices.buscarPsicologo(id)
+      .subscribe(async (dados: any) => {
+
         this.psicologo = dados;
 
         this.agenda = await this.agendaServices.buscarAgenda(id);
 
         if(this.agenda){
-          this.agenda.diasDisponiveis = this.ordenarDias(this.agenda.diasDisponiveis);
+          this.agenda.diasDisponiveis =
+            this.ordenarDias(this.agenda.diasDisponiveis);
         }
-        
+
+        this.avaliacaoService
+          .buscarAvaliacoesPsicologo(id)
+          .subscribe((dados: any) => {
+
+            this.avaliacoes = dados;
+
+            if(this.avaliacoes.length > 0){
+
+              const soma =
+                this.avaliacoes.reduce(
+                  (total, a) => total + a.nota,
+                  0
+                );
+
+              this.mediaAvaliacoes =
+                soma / this.avaliacoes.length;
+            }
+
+          });
+
         this.carregando = false;
+
       });
-    }
+  }
   }
 
 
@@ -146,6 +179,7 @@ export class PerfilPsicologoPage implements OnInit {
 
   async agendarConsulta(){
 
+
     const agora = new Date();
 
     const dataSelecionada =
@@ -186,13 +220,25 @@ export class PerfilPsicologoPage implements OnInit {
       return;
     }
 
+    let valorConsulta = this.psicologo.valorConsulta;
+
+    this.usarConsultaGratis = false;
+
+    await this.perguntarConsultaGratis();
+
+    if(this.usarConsultaGratis){
+
+      valorConsulta = 0;
+
+    }
+
     const consulta: Consulta = {
       usuarioId: this.usuario.id,
       usuarioNome: this.usuario.nome,
       psicologoId: this.psicologo.id,
       psicologoNome: this.psicologo.nome,
       dataConsulta: this.dataConsulta,
-      valorConsulta: this.psicologo.valorConsulta,
+      valorConsulta: valorConsulta,
       status: 'pendente'
     };
 
@@ -201,6 +247,17 @@ export class PerfilPsicologoPage implements OnInit {
 
       if(consultaCriada){
         this.presentToast('Consulta agendada!', 'success');
+
+        if(this.usarConsultaGratis){
+
+          await this.dataServices.atualizarUsuario(
+            this.usuario.id,
+            {
+              consultasGratis: this.usuario.consultaGratis - 1
+            }
+          );
+
+        }
 
       } else {
         this.presentToast('Erro ao agendar consulta.', 'danger');
@@ -224,5 +281,47 @@ export class PerfilPsicologoPage implements OnInit {
     });
 
     toast.present();
+  }
+
+
+
+
+  async perguntarConsultaGratis() {
+    if(this.usuario.consultaGratis <= 0){
+      return false;
+    }
+
+    const alert = await this.alertController.create({
+
+      header: 'Consulta gratuita 🎁',
+
+      message:
+        'Você possui uma consulta gratuita disponível. Deseja utilizá-la nesta consulta?',
+
+      buttons: [
+
+        {
+          text: 'Não',
+          role: 'cancel'
+        },
+
+        {
+          text: 'Sim',
+          handler: () => {
+
+            this.usarConsultaGratis = true;
+
+          }
+        }
+
+      ]
+
+    });
+
+    await alert.present();
+
+    await alert.onDidDismiss();
+
+    return this.usarConsultaGratis;
   }
 }

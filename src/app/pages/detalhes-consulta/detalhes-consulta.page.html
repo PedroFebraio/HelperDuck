@@ -64,6 +64,8 @@
           ? 'success'
           : consulta.status === 'pendente'
           ? 'warning'
+          : consulta.status === 'finalizada'
+          ? 'primary'
           : 'danger'
         ">
 
@@ -74,7 +76,8 @@
             ? 'Confirmada'
             : consulta.status === 'pendente'
             ? 'Pendente'
-            : 'Cancelada'
+            : consulta.status === 'finalizada' 
+            ? 'Finalizada' : 'Cancelada'
           }}
 
         </ion-label>
@@ -164,6 +167,91 @@
           {{ consulta.valorConsulta }}
 
         </strong>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon name="person-outline"></ion-icon>
+
+        <h2>
+          Perfil do Psicólogo
+        </h2>
+
+      </div>
+
+      <div class="ficha-item">
+
+        <span>Nome</span>
+
+        <strong>
+          {{ psicologo.nome }}
+        </strong>
+
+      </div>
+
+      <div class="ficha-item">
+
+        <span>CRP</span>
+
+        <strong>
+          {{ psicologo.crp }}
+        </strong>
+
+      </div>
+
+      <div class="ficha-item">
+
+        <span>Especialidades</span>
+
+        <strong>
+          {{ psicologo.especialidades?.join(', ') }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon name="star-outline"></ion-icon>
+
+        <h2>
+          Reputação do Psicólogo
+        </h2>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length > 0">
+
+        <h1>
+
+          ⭐ {{ mediaAvaliacoes | number:'1.1-1' }}
+
+        </h1>
+
+        <p>
+
+          Baseado em {{ avaliacoes.length }}
+          avaliações
+
+        </p>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length === 0">
+
+        Este psicólogo ainda não possui avaliações.
 
       </div>
 
@@ -278,8 +366,8 @@
     <ion-button
 
       *ngIf="
-        consulta.status ===
-        'confirmada'
+        consulta.status === 'confirmada' ||
+        consulta.status === 'finalizada'
       "
 
       expand="block"
@@ -303,6 +391,58 @@
       Entrar na Consulta
 
     </ion-button>
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+
+        <h2>
+          Avaliações dos Pacientes
+        </h2>
+
+      </div>
+
+      <div
+        class="avaliacao-card"
+        *ngFor="let avaliacao of avaliacoes">
+
+        <div class="avaliacao-header">
+
+          <div>
+
+            <h3>
+
+              {{ avaliacao.usuarioNome }}
+
+            </h3>
+
+            <div class="avaliacao-data">
+
+              {{ avaliacao.dataAvaliacao | date:'dd/MM/yyyy' }}
+
+            </div>
+
+          </div>
+
+          <span>
+
+            ⭐ {{ avaliacao.nota }}/5
+
+          </span>
+
+        </div>
+
+        <p class="comentario">
+
+          "{{ avaliacao.comentario }}"
+
+        </p>
+
+      </div>
+
+    </div>
 
   </div>
 

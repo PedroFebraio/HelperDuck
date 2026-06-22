@@ -274,6 +274,134 @@ ion-button {
   margin-bottom: 12px;
 }
 
+/* =========================
+   REPUTAÇÃO
+========================= */
+
+.info-card h1 {
+
+  margin: 0;
+
+  font-size: 2rem;
+
+  font-weight: 800;
+
+  color: #111827;
+}
+
+.info-card p {
+
+  color: #4b5563;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   HISTÓRICO
+========================= */
+
+.info-card ul {
+
+  color: #111827;
+}
+
+.info-card li {
+
+  color: #374151;
+
+  margin-bottom: 10px;
+}
+
+
+/* =========================
+   AVALIAÇÕES
+========================= */
+
+.avaliacao-card {
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 20px;
+
+  margin-bottom: 16px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,.06);
+}
+
+.avaliacao-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  margin-bottom: 12px;
+}
+
+.avaliacao-header h3 {
+
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+.avaliacao-header span {
+
+  color: #111827;
+
+  font-weight: 700;
+
+  font-size: 15px;
+}
+
+.avaliacao-data {
+
+  margin-top: 4px;
+
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+.comentario {
+
+  margin: 0;
+
+  color: #4b5563;
+
+  line-height: 1.6;
+
+  font-style: italic;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .avaliacao-header {
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    align-items: flex-start;
+  }
+
+}
 
 /* TABLET */
 

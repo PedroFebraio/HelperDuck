@@ -241,6 +241,89 @@
 
     </ion-button>
 
+    <!-- AVALIAÇÕES -->
+    <ion-card class="ion-margin-top">
+
+      <ion-card-header>
+
+        <ion-card-title>
+
+          Avaliações Recebidas
+
+        </ion-card-title>
+
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <div
+          *ngIf="avaliacoes.length > 0"
+          class="resumo-avaliacoes">
+
+          <div class="nota-media">
+
+            ⭐ {{ mediaAvaliacoes | number:'1.1-1' }}
+
+          </div>
+
+          <p>
+
+            Baseado em
+            {{ avaliacoes.length }}
+            avaliações
+
+          </p>
+
+        </div>
+
+        <div
+          *ngFor="let avaliacao of avaliacoes"
+          class="avaliacao-card">
+
+          <div class="avaliacao-header">
+
+            <div>
+
+              <h3>
+
+                {{ avaliacao.usuarioNome }}
+
+              </h3>
+
+              <div class="avaliacao-data">
+
+                {{ avaliacao.dataAvaliacao | date:'dd/MM/yyyy' }}
+
+              </div>
+
+            </div>
+
+            <span>
+
+              ⭐ {{ avaliacao.nota }}/5
+
+            </span>
+
+          </div>
+
+          <p class="comentario">
+
+            "{{ avaliacao.comentario }}"
+
+          </p>
+
+        </div>
+
+        <div *ngIf="avaliacoes.length === 0">
+
+          Ainda não há avaliações.
+
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
   </form>
 
 </ion-content>

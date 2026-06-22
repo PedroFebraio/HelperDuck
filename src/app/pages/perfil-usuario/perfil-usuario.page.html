@@ -42,6 +42,41 @@
 
     </div>
 
+    <!-- REPUTAÇÃO -->
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon name="star-outline">
+        </ion-icon>
+
+        <h2>
+          Minha Reputação
+        </h2>
+
+      </div>
+
+      <div class="estatistica">
+
+        <h3>
+
+          ⭐ {{ mediaAvaliacoes | number:'1.1-1' }}
+
+        </h3>
+
+        <p>
+
+          avaliações recebidas
+          {{ avaliacoes.length }}
+          
+
+        </p>
+
+      </div>
+
+    </div>
+
     <!-- DADOS PESSOAIS -->
 
     <div class="card">
@@ -152,12 +187,12 @@
       </div>
 
       <ion-chip
-        [color]="usuario.consultaGratisUsada ? 'danger' : 'success'">
+        [color]="usuario.consultasGratis ? 'danger' : 'success'">
 
         <ion-label>
 
           {{
-            usuario.consultaGratisUsada
+            usuario.consultasGratis
             ? 'Consulta Gratuita Utilizada'
             : 'Consulta Gratuita Disponível'
           }}
@@ -189,7 +224,7 @@
         <ion-button
           expand="block"
           fill="outline"
-          routerLink="/consultas">
+          routerLink="/minhas-consulta">
 
           Ver Minhas Consultas
 
@@ -224,7 +259,7 @@
       <ion-button
         expand="block"
         fill="outline"
-        routerLink="/recompensas">
+        routerLink="/fidelidade">
 
         Ver Recompensas
 
@@ -271,6 +306,79 @@
       Salvar Alterações
 
     </ion-button>
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon name="star-outline">
+        </ion-icon>
+
+        <h2>
+          Comentários
+        </h2>
+
+      </div>
+
+      <!-- COMENTÁRIOS RECEBIDOS -->
+      <div *ngIf="avaliacoes.length > 0" class="resumo-avaliacoes">
+
+        <div class="nota-media">
+          ⭐ {{ mediaAvaliacoes | number:'1.1-1' }}
+        </div>
+
+        <p>
+          Baseado em {{ avaliacoes.length }}
+          avaliações
+        </p>
+
+      </div>
+
+      <div
+        class="avaliacao-card"
+        *ngFor="let avaliacao of avaliacoes">
+
+        <div class="avaliacao-header">
+
+          <div>
+
+            <h3>
+              {{ avaliacao.psicologoNome }}
+            </h3>
+
+            <div class="avaliacao-data">
+              {{ avaliacao.dataAvaliacao | date:'dd/MM/yyyy' }}
+            </div>
+
+          </div>
+
+          <span>
+            ⭐ {{ avaliacao.nota }}/5
+          </span>
+
+        </div>
+
+        <p class="comentario">
+          "{{ avaliacao.comentario }}"
+        </p>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length === 0">
+
+        <p>
+          Ainda não há avaliações.
+        </p>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length === 0">
+
+        <p>Ainda não há avaliações.</p>
+
+      </div>
+
+    </div>
 
   </div>
 

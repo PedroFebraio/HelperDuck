@@ -15,7 +15,8 @@ export class ConsultasPage implements OnInit {
   consultasPendentes: any[] = [];
   consultasConfirmadas: any[] = [];
   consultasCanceladas: any[] = [];
-  
+  consultasFinalizadas: any[] = [];
+
   psicologo: any;
 
   carregando = true;
@@ -58,6 +59,9 @@ export class ConsultasPage implements OnInit {
 
       this.consultasCanceladas = this.consultas.filter(
         consulta => consulta.status === 'cancelada');
+
+      this.consultasFinalizadas = this.consultas.filter(
+        consulta => consulta.status === 'finalizada');
 
       this.carregando = false;
     });

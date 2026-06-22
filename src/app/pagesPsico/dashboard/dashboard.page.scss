@@ -26,11 +26,25 @@
 
 /* HEADER */
 
+.card{
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 22px;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.05);
+
+  color:#1e293b;
+}
+
 .welcome-card {
 
   background: linear-gradient(
     135deg,
-    #f5b700,
+    #fff1c8,
     #ffcc33
   );
 
@@ -95,48 +109,123 @@
 
 /* STATS */
 
-.stats-grid {
+.stats-grid{
 
   display: grid;
 
-  grid-template-columns:
-    repeat(auto-fit, minmax(150px,1fr));
+  grid-template-columns: 1fr;
 
-  gap: 16px;
+  gap: 14px;
 
-  margin-bottom: 22px;
+  margin-bottom: 30px;
 }
 
-.stat-card {
+.stat-card{
 
-  background: white;
+  border-radius: 18px;
 
-  border-radius: 22px;
+  padding: 18px;
 
-  padding: 22px;
+  color: white;
 
   text-align: center;
 
-  box-shadow:
-    0 6px 20px rgba(0,0,0,.05);
+  min-height: 130px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
 }
 
-.stat-card h2 {
+.stat-card .emoji{
 
-  margin: 0 0 8px;
+  font-size: 28px;
 
-  font-size: 1.8rem;
-
-  color: #f5b700;
-
-  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-.stat-card p {
+.stat-card h2{
 
   margin: 0;
 
-  color: #64748b;
+  font-size: 24px;
+
+  font-weight: bold;
+
+  color: white;
+}
+
+.stat-card p{
+
+  margin-top: 6px;
+
+  font-size: 14px;
+
+  color: rgba(255,255,255,.9);
+}
+
+.stat-card:hover{
+
+  transform:translateY(-3px);
+}
+
+.blue{
+
+  background:#4f8cff;
+}
+
+.green{
+
+  background:#4cc790;
+}
+
+.purple{
+
+  background:#9b7cff;
+}
+
+.orange{
+
+  background:#ffb84d;
+}
+
+.cyan{
+
+  background:#00b8d9;
+}
+
+.financeiro-card{
+
+  background:linear-gradient(
+    135deg,
+    #fffdf3,
+    #fff7d6
+  );
+
+  margin-bottom:22px;
+}
+
+.financeiro-card h3{
+
+  color:#1e293b;
+
+  margin-bottom:18px;
+}
+
+.financeiro-card p{
+
+  color:#475569;
+
+  margin:10px 0;
+
+  line-height:1.6;
+}
+
+.financeiro-card strong{
+
+  color:#111827;
 }
 
 
@@ -174,21 +263,63 @@
 
 
 /* CONSULTAS */
+.consulta-destaque{
 
-.consulta-item {
+  background:linear-gradient(
+    135deg,
+    #fff8e8,
+    #fffdf7
+  );
 
-  display: flex;
+  border:1px solid #ffe4a3;
 
-  justify-content: space-between;
+  margin-bottom:22px;
+}
 
-  align-items: center;
+.consulta-destaque h3{
 
-  gap: 14px;
+  color:#f59e0b;
 
-  padding: 16px 0;
+  margin-bottom:10px;
+}
 
-  border-bottom:
-    1px solid #edf2f7;
+.consulta-destaque h2{
+
+  color:#1e293b;
+
+  margin-bottom:10px;
+}
+
+.consulta-destaque p{
+
+  color:#64748b;
+}
+
+.consulta-item{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:18px;
+
+  padding:16px 0;
+
+  border-bottom:1px solid #ececec;
+}
+
+.consulta-item strong{
+
+  color:#111827;
+
+  font-size:16px;
+}
+
+.consulta-item p{
+
+  color:#64748b;
 }
 
 .consulta-item:last-child {
@@ -196,47 +327,103 @@
   border-bottom: none;
 }
 
-.consulta-item strong {
+.sem-consultas{
 
-  display: block;
+  padding:20px;
 
-  margin-bottom: 4px;
+  text-align:center;
 
-  color: #111827;
+  color:#64748b;
 
-  font-size: 1rem;
+  border:1px dashed #ffe3a8;
+
+  border-radius:18px;
+
+  background:#fffdf7;
 }
 
-.consulta-item p {
+.historico-card{
 
-  margin: 4px 0 8px;
-
-  color: #64748b;
-
-  font-size: .95rem;
+  margin-bottom:22px;
 }
 
+.historico-card h3{
+
+  color:#1e293b;
+
+  margin-bottom:20px;
+}
+
+.historico-item{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+
+  padding:14px 0;
+
+  border-bottom:1px solid #ececec;
+}
+
+.historico-item:last-child{
+
+  border:none;
+}
+
+.historico-icone{
+
+  width:50px;
+
+  height:50px;
+
+  border-radius:50%;
+
+  background:#dff7e8;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  font-size:22px;
+}
+
+.historico-item h4{
+
+  margin:0;
+
+  color:#1e293b;
+}
+
+.historico-item p{
+
+  margin-top:5px;
+
+  color:#64748b;
+}
 
 /* AÇÕES */
 
-.actions {
+.actions{
 
-  display: flex;
+  background:white;
 
-  flex-direction: column;
+  border-radius:24px;
 
-  gap: 14px;
+  padding:22px;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.05);
 }
 
-.actions ion-button {
+.actions h3{
 
-  height: 52px;
+  color:#1e293b;
 
-  --border-radius: 18px;
-
-  font-weight: 600;
-
-  text-transform: none;
+  margin-bottom:20px;
 }
 
 
@@ -345,4 +532,18 @@
 
     padding: 18px;
   }
+
+  .historico-item{
+
+  gap:12px;
+}
+
+.historico-icone{
+
+  width:42px;
+
+  height:42px;
+
+  font-size:18px;
+}
 }

@@ -21,17 +21,20 @@
 
     <!-- HEADER -->
 
-    <div class="welcome-card">
+    <!-- ===================== -->
+    <!-- SAUDAÇÃO -->
+    <!-- ===================== -->
 
-      <div>
+    <div class="card welcome-card">
+
+      <div class="welcome-text">
 
         <h1>
-          Olá,
-          {{ psicologo.nome }}
+          {{ saudacao }}, Dr(a). {{ psicologo.nome }}
         </h1>
 
         <p>
-          Bem-vindo ao painel do psicólogo
+          ✨ {{ mensagemMotivacional }}
         </p>
 
       </div>
@@ -42,122 +45,283 @@
 
     </div>
 
-    <!-- CARDS -->
+    
+
+    <!-- ===================== -->
+    <!-- ESTATÍSTICAS -->
+    <!-- ===================== -->
 
     <div class="stats-grid">
 
-      <!-- CONSULTAS -->
+      <div class="stat-card blue">
 
-      <div class="stat-card">
+        <div class="emoji">📅</div>
 
-        <h2>
-          {{ consultasHoje }}
-        </h2>
+        <h2>{{ consultasHoje }}</h2>
 
-        <p>
-          Consultas Hoje
-        </p>
+        <p>Consultas hoje</p>
 
       </div>
 
-      <!-- PACIENTES -->
 
-      <div class="stat-card">
+      <div class="stat-card green">
 
-        <h2>
-          {{ totalPacientes }}
-        </h2>
+        <div class="emoji">👥</div>
 
-        <p>
-          Pacientes
-        </p>
+        <h2>{{ totalPacientes }}</h2>
+
+        <p>Pacientes atendidos</p>
 
       </div>
 
-      <!-- GANHOS -->
 
-      <div class="stat-card">
+      <div class="stat-card purple">
 
-        <h2>
-          R$ {{ ganhosMes }}
-        </h2>
+        <div class="emoji">✅</div>
 
-        <p>
-          Ganhos no mês
-        </p>
+        <h2>{{ consultasRealizadas }}</h2>
+
+        <p>Consultas realizadas</p>
+
+      </div>
+
+
+      <div class="stat-card orange">
+
+        <div class="emoji">💰</div>
+
+        <h2>R$ {{ ganhosMes.toFixed(2) }}</h2>
+
+        <p>Ganhos totais</p>
+
+      </div>
+
+
+      <div class="stat-card cyan">
+
+        <div class="emoji">📈</div>
+
+        <h2>R$ {{ ticketMedio.toFixed(2) }}</h2>
+
+        <p>Ticket médio</p>
 
       </div>
 
     </div>
 
-    <!-- CONSULTAS -->
 
-    <div class="section-card">
+    <!-- ===================== -->
+    <!-- PRÓXIMA CONSULTA -->
+    <!-- ===================== -->
 
-      <div class="section-header">
+    <div
+    class="card consulta-destaque"
+    *ngIf="proximaConsulta">
 
-        <h2>
-          Próximas Consultas
-        </h2>
+      <h3>
 
-      </div>
+        ⏰ Próxima consulta
 
-      <div
-        *ngFor="
-          let consulta
-          of proximasConsultas"
-        class="consulta-item">
+      </h3>
 
-        <div>
+      <h2>
 
-          <strong>
-            {{ consulta.usuarioNome }}
-          </strong>
+        {{ proximaConsulta.usuarioNome }}
 
-          <p>
-            {{ consulta.dataConsulta | date:'dd/MM HH:mm' }}
-          </p>
+      </h2>
 
-          <ion-chip
+      <p>
+
+        {{ proximaConsulta.dataConsulta |
+        date:'dd/MM/yyyy HH:mm' }}
+
+      </p>
+
+    </div>
+
+
+
+    <!-- ===================== -->
+    <!-- PRÓXIMAS CONSULTAS -->
+    <!-- ===================== -->
+
+    <div class="card section-card">
+
+      <h3>
+
+        📅 Próximas consultas
+
+      </h3>
+
+      <ng-container *ngIf="proximasConsultas.length > 0">
+
+        <div
+          *ngFor="let consulta of proximasConsultas"
+          class="consulta-item">
+
+          <div>
+
+            <strong>
+
+              {{ consulta.usuarioNome }}
+
+            </strong>
+
+            <p>
+
+              {{ consulta.dataConsulta |
+              date:'dd/MM/yyyy HH:mm' }}
+
+            </p>
+
+            <ion-chip
             [color]="consulta.status === 'confirmada'
             ? 'success'
             : 'warning'">
 
-            <ion-label>
+              <ion-label>
 
-              {{ consulta.status === 'confirmada'
+                {{ consulta.status === 'confirmada'
                 ? 'Confirmada'
                 : 'Pendente' }}
 
-            </ion-label>
+              </ion-label>
 
-          </ion-chip>
+            </ion-chip>
+
+          </div>
+
+          <ion-button
+            fill="outline"
+            size="small"
+            routerLink="/consultas-psicologo">
+
+            Ver
+
+          </ion-button>
 
         </div>
 
-        <ion-button
-          fill="outline"
-          size="small"
-          [routerLink]="['/detalhes-consulta-psicologo', consulta.id]">
+      </ng-container>
 
-          Ver
+      <div
+        class="sem-consultas"
+        *ngIf="proximasConsultas.length === 0">
 
-        </ion-button>
+        Nenhuma consulta agendada.
 
       </div>
 
     </div>
 
-    <!-- AÇÕES -->
 
-    <div class="actions">
+
+    <!-- ===================== -->
+    <!-- HISTÓRICO -->
+    <!-- ===================== -->
+
+    <div class="card historico-card">
+
+      <h3>
+
+        🕒 Histórico recente
+
+      </h3>
+
+      <div
+      class="historico-item"
+      *ngFor="let consulta of historicoRecente">
+
+        <div class="historico-icone">
+
+          ✅
+
+        </div>
+
+        <div>
+
+          <h4>
+
+            {{ consulta.usuarioNome }}
+
+          </h4>
+
+          <p>
+
+            {{ consulta.dataConsulta |
+            date:'dd/MM/yyyy HH:mm' }}
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================== -->
+    <!-- FINANCEIRO -->
+    <!-- ===================== -->
+
+    <div class="card financeiro-card">
+
+      <h3>
+
+        💰 Resumo financeiro
+
+      </h3>
+
+      <p>
+
+        Ganhos totais:
+        <strong>
+
+          R$ {{ ganhosMes.toFixed(2) }}
+
+        </strong>
+
+      </p>
+
+      <p>
+
+        Consultas realizadas:
+        <strong>
+
+          {{ consultasRealizadas }}
+
+        </strong>
+
+      </p>
+
+      <p>
+
+        Ticket médio:
+        <strong>
+
+          R$ {{ ticketMedio.toFixed(2) }}
+
+        </strong>
+
+      </p>
+
+    </div>
+
+    <!-- ===================== -->
+    <!-- AÇÕES RÁPIDAS -->
+    <!-- ===================== -->
+
+    <div class="card actions">
+
+      <h3>
+
+        ⚙️ Ações rápidas
+
+      </h3>
 
       <ion-button
-
         expand="block"
-
         color="warning"
-
         routerLink="/perfil-psicologo">
 
         Editar Perfil
@@ -165,13 +329,9 @@
       </ion-button>
 
       <ion-button
-
         expand="block"
-
         fill="outline"
-
         color="primary"
-
         routerLink="/agenda-psicologo">
 
         Configurar Agenda

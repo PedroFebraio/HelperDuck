@@ -120,6 +120,39 @@
 
     </div>
 
+    <!-- AVALIAÇÕES -->
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon name="star-outline"></ion-icon>
+
+        <h2>
+          Avaliações
+        </h2>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length > 0">
+
+        <h3>
+
+          ⭐ {{ mediaAvaliacoes | number:'1.1-1' }}
+
+          (avaliações: {{ avaliacoes.length }})
+
+        </h3>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length === 0">
+
+        Ainda não há avaliações.
+
+      </div>
+
+    </div>
+
 
     <!-- CONTATO -->
     <div class="card">
@@ -270,6 +303,24 @@
 
     <!-- BOTÃO -->
 
+    <div
+      class="card"
+      *ngIf="usuario.consultaGratis > 0">
+
+      <h3>
+        🎁 Consulta Gratuita Disponível
+      </h3>
+
+      <p>
+
+        Você possui
+        {{ usuario.consultaGratis }}
+        consulta gratuita disponível.
+
+      </p>
+
+    </div>
+
     <ion-button
       expand="block"
       size="large"
@@ -286,6 +337,77 @@
       Confirmar Agendamento
 
     </ion-button>
+
+
+    <!-- RESUMO DAS AVALIAÇÕES -->
+
+    <div class="card">
+
+      <div class="section-title">
+
+        <ion-icon name="star-outline"></ion-icon>
+
+        <h2>Avaliações</h2>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length > 0" class="resumo-avaliacoes">
+
+        <div class="nota-media">
+
+          ⭐ {{ mediaAvaliacoes | number:'1.1-1' }}
+
+        </div>
+
+        <p>
+
+          Baseado em {{ avaliacoes.length }}
+          avaliações
+
+        </p>
+
+      </div>
+
+      <div *ngIf="avaliacoes.length === 0">
+
+        Ainda não há avaliações.
+
+      </div>
+
+
+      <!-- COMENTÁRIOS -->
+
+      <div
+        class="avaliacao-card"
+        *ngFor="let avaliacao of avaliacoes">
+
+        <div class="avaliacao-header">
+
+          <div>
+
+            <h3>
+              {{ avaliacao.usuarioNome }}
+            </h3>
+
+            <div class="avaliacao-data">
+              {{ avaliacao.dataAvaliacao | date:'dd/MM/yyyy' }}
+            </div>
+
+          </div>
+
+          <span>
+            ⭐ {{ avaliacao.nota }}/5
+          </span>
+
+        </div>
+
+        <p class="comentario">
+          "{{ avaliacao.comentario }}"
+        </p>
+
+      </div>
+
+    </div>
 
   </div>
 

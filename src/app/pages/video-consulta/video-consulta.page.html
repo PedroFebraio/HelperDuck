@@ -35,7 +35,7 @@
   <!-- CONSULTA -->
 
   <div
-    *ngIf="!carregando && consulta && !chamadaIniciada"
+  *ngIf="!carregando && consulta && !chamadaIniciada"
   class="container">
 
     <!-- HERO -->
@@ -59,6 +59,8 @@
         ? 'success'
         : consulta.status === 'pendente'
         ? 'warning'
+        : consulta.status === 'finalizada'
+        ? 'primary'
         : 'danger'">
 
         <ion-label>
@@ -272,6 +274,7 @@
         </ion-card>
 
         <ion-button
+          *ngIf="!consulta.finalizada"
 
           expand="block"
 
@@ -296,76 +299,208 @@
 
   </div>
 
+
+  <!-- Avaliação -->
+
+  <div
+  *ngIf="consulta?.finalizada && !avaliacaoEnviada"
+  class="avaliacao-container">
+
+    <h2>
+      Como foi sua consulta?
+    </h2>
+
+    <div class="estrelas">
+
+      <ion-icon
+        *ngFor="let estrela of [1,2,3,4,5]"
+        name="star"
+        [class.ativa]="estrela <= avaliacao"
+        (click)="avaliacao = estrela">
+      </ion-icon>
+
+    </div>
+
+    <div class="avaliacao-textarea">
+
+      <ion-textarea
+
+        [(ngModel)]="comentario"
+
+        rows="4"
+
+        placeholder="Conte como foi sua experiência (mínimo 20 linhas)">
+      </ion-textarea>
+
+    </div>
+
+    <ion-button
+
+      class="avaliacao-button"
+
+      expand="block"
+
+      [disabled]="avaliacao === 0"
+      [disabled]="comentario.length <= 20"
+
+      color="warning"
+
+      (click)="enviarAvaliacao()">
+
+      Enviar Avaliação
+
+    </ion-button>
+
+  </div>
+
+  <div
+    class="avaliacao-sucesso"
+    *ngIf="avaliacaoEnviada">
+
+    <h2>✅ Obrigado pela sua avaliação!</h2>
+
+    <div class="estrelas-avaliadas">
+      <ion-icon
+        *ngFor="let estrela of [1,2,3,4,5]"
+        name="star"
+        [class.ativa]="estrela <= avaliacao">
+      </ion-icon>
+    </div>
+
+    <p>
+      Você avaliou esta consulta com
+      {{ avaliacao }}/5 estrelas.
+    </p>
+
+
+    <p *ngIf="comentario">
+
+      "<i>{{ comentario }}</i>"
+
+    </p>
+
+  </div>
+
+
+  
   <!-- CHAMADA -->
 
-<div
-  *ngIf="chamadaIniciada"
-  class="call-container">
+  <div
+    *ngIf="chamadaIniciada"
+    class="call-container">
 
-  <div class="participant-name">
+    <div class="top-bar">
 
-    {{
-      tipoUsuario === 'usuario'
-      ? consulta.psicologoNome
-      : consulta.usuarioNome
-    }}
+    <div class="top-info">
+
+      <div class="participant-name">
+
+        {{
+          tipoUsuario === 'usuario'
+          ? consulta.psicologoNome
+          : consulta.usuarioNome
+        }}
+
+      </div>
+
+      <div class="call-timer">
+
+        ⏳ {{ tempoRestante }}
+
+      </div>
+
+    </div>
+
+    <ion-button
+      fill="clear"
+      color="light"
+      (click)="toggleFullscreen()">
+
+      <ion-icon
+        name="expand-outline">
+      </ion-icon>
+
+    </ion-button>
+
+    </div>
+
+    <div
+      *ngIf="mensagemAviso"
+      class="alerta-consulta">
+
+      {{ mensagemAviso }}
+
+    </div>
+
+    <video
+      #remoteVideo
+      autoplay
+      playsinline
+      disablePictureInPicture
+      class="remote-video">
+    </video>
+
+    <div
+      *ngIf="!remotoConectado"
+      class="waiting-screen">
+
+      <ion-icon
+        name="person-circle-outline">
+      </ion-icon>
+
+      <h2>
+        Aguardando participante...
+      </h2>
+
+    </div>
+
+    <video
+      #localVideo
+      autoplay
+      muted
+      playsinline
+      class="local-video">
+    </video>
+
+    <div class="call-controls">
+
+      <ion-button
+        shape="round"
+        (click)="toggleMicrofone()">
+
+        <ion-icon
+          [name]="microfoneLigado
+          ? 'mic-outline'
+          : 'mic-off-outline'">
+        </ion-icon>
+
+      </ion-button>
+
+      <ion-button
+        shape="round"
+        (click)="toggleCamera()">
+
+        <ion-icon
+          [name]="cameraLigada
+          ? 'videocam-outline'
+          : 'videocam-off-outline'">
+        </ion-icon>
+
+      </ion-button>
+
+      <ion-button
+        color="danger"
+        shape="round"
+        (click)="sairDaConsulta()">
+
+        <ion-icon
+          name="call-outline">
+        </ion-icon>
+
+      </ion-button>
+
+    </div>
 
   </div>
-
-  <video
-    #remoteVideo
-    autoplay
-    playsinline
-    class="remote-video">
-  </video>
-
-  <video
-    #localVideo
-    autoplay
-    muted
-    playsinline
-    class="local-video">
-  </video>
-
-  <div class="call-controls">
-
-    <ion-button
-      shape="round"
-      (click)="toggleMicrofone()">
-
-      <ion-icon
-        [name]="microfoneLigado
-        ? 'mic-outline'
-        : 'mic-off-outline'">
-      </ion-icon>
-
-    </ion-button>
-
-    <ion-button
-      shape="round"
-      (click)="toggleCamera()">
-
-      <ion-icon
-        [name]="cameraLigada
-        ? 'videocam-outline'
-        : 'videocam-off-outline'">
-      </ion-icon>
-
-    </ion-button>
-
-    <ion-button
-      color="danger"
-      shape="round"
-      (click)="sairDaConsulta()">
-
-      <ion-icon
-        name="call-outline">
-      </ion-icon>
-
-    </ion-button>
-
-  </div>
-
-</div>
 
 </ion-content>

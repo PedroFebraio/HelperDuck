@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AvalicaoServices } from 'src/app/services/avalicao';
 import { PsicologoServices } from 'src/app/services/psicologo';
 
 @Component({
@@ -38,6 +39,7 @@ export class AgendamentoPage implements OnInit {
   constructor(
     private psicologoServices: PsicologoServices,
     private router: Router,
+    private avaliacaoService: AvalicaoServices
   ) {}
 
   ngOnInit() {
@@ -48,7 +50,34 @@ export class AgendamentoPage implements OnInit {
 
       this.todosPsicologos = dados;
 
-      this.psicologos = dados;
+      this.todosPsicologos.forEach(psicologo => {
+
+        psicologo.mediaAvaliacoes = 0;
+        psicologo.quantidadeAvaliacoes = 0;
+
+        this.avaliacaoService
+          .buscarAvaliacoesPsicologo(psicologo.id)
+          .subscribe((avaliacoes: any[]) => {
+
+            psicologo.quantidadeAvaliacoes = avaliacoes.length;
+
+            if(avaliacoes.length > 0){
+
+              const soma = avaliacoes.reduce(
+                (total, a) => total + a.nota,
+                0
+              );
+
+              psicologo.mediaAvaliacoes =
+                soma / avaliacoes.length;
+
+            }
+
+          });
+
+      });
+
+      this.psicologos = this.todosPsicologos;
 
       this.carregando = false;
     });

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Agenda, AgendaServices } from 'src/app/services/agenda';
+import { Avaliacao, AvalicaoServices } from 'src/app/services/avalicao';
 import { Psicologo, PsicologoServices } from 'src/app/services/psicologo';
 
 @Component({
@@ -16,6 +17,10 @@ export class PerfilPage implements OnInit {
   especialidades: string[] = [];
 
   agenda: Agenda | null = null;
+
+  avaliacoes: Avaliacao[] = [];
+
+  mediaAvaliacoes = 0;
 
   especialidadesDisponiveis = [
     'Ansiedade',
@@ -37,7 +42,8 @@ export class PerfilPage implements OnInit {
   constructor(
     private psicologoServices: PsicologoServices,
     private agendaServices: AgendaServices,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private avaliacaoServices: AvalicaoServices
   ) {}
 
 
@@ -62,7 +68,31 @@ export class PerfilPage implements OnInit {
 
     this.especialidades = this.psicologo.especialidades || [];
 
-    this.agenda = await this.agendaServices.buscarAgenda(this.psicologo.id!);
+    this.agenda =
+      await this.agendaServices.buscarAgenda(
+        this.psicologo.id!
+      );
+
+    this.avaliacaoServices
+    .buscarAvaliacoesPsicologo(this.psicologo.id!)
+    .subscribe((dados: any) => {
+
+      this.avaliacoes = dados;
+
+      if(this.avaliacoes.length > 0){
+
+        const soma =
+          this.avaliacoes.reduce(
+            (total, avaliacao) =>
+              total + avaliacao.nota,
+            0
+          );
+
+        this.mediaAvaliacoes =
+          soma / this.avaliacoes.length;
+      }
+
+    });
   }
 
 

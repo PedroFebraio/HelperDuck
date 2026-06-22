@@ -17,7 +17,9 @@ export interface Usuario{
   senha: string,
   dataNascimento: Date | null,
   pontosFidelidade?: number,
-  consultaGratisUsada?: boolean,
+  consultasGratis?: number,
+  cupons10?: number,
+  cupons25?: number,
   chartedAt?: Date
 }
 
@@ -50,9 +52,11 @@ export class DataServices {
         telefone: usuario.telefone,
         dataNascimento: usuario.dataNascimento,
         pontosFidelidade: 0,
-        consultaGratisUsada: false,
+        consultasGratis: 1,
+        cupons10: 0,
+        cupons25: 0,
         chartedAt: Date.now()
-      })
+      });
 
       console.log('Usuário criado com sucesso');
       return true
@@ -121,7 +125,7 @@ export class DataServices {
 
 
 
-  async atualizarUsuario( id: string, usuario: Usuario){
+  async atualizarUsuario(id: string, usuario: Partial<Usuario>){
 
     try{
 
@@ -130,7 +134,7 @@ export class DataServices {
 
       await setDoc(
         usuarioRef,
-        { ...usuario },
+        usuario,
         { merge: true }
       );
 
