@@ -40,7 +40,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
   remotoConectado = false;
 
   tempoDecorrido = '00:00';
-  tempoRestante = '50:00';
+  tempoRestante = '10:00';
   private timerInterval: any;
   encerrandoConsulta = false;
 
@@ -147,7 +147,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
 
   escutarConsulta(){
 
-    
+
     this.consultaSubscription =
     this.consultaService
       .escutarConsulta(this.consultaId)
@@ -206,7 +206,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
               }
             }
           }
-        } 
+        }
 
         this.consulta = consulta;
 
@@ -231,12 +231,12 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
 
         if (!consulta.offer && !this.isPsicologo && this.chamadaIniciada) {
           console.log('Psicólogo limpou a consulta para reiniciar. Resetando usuário...');
-          
+
           this.answerEnviado = false;
           this.candidatosRecebidos.clear();
           this.icePendentes = [];
-          
-          return; 
+
+          return;
         }
 
         if (
@@ -246,9 +246,9 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
           this.chamadaIniciada &&
           !this.answerEnviado
         ) {
-          if (this.peerConnection && 
+          if (this.peerConnection &&
             this.peerConnection.signalingState !== 'stable') {
-            
+
               console.log('Recriando PeerConnection do usuário para nova tentativa');
             await this.reiniciarConexaoUsuario();
           }
@@ -367,8 +367,8 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
 
   }
 
-  
-  
+
+
   async reiniciarConexaoUsuario() {
   if (this.peerConnection) {
     this.peerConnection.close();
@@ -398,7 +398,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
     if(this.reconectando){
       return;
     }
-    
+
     try{
 
       this.reconectando = true;
@@ -431,8 +431,8 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
         {
           offer: null,
           answer: null,
-          iceCandidatesOferta: [], 
-          iceCandidatesResposta: [] 
+          iceCandidatesOferta: [],
+          iceCandidatesResposta: []
         }
       );
 
@@ -606,7 +606,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
       this.iceResposta = [];
 
       this.criarPeerConnection();
-      
+
 
         stream.getTracks().forEach(track => {
 
@@ -695,7 +695,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
 
 
   async sairDaConsulta() {
-    
+
     this.consultaSubscription?.unsubscribe();
 
     this.consultaSubscription = null;
@@ -784,7 +784,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
     };
 
     if(
-      duracao >= 30 &&
+      duracao >= 1 &&
       this.consulta.checkinUsuario
     ){
 
@@ -795,7 +795,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
     }
 
     if(
-      duracao >= 30 &&
+      duracao >= 1 &&
       this.consulta.checkinPsicologo
     ){
 
@@ -826,7 +826,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
       dadosFinalizacao
     );
 
-    
+
   }
 
 
@@ -1047,7 +1047,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
       await this.peerConnection.setRemoteDescription(
         new RTCSessionDescription(offer)
       );
-      
+
       for(const candidato of this.icePendentes){
 
         try{
@@ -1113,7 +1113,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
         );
 
       const duracaoTotal =
-        (this.consulta?.duracaoConsulta || 50) * 60;
+        (this.consulta?.duracaoConsulta || 10) * 60;
 
       const segundosRestantes =
         duracaoTotal - segundosPassados;
@@ -1121,14 +1121,14 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
       const minutosRestantes = Math.floor(segundosRestantes / 60);
 
       if(
-        minutosRestantes <= 5 &&
+        minutosRestantes <= 2 &&
         !this.aviso5MinutosExibido
       ){
 
         this.aviso5MinutosExibido = true;
 
         this.mostrarAviso(
-          '⚠️ A consulta será encerrada em 5 minutos.'
+          '⚠️ A consulta será encerrada em 2 minutos.'
         );
       }
 
