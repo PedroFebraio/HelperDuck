@@ -40,7 +40,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
   remotoConectado = false;
 
   tempoDecorrido = '00:00';
-  tempoRestante = '10:00';
+  tempoRestante = '5:00';
   private timerInterval: any;
   encerrandoConsulta = false;
 
@@ -1113,7 +1113,7 @@ export class VideoConsultaPage implements OnInit, AfterViewInit {
         );
 
       const duracaoTotal =
-        (this.consulta?.duracaoConsulta || 10) * 60;
+        (this.consulta?.duracaoConsulta || 5) * 60;
 
       const segundosRestantes =
         duracaoTotal - segundosPassados;

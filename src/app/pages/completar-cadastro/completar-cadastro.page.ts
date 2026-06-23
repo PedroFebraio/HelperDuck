@@ -42,12 +42,47 @@ export class CompletarCadastroPage implements OnInit {
 
     this.cadastroForm = this.fb.group({
 
-      telefone: ['', [Validators.required, 
-        Validators.pattern(/^\(\d{2}\)\s\d{5}-\d{4}$/)]],
+      telefone: ['',[Validators.required,
+    Validators.pattern(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)]],
 
       dataNascimento: ['', [Validators.required, 
         this.validarMaiorIdade]]
     });
+  }
+
+
+  formatarTelefone(event: any) {
+
+    let valor = event.target.value || '';
+
+    // Remove tudo que não for número
+    valor = valor.replace(/\D/g, '');
+
+    // Limita a 11 dígitos
+    valor = valor.substring(0, 11);
+
+    // Formata
+    if (valor.length > 10) {
+
+      valor = valor.replace(
+        /^(\d{2})(\d{5})(\d{4}).*/,
+        '($1) $2-$3'
+      );
+
+    } else {
+
+      valor = valor.replace(
+        /^(\d{2})(\d{4})(\d{4}).*/,
+        '($1) $2-$3'
+      );
+
+    }
+
+    // Atualiza o campo do formulário
+    this.cadastroForm.patchValue(
+      { telefone: valor },
+      { emitEvent: false }
+    );
   }
 
   

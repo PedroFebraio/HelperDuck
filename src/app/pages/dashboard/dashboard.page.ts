@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { ConsultaServices } from 'src/app/services/consulta';
+import { FidelidadeServices } from 'src/app/services/fidelidade';
 import { HumorServices } from 'src/app/services/humor';
 
 @Component({
@@ -13,6 +14,7 @@ export class DashboardPage implements OnInit {
 
   usuario: any;
 
+  pontos = 0
   psicologosAtendidos = 0;
   quantidadeConsultas = 0;
   consultasProximas: any[] = [];
@@ -38,7 +40,8 @@ export class DashboardPage implements OnInit {
 
     private humorServices: HumorServices,
     private app: AppComponent,
-    private consultaServices: ConsultaServices
+    private consultaServices: ConsultaServices,
+    private fidelidadeServices: FidelidadeServices
   ) { }
 
   async ngOnInit() {
@@ -57,6 +60,11 @@ export class DashboardPage implements OnInit {
       await this.carregarConsultas()
     
       const humorHoje = await this.humorServices.getHumorHoje(this.usuario.id);
+
+      this.pontos =
+        await this.fidelidadeServices.buscarPontos(
+          this.usuario.id
+        );
 
       if(humorHoje){
 
@@ -201,7 +209,7 @@ export class DashboardPage implements OnInit {
       this.consultasProximas =
         consultasAtivas.sort((a, b) =>
           new Date(a.dataConsulta).getTime() -
-          new Date(b.dataConsulta).getTime()).slice(1, 5);
+          new Date(b.dataConsulta).getTime()).slice(0, 5);
     });
   }
 }

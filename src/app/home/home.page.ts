@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
+  abaSelecionada = 'sobre';
 
   constructor(
     private router: Router
@@ -34,5 +35,21 @@ export class HomePage {
       console.log('Psicólogo Logado');
       this.router.navigateByUrl('/dashboard-psicologo')
     }
+  }
+
+  scrollPara(secao: string) {
+
+    const elemento =
+      document.getElementById(secao);
+
+    if (elemento) {
+
+      elemento.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+    }
+
   }
 }

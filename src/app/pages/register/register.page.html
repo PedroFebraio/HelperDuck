@@ -98,9 +98,9 @@
 
         <ion-input
           type="tel"
-          placeholder="Ex: (11) 123456789"
-          mask="(00) 000000000"
-          formControlName="telefone">
+          placeholder="Ex: (11) 98765-4321"
+          formControlName="telefone"
+          (ionInput)="formatarTelefone($event)">
         </ion-input>
       </ion-item>
 

@@ -53,7 +53,7 @@
 
         <p>Duck Points</p>
 
-        <h3>{{ usuario.pontosFidelidade }}</h3>
+        <h3>{{ pontos }}</h3>
 
         <p>Pontos de fidelidade</p>
       </div>
@@ -306,14 +306,14 @@
 
           <p>
 
-            {{ usuario.pontosFidelidade }}/1000 pontos
+            {{ pontos }}/1000 pontos
 
           </p>
 
           <p>
 
             Faltam
-            {{ 1000 - usuario.pontosFidelidade }}
+            {{ 1000 - pontos }}
             pontos para uma consulta gratuita 🦆
 
           </p>
@@ -323,7 +323,7 @@
       </div>
 
       <ion-progress-bar
-        [value]="usuario.pontosFidelidade / 1000">
+        [value]="pontos / 1000">
 
       </ion-progress-bar>
 

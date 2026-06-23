@@ -110,7 +110,7 @@ export class ConsultasPage implements OnInit {
 
       fimSessao: null,
 
-      duracaoConsulta: 50,
+      duracaoConsulta: 5,
 
       duracaoReal: 0
     };

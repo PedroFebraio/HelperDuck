@@ -209,10 +209,10 @@
         <ion-label position="stacked">Telefone (Celular)</ion-label>
 
         <ion-input
-          type="text"
-          placeholder="(11) 912345678"
-          mask="(00) 000000000"
-          formControlName="telefone">
+          type="tel"
+          placeholder="Ex: (11) 98765-4321"
+          formControlName="telefone"
+          (ionInput)="formatarTelefone($event)">
         </ion-input>
       </ion-item>
 
